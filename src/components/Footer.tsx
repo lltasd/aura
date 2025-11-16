@@ -1,0 +1,182 @@
+import { Link } from 'react-router-dom'
+import { MapPin, Phone, Clock, ChevronRight } from 'lucide-react'
+import { contactInfo } from '../data/services'
+import Logo from './Logo'
+
+export default function Footer() {
+  return (
+    <footer id="site-footer" className="bg-primary-dark text-white">
+      {/* Disclaimer */}
+      <div className="bg-gradient-to-r from-gray-100 to-gray-50 text-gray-700 py-3 text-center text-sm border-b border-gray-200">
+        <div className="container mx-auto px-4">
+          <p className="flex items-center justify-center gap-2">
+            <span className="text-gold">Info</span>
+            Информация на сайте не является публичной офертой и требует уточнения у менеджера
+          </p>
+        </div>
+      </div>
+
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
+          {/* Studio info */}
+          <div className="space-y-6">
+            <Link to="/" className="inline-flex items-center gap-3 mb-4 hover:opacity-90 transition-all group">
+              <Logo size={52} className="drop-shadow-lg group-hover:scale-110 transition-transform" />
+              <div>
+                <div className="font-display text-xl font-bold tracking-wide">АУРА</div>
+                <div className="text-accent text-xs tracking-widest">СТУДИЯ КРАСОТЫ</div>
+              </div>
+            </Link>
+
+            <div className="space-y-3 text-sm">
+              {contactInfo.addresses.map((address, index) => (
+                <div
+                  key={index}
+                  className="flex items-start gap-3 text-white/80 hover:text-accent transition-colors group"
+                >
+                  <MapPin size={18} className="text-accent mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform" />
+                  <span className="leading-relaxed">{address}</span>
+                </div>
+              ))}
+              <div className="flex items-center gap-3 text-white/80 hover:text-accent transition-colors pt-2 group">
+                <Clock size={18} className="text-accent group-hover:scale-110 transition-transform" />
+                <span className="font-medium">{contactInfo.workingHours}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Services */}
+          <div>
+            <h3 className="font-bold text-lg mb-5 text-accent">УСЛУГИ</h3>
+            <ul className="space-y-2.5">
+              {[
+                { label: 'Лазерная эпиляция', href: '#services' },
+                { label: 'Аппаратная коррекция фигуры', href: '#body-contouring' },
+                { label: 'Кавитация', href: '#body-contouring' },
+                { label: 'LPG массаж', href: '#body-contouring' },
+                { label: 'РФ лифтинг', href: '#body-contouring' },
+                { label: 'Прессотерапия', href: '#body-contouring' },
+              ].map((item, index) => (
+                <li key={index}>
+                  <a
+                    href={item.href}
+                    className="text-sm text-white/80 hover:text-accent transition-all duration-300 flex items-center gap-2 group"
+                  >
+                    <ChevronRight size={14} className="text-accent opacity-0 group-hover:opacity-100 transition-all duration-300 -ml-5 group-hover:ml-0" />
+                    <span>{item.label}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* About */}
+          <div>
+            <h3 className="font-bold text-lg mb-5 text-accent">О НАС</h3>
+            <ul className="space-y-2.5">
+              {[
+                { label: 'О студии красоты «Аура»', to: '/about', isRoute: true },
+                { label: 'Прайс-лист', href: '#pricing', isRoute: false },
+                { label: 'Специальные предложения', href: '#packages', isRoute: false },
+                { label: 'Контакты', to: '/contacts', isRoute: true },
+              ].map((item, index) => (
+                <li key={index}>
+                  {item.isRoute ? (
+                    <Link
+                      to={item.to!}
+                      className="text-sm text-white/80 hover:text-accent transition-all duration-300 flex items-center gap-2 group"
+                    >
+                      <ChevronRight size={14} className="text-accent opacity-0 group-hover:opacity-100 transition-all duration-300 -ml-5 group-hover:ml-0" />
+                      <span>{item.label}</span>
+                    </Link>
+                  ) : (
+                    <a
+                      href={item.href}
+                      className="text-sm text-white/80 hover:text-accent transition-all duration-300 flex items-center gap-2 group"
+                    >
+                      <ChevronRight size={14} className="text-accent opacity-0 group-hover:opacity-100 transition-all duration-300 -ml-5 group-hover:ml-0" />
+                      <span>{item.label}</span>
+                    </a>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contacts */}
+          <div>
+            <h3 className="font-bold text-lg mb-5 text-accent">КОНТАКТЫ</h3>
+            <div className="space-y-3 mb-6">
+              {contactInfo.phones.map((phone, index) => (
+                <a
+                  key={index}
+                  href={`tel:${phone.replace(/\s/g, '').replace(/[()]/g, '')}`}
+                  className="flex items-center gap-3 text-white/80 hover:text-accent transition-all duration-300 text-sm group"
+                >
+                  <div className="bg-white/10 backdrop-blur-md p-2 rounded-lg group-hover:bg-accent/20 transition-all duration-300 shadow-md">
+                    <Phone size={16} className="text-accent group-hover:scale-110 transition-transform" />
+                  </div>
+                  <span className="font-medium">{phone}</span>
+                </a>
+              ))}
+            </div>
+
+            {/* Social media */}
+            <div>
+              <h4 className="font-semibold text-sm mb-3 text-white/90">Мы в соцсетях:</h4>
+              <div className="flex gap-3">
+                <a
+                  href={contactInfo.socialMedia.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-green-500/20 hover:shadow-lg"
+                  aria-label="WhatsApp"
+                >
+                  <img src="/whatsapp.svg" alt="WhatsApp" className="w-7 h-7" />
+                </a>
+                <a
+                  href={contactInfo.socialMedia.vk}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-blue-600/20 hover:shadow-lg"
+                  aria-label="VKontakte"
+                >
+                  <img src="/vk.svg" alt="VK" className="w-7 h-7" />
+                </a>
+                <a
+                  href={contactInfo.socialMedia.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-pink-500/20 hover:shadow-lg"
+                  aria-label="Instagram"
+                >
+                  <img src="/instagram.svg" alt="Instagram" className="w-7 h-7" />
+                </a>
+                <a
+                  href={contactInfo.socialMedia.telegram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-sky-500/20 hover:shadow-lg"
+                  aria-label="Telegram"
+                >
+                  <img src="/telegram.svg" alt="Telegram" className="w-7 h-7" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="border-t border-white/10 mt-10 pt-8">
+          <div className="text-center space-y-2">
+            <p className="text-sm text-white/70">
+              © 2025 Студия красоты Аура Донецк ДНР. Все права защищены.
+            </p>
+            <p className="text-xs text-white/50">
+              ИП Париева Анна Сергеевна | ОГРН 323930100242527, ИНН 614331224890
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  )
+}
