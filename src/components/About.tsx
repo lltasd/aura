@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { X, Award, Users, Sparkles, Phone, Calendar, Star } from 'lucide-react'
 import PhoneSelectModal from './PhoneSelectModal'
-import { contactInfo } from '../data/services'
 
 interface LightboxProps {
   image: string | null

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { Search, Filter, Zap, Clock, Sparkles, TrendingUp } from 'lucide-react'
+import { Search, Filter, Zap, Clock, TrendingUp } from 'lucide-react'
 import { alexandriteServices, diodeServices } from '../data/services'
 import type { ServiceItem } from '../data/services'
 

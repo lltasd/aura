@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { MapPin, Mail, Clock, ArrowRight, MessageCircle, Phone as PhoneIcon, Sparkles, TrendingUp } from 'lucide-react';
+import { MapPin, Clock, ArrowRight, MessageCircle, Phone as PhoneIcon, Sparkles, TrendingUp } from 'lucide-react';
 import { contactInfo } from '../data/services';
 import PhoneSelectModal from './PhoneSelectModal';
 
