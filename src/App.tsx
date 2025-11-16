@@ -3,6 +3,12 @@ import { useEffect } from 'react'
 import HomePage from './pages/HomePage'
 import AboutPage from './pages/AboutPage'
 import ContactsPage from './pages/ContactsPage'
+import BodyProceduresPage from './pages/BodyProceduresPage'
+import BodyProcedureDetailPage from './pages/BodyProcedureDetailPage'
+import FaceProceduresPage from './pages/FaceProceduresPage'
+import FaceProcedureDetailPage from './pages/FaceProcedureDetailPage'
+import ProceduresOverviewPage from './pages/ProceduresOverviewPage'
+// detail page for face can reuse body detail if structure same, but we create separate route to body component later if needed
 
 function App() {
   useEffect(() => {
@@ -31,6 +37,11 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contacts" element={<ContactsPage />} />
+        <Route path="/procedures" element={<ProceduresOverviewPage />} />
+        <Route path="/body-procedures" element={<BodyProceduresPage />} />
+        <Route path="/body-procedures/:slug" element={<BodyProcedureDetailPage />} />
+        <Route path="/face-procedures" element={<FaceProceduresPage />} />
+        <Route path="/face-procedures/:slug" element={<FaceProcedureDetailPage />} />
       </Routes>
     </Router>
   )

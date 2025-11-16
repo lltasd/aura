@@ -41,9 +41,9 @@ export default function Header({ onBookClick }: HeaderProps) {
 
   const navItems = [
     { label: 'ГЛАВНАЯ', href: '/', isRoute: true },
-    { label: 'ВИДЫ ПРОЦЕДУР', href: '#services', isRoute: false },
-    { label: 'ПРОЦЕДУРЫ ДЛЯ ЛИЦА', href: '#services', isRoute: false },
-    { label: 'ПРОЦЕДУРЫ ДЛЯ ТЕЛА', href: '#body-contouring', isRoute: false },
+    { label: 'ВИДЫ ПРОЦЕДУР', href: '/procedures', isRoute: true },
+    { label: 'ПРОЦЕДУРЫ ДЛЯ ЛИЦА', href: '/face-procedures', isRoute: true },
+    { label: 'ПРОЦЕДУРЫ ДЛЯ ТЕЛА', href: '/body-procedures', isRoute: true },
     { label: 'О СТУДИИ', href: '/about', isRoute: true },
     { label: 'ЦЕНЫ НА УСЛУГИ', href: '/', isRoute: true },
     { label: 'КОНТАКТЫ', href: '/contacts', isRoute: true },
