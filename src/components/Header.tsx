@@ -45,7 +45,7 @@ export default function Header({ onBookClick }: HeaderProps) {
     { label: 'ПРОЦЕДУРЫ ДЛЯ ЛИЦА', href: '/face-procedures', isRoute: true },
     { label: 'ПРОЦЕДУРЫ ДЛЯ ТЕЛА', href: '/body-procedures', isRoute: true },
     { label: 'О СТУДИИ', href: '/about', isRoute: true },
-    { label: 'ЦЕНЫ НА УСЛУГИ', href: '/', isRoute: true },
+    { label: 'ЦЕНЫ НА УСЛУГИ', href: '/pricing', isRoute: true },
     { label: 'КОНТАКТЫ', href: '/contacts', isRoute: true },
   ]
 

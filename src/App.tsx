@@ -8,6 +8,7 @@ import BodyProcedureDetailPage from './pages/BodyProcedureDetailPage'
 import FaceProceduresPage from './pages/FaceProceduresPage'
 import FaceProcedureDetailPage from './pages/FaceProcedureDetailPage'
 import ProceduresOverviewPage from './pages/ProceduresOverviewPage'
+import PricingPage from './pages/PricingPage'
 // detail page for face can reuse body detail if structure same, but we create separate route to body component later if needed
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
         <Route path="/body-procedures/:slug" element={<BodyProcedureDetailPage />} />
         <Route path="/face-procedures" element={<FaceProceduresPage />} />
         <Route path="/face-procedures/:slug" element={<FaceProcedureDetailPage />} />
+        <Route path="/pricing" element={<PricingPage />} />
       </Routes>
     </Router>
   )
