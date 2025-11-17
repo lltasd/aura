@@ -7,20 +7,30 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Primary blue palette (saturated shades)
+        // Muted deep blue palette
         primary: {
-          DEFAULT: '#2563eb',
-          dark: '#1d4ed8',
-          darker: '#1e40af',
+          DEFAULT: '#2E3F6E',
+          dark: '#1E2F5E',
+          light: '#3E4F7E',
         },
-        // Silver palette
+        // Soft blue-gray accent palette
+        accent: {
+          DEFAULT: '#B8C5E0',
+          light: '#D4DEEF',
+          dark: '#9BA8C5',
+        },
+        // Gold for subtle highlights
+        gold: {
+          DEFAULT: '#D4AF37',
+          light: '#E5C158',
+          dark: '#B8941F',
+        },
+        // Keep silver aliases for compatibility
         silver: {
           light: '#e2e8f0',
           DEFAULT: '#cbd5e1',
           dark: '#475569',
         },
-        // Aliases for convenience
-        accent: '#cbd5e1',
         'silver-light': '#e2e8f0',
         'silver-dark': '#475569',
       },
