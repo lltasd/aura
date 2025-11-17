@@ -23,7 +23,7 @@ export default function FaceProcedureDetailPage() {
           <div className="space-y-10">
             {/* Top section: image left, intro text right */}
             <div className="grid md:grid-cols-2 gap-8 items-start">
-              <img src="/kab1.webp" alt="Вакуумная чистка лица" className="w-full rounded-2xl border" />
+              <img src="/first.webp" alt="Вакуумная чистка лица" className="w-full rounded-2xl border" />
               <div className="space-y-4 text-gray-700 leading-relaxed">
                 <p>
                   В современном мире, где красота и здоровье кожи лица играют важную роль, женщины прибегают к различным косметическим процедурам. Одной из них является вакуумная чистка лица.
@@ -96,6 +96,109 @@ export default function FaceProcedureDetailPage() {
               <p>
                 Цена на вакуумную чистку лица зависит от индивидуальных потребностей клиента и объема работы, однако мы предлагаем конкурентные цены и высокое качество услуг.
               </p>
+            </div>
+          </div>
+        ) : item.slug === 'ultrasonic-face-cleaning' ? (
+          <div className="space-y-10">
+            <div className="grid md:grid-cols-2 gap-8 items-start">
+              <img src="/kab3.webp" alt="Ультразвуковая чистка лица" className="w-full rounded-2xl border" />
+              <div className="space-y-4 text-gray-700 leading-relaxed">
+                <p>
+                  В настоящее время ультразвуковая чистка кожи лица является одной из самых востребованных процедур в косметологии благодаря способности мягко и безболезненно очищать кожу от загрязнений, токсинов, лишнего сала и верхнего ороговевшего эпидермиса.
+                </p>
+                <p>
+                  Специалисты рекомендуют ее из-за эффективности, безопасности и минимальной травматичности. Ультразвуковая чистка лица способствует стимуляции кровообращения и выработке коллагена, что приводит к омоложению и повышению упругости кожи.
+                </p>
+              </div>
+            </div>
+
+            <div className="rounded-xl border border-blue-200 bg-blue-50 p-6">
+              <h2 className="font-extrabold uppercase text-blue-700 mb-3">ЭФФЕКТ ОТ УЛЬТРАЗВУКОВОЙ ЧИСТКИ ЛИЦА</h2>
+              <ul className="list-disc pl-5 space-y-1 text-gray-800">
+                <li>Улучшается цвет лица, уходит жирный блеск.</li>
+                <li>Исчезают чёрные точки и уменьшаются поры.</li>
+                <li>Повышается эластичность кожи.</li>
+                <li>Выравнивается рельеф кожных покровов.</li>
+                <li>Восстанавливается защитный слой.</li>
+              </ul>
+              <p className="text-gray-700 mt-3">
+                Ультразвуковая чистка лица — щадящая процедура, обеспечивающая очищение, увлажнение и омоложение кожи без болевых ощущений и долгого восстановления.
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-rose-200 bg-rose-50 p-6">
+              <h2 className="font-extrabold uppercase text-rose-700 mb-3">ПРОТИВОПОКАЗАНИЯ</h2>
+              <p className="text-gray-700">Острые воспалительные процессы на коже, раны, повреждения, а также новообразования.</p>
+            </div>
+
+            <div className="space-y-3">
+              <h2 className="font-extrabold uppercase text-blue-700">КАК ПРОВОДИТСЯ ЧИСТКА УЛЬТРАЗВУКОМ?</h2>
+              <p className="text-gray-700">
+                В основе процедуры — высокочастотные волны, повышающие температуру верхнего слоя ткани на глубине около 0,2 мм.
+              </p>
+              <p className="text-gray-700 font-semibold">Чистка включает стадии:</p>
+              <ol className="list-decimal pl-5 space-y-1 text-gray-800">
+                <li>Очищение кожи: снятие макияжа с лица.</li>
+                <li>Нанесение проводящего геля.</li>
+                <li>Аппаратная чистка: обработка кожи скрабером.</li>
+                <li>Завершающий уход: успокаивающая маска или крем.</li>
+              </ol>
+              <p className="text-gray-700">Процесс занимает 60–90 минут и не вызывает дискомфорта. Количество сеансов определяет специалист.</p>
+            </div>
+
+            <div className="rounded-xl border border-blue-200 bg-blue-50 p-6">
+              <h2 className="font-extrabold uppercase text-blue-700 mb-3">ПРЕИМУЩЕСТВА</h2>
+              <ul className="list-disc pl-5 space-y-1 text-gray-800">
+                <li>Безболезненность и отсутствие травмирования кожи.</li>
+                <li>Быстрый и заметный эффект.</li>
+                <li>Можно проводить в любое время года.</li>
+                <li>Подходит для разных типов кожи.</li>
+              </ul>
+              <p className="text-gray-600 mt-2">Недостаток: неглубокое воздействие — при выраженных загрязнениях лучше альтернативные методы.</p>
+            </div>
+
+            <p className="text-gray-700">В студии красоты «Аура» опытные косметологи выполняют ультразвуковую чистку с применением современных аппаратов и качественных средств. Доверьте свою кожу профессионалам!</p>
+          </div>
+        ) : item.slug === 'peeling-face' ? (
+          <div className="space-y-10">
+            <img src="/pil.webp" alt="Пилинг" className="w-full rounded-2xl border" />
+
+            <div className="grid md:grid-cols-2 gap-8 items-start">
+              <div className="space-y-4 text-gray-700 leading-relaxed">
+                <p>
+                  Пилинг — это косметологическая процедура, направленная на обновление кожи путём удаления ороговевших клеток. Методика улучшает текстуру кожи, устраняет мелкие недостатки и стимулирует процессы регенерации.
+                </p>
+                <p>
+                  Существует множество видов пилингов, каждый из которых имеет свои особенности и показания.
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <h2 className="font-extrabold uppercase text-blue-700">ВИДЫ ПИЛИНГОВ</h2>
+              <p className="text-gray-700">Пилинг делится по глубине воздействия:</p>
+              <ol className="list-decimal pl-5 space-y-1 text-gray-800">
+                <li><span className="font-bold">Поверхностный пилинг</span> — самый щадящий, для всех типов кожи. Освежает цвет лица и улучшает текстуру.</li>
+                <li><span className="font-bold">Срединный пилинг</span> — воздействует на верхние слои дермы, эффективен для устранения более выраженных проблем.</li>
+                <li><span className="font-bold">Глубокий пилинг</span> — наиболее агрессивный, требует длительного восстановления и даёт самые заметные результаты.</li>
+              </ol>
+              <p className="text-gray-700">Популярные виды: кислотный, энзимный, миндальный, химический, карбоновый.</p>
+            </div>
+
+            <div className="rounded-xl border border-blue-200 bg-blue-50 p-6">
+              <h2 className="font-extrabold uppercase text-blue-700 mb-3">ПРЕИМУЩЕСТВА И ЭФФЕКТ</h2>
+              <ul className="list-disc pl-5 space-y-1 text-gray-800">
+                <li>Улучшение текстуры кожи и цвета лица.</li>
+                <li>Выравнивание тона, уменьшение пор и морщин.</li>
+                <li>Повышение упругости и гладкости.</li>
+              </ul>
+              <p className="text-gray-700 mt-2">Максимальный результат достигается курсом по рекомендации специалиста.</p>
+            </div>
+
+            <div className="space-y-3">
+              <h2 className="font-extrabold uppercase text-blue-700">РЕКОМЕНДАЦИИ КОСМЕТОЛОГА</h2>
+              <p className="text-gray-700">Перед началом сеансов необходима консультация. Специалист оценит состояние кожи и подберёт оптимальный тип пилинга и домашний уход.</p>
+              <p className="text-gray-700">Возможны кратковременные реакции кожи (покраснение, лёгкое шелушение), поэтому важно соблюдать рекомендации по уходу после процедуры.</p>
             </div>
           </div>
         ) : (
