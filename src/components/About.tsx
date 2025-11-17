@@ -198,7 +198,7 @@ export default function About({ onBookClick }: AboutProps) {
           <div className="text-center mb-20 relative">
             <div className="flex items-center justify-center gap-4 mb-10">
               <div className="h-px w-24 bg-gradient-to-r from-transparent via-primary to-transparent"></div>
-              <Star className="w-6 h-6 text-gold fill-gold animate-pulse" />
+              <Star className="w-6 h-6 text-accent fill-accent animate-pulse" />
               <div className="h-px w-24 bg-gradient-to-l from-transparent via-primary to-transparent"></div>
             </div>
             
@@ -215,11 +215,11 @@ export default function About({ onBookClick }: AboutProps) {
             </h2>
             
             <div className="flex items-center justify-center gap-4 mb-8">
-              <div className="h-1 w-32 bg-gradient-to-r from-transparent via-gold to-gold rounded-full"></div>
-              <div className="w-3 h-3 bg-gold rounded-full animate-pulse"></div>
-              <Sparkles className="w-8 h-8 text-gold" />
-              <div className="w-3 h-3 bg-gold rounded-full animate-pulse"></div>
-              <div className="h-1 w-32 bg-gradient-to-l from-transparent via-gold to-gold rounded-full"></div>
+              <div className="h-1 w-32 bg-gradient-to-r from-transparent via-accent to-accent rounded-full"></div>
+              <div className="w-3 h-3 bg-accent rounded-full animate-pulse"></div>
+              <Sparkles className="w-8 h-8 text-accent" />
+              <div className="w-3 h-3 bg-accent rounded-full animate-pulse"></div>
+              <div className="h-1 w-32 bg-gradient-to-l from-transparent via-accent to-accent rounded-full"></div>
             </div>
             
             <p className="text-2xl md:text-3xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-light">
@@ -231,7 +231,7 @@ export default function About({ onBookClick }: AboutProps) {
             {studioImages.map((image, index) => (
               <div
                 key={index}
-                className="relative group cursor-pointer overflow-hidden rounded-[2rem] shadow-2xl hover:shadow-3xl transition-all duration-700 transform hover:scale-[1.04] border-2 border-white hover:border-gold/60 bg-white"
+                className="relative group cursor-pointer overflow-hidden rounded-[2rem] shadow-2xl hover:shadow-3xl transition-all duration-700 transform hover:scale-[1.04] border-2 border-white hover:border-accent/60 bg-white"
                 onClick={() => handleImageClick(image)}
               >
                 <div className="aspect-[4/3] bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden relative">
@@ -245,7 +245,7 @@ export default function About({ onBookClick }: AboutProps) {
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/0 group-hover:from-primary/40 via-transparent to-transparent transition-all duration-700"></div>
                 </div>
                 <div className="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
-                  <div className="flex items-center gap-3 bg-white/95 backdrop-blur-md px-8 py-4 rounded-full border-2 border-gold/60 shadow-2xl">
+                  <div className="flex items-center gap-3 bg-white/95 backdrop-blur-md px-8 py-4 rounded-full border-2 border-accent/60 shadow-2xl">
                     <Sparkles className="w-5 h-5 text-primary" />
                     <span className="text-gray-800 font-bold text-base">Нажмите для увеличения</span>
                   </div>
@@ -255,7 +255,7 @@ export default function About({ onBookClick }: AboutProps) {
           </div>
 
           <div className="max-w-5xl mx-auto relative">
-            <div className="absolute -top-6 -left-6 w-12 h-12 border-t-4 border-l-4 border-gold rounded-tl-3xl"></div>
+            <div className="absolute -top-6 -left-6 w-12 h-12 border-t-4 border-l-4 border-accent rounded-tl-3xl"></div>
             <div className="absolute -top-6 -right-6 w-12 h-12 border-t-4 border-r-4 border-primary rounded-tr-3xl"></div>
             <div className="absolute -bottom-6 -left-6 w-12 h-12 border-b-4 border-l-4 border-primary-dark rounded-bl-3xl"></div>
             <div className="absolute -bottom-6 -right-6 w-12 h-12 border-b-4 border-r-4 border-accent rounded-br-3xl"></div>
@@ -314,8 +314,8 @@ export default function About({ onBookClick }: AboutProps) {
         >
           <div className="text-center mb-16">
             <div className="flex items-center justify-center gap-4 mb-8">
-              <Star className="w-6 h-6 text-gold fill-gold" />
-              <div className="h-1 w-16 bg-gradient-to-r from-gold to-primary rounded-full"></div>
+              <Star className="w-6 h-6 text-accent fill-accent" />
+              <div className="h-1 w-16 bg-gradient-to-r from-accent to-primary rounded-full"></div>
               <Sparkles className="w-7 h-7 text-primary animate-pulse" />
               <div className="h-1 w-16 bg-gradient-to-r from-primary to-primary-dark rounded-full"></div>
               <Star className="w-6 h-6 text-primary-dark fill-primary-dark" />
@@ -331,7 +331,7 @@ export default function About({ onBookClick }: AboutProps) {
               
               <div className="relative">
                 <div className="flex justify-center mb-6">
-                  <Award className="w-16 h-16 text-gold" />
+                  <Award className="w-16 h-16 text-accent" />
                 </div>
                 <p className="text-xl md:text-2xl text-gray-700 leading-relaxed font-light">
                   Студия «Аура» оснащена современным высокотехнологичным оборудованием, чтобы каждая
@@ -347,7 +347,7 @@ export default function About({ onBookClick }: AboutProps) {
             {equipmentImages.map((image, index) => (
               <div
                 key={index}
-                className="relative group cursor-pointer overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-105 bg-white border-2 border-gray-100 hover:border-gold/60"
+                className="relative group cursor-pointer overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-105 bg-white border-2 border-gray-100 hover:border-accent/60"
                 onClick={() => handleImageClick(image)}
               >
                 <div className="aspect-square bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden relative">
@@ -398,14 +398,14 @@ export default function About({ onBookClick }: AboutProps) {
                 индустрии красоты позволяет идти в ногу со временем и предлагать самые качественные
                 услуги.
               </p>
-              <div className="flex items-start gap-4 p-6 bg-gradient-to-r from-gold/10 to-primary/10 rounded-2xl border-2 border-gold/30 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <Award className="w-7 h-7 text-gold flex-shrink-0 mt-1" />
+              <div className="flex items-start gap-4 p-6 bg-gradient-to-r from-accent/10 to-primary/10 rounded-2xl border-2 border-accent/30 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <Award className="w-7 h-7 text-accent flex-shrink-0 mt-1" />
                 <p className="text-base text-gray-700 font-medium leading-relaxed">
                   Больше информации о специалистах студии — на странице нашей косметологии
                 </p>
               </div>
             </div>
-            <div className="relative group overflow-hidden rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-500 border-2 border-white hover:border-gold/60 z-10">
+            <div className="relative group overflow-hidden rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-500 border-2 border-white hover:border-accent/60 z-10">
               <div className="aspect-[4/3] bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden relative">
                 <img
                   src="/team-photo.jpg"
@@ -427,21 +427,21 @@ export default function About({ onBookClick }: AboutProps) {
         >
           <div className="absolute inset-0 opacity-20">
             <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 animate-pulse"></div>
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-gold rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 animate-pulse"></div>
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 animate-pulse"></div>
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/50 rounded-full blur-3xl"></div>
           </div>
           
           <div className="relative z-10">
             <div className="flex items-center justify-center gap-3 mb-8">
-              <Star className="w-6 h-6 text-gold fill-gold animate-pulse" />
+              <Star className="w-6 h-6 text-accent fill-accent animate-pulse" />
               <div className="inline-flex items-center gap-3 bg-white/20 backdrop-blur-md px-8 py-4 rounded-full border-2 border-white/40 shadow-xl">
-                <Sparkles className="w-6 h-6 text-gold animate-pulse" />
+                <Sparkles className="w-6 h-6 text-accent animate-pulse" />
                 <span className="text-white font-bold text-base uppercase tracking-widest">
                   Готовы начать?
                 </span>
-                <Sparkles className="w-6 h-6 text-gold animate-pulse" />
+                <Sparkles className="w-6 h-6 text-accent animate-pulse" />
               </div>
-              <Star className="w-6 h-6 text-gold fill-gold animate-pulse" />
+              <Star className="w-6 h-6 text-accent fill-accent animate-pulse" />
             </div>
             
             <h3 className="text-4xl md:text-6xl font-black mb-8 leading-tight">
@@ -450,9 +450,9 @@ export default function About({ onBookClick }: AboutProps) {
             
             <div className="flex justify-center mb-10">
               <div className="flex items-center gap-3">
-                <div className="w-3 h-3 bg-gold rounded-full animate-pulse"></div>
+                <div className="w-3 h-3 bg-accent rounded-full animate-pulse"></div>
                 <div className="w-24 h-1.5 bg-white/40 rounded-full"></div>
-                <div className="w-3 h-3 bg-gold rounded-full animate-pulse"></div>
+                <div className="w-3 h-3 bg-accent rounded-full animate-pulse"></div>
               </div>
             </div>
             
@@ -464,7 +464,7 @@ export default function About({ onBookClick }: AboutProps) {
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-10">
               <button
                 onClick={onBookClick}
-                className="group bg-gradient-to-r from-gold via-gold-light to-gold hover:from-gold-light hover:via-gold hover:to-gold-light text-primary px-12 py-6 rounded-2xl font-black text-xl transition-all transform hover:scale-110 shadow-2xl shadow-gold/50 hover:shadow-3xl hover:shadow-gold/60 inline-flex items-center gap-4 border-2 border-gold/20"
+                className="group bg-gradient-to-r from-accent via-silver-light to-accent hover:from-silver-light hover:via-accent hover:to-silver-light text-primary px-12 py-6 rounded-2xl font-black text-xl transition-all transform hover:scale-110 shadow-2xl shadow-primary/50 hover:shadow-3xl hover:shadow-primary/60 inline-flex items-center gap-4 border-2 border-accent/20"
               >
                 <Calendar size={28} className="group-hover:rotate-12 transition-transform duration-300" />
                 Заказать звонок

@@ -100,7 +100,7 @@ export default function Services({}: ServicesProps) {
         </div>
 
         {/* Note about male pricing */}
-        <div className="mt-6 bg-gold/10 border-l-4 border-gold p-4 rounded">
+        <div className="mt-6 bg-accent/10 border-l-4 border-accent p-4 rounded">
           <p className="text-gray-700">
             <strong>Примечание:</strong> Мужская лазерная эпиляция +25% от прайса
           </p>

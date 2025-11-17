@@ -10,7 +10,7 @@ export default function Footer() {
       <div className="bg-gradient-to-r from-gray-100 to-gray-50 text-gray-700 py-3 text-center text-sm border-b border-gray-200">
         <div className="container mx-auto px-4">
           <p className="flex items-center justify-center gap-2">
-            <span className="text-gold">Info</span>
+            <span className="text-accent">Info</span>
             Информация на сайте не является публичной офертой и требует уточнения у менеджера
           </p>
         </div>

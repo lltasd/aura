@@ -265,7 +265,7 @@ export default function ContactsSection() {
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-3">
                   <div className="bg-white/20 backdrop-blur-sm p-2 rounded-xl">
-                    <MessageCircle className="w-6 h-6 text-gold" />
+                    <MessageCircle className="w-6 h-6 text-accent" />
                   </div>
                   <h4 className="text-2xl font-bold">Остались вопросы?</h4>
                 </div>
@@ -278,7 +278,7 @@ export default function ContactsSection() {
                   href={contactInfo.socialMedia.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-8 py-4 rounded-xl bg-gold hover:bg-gold-light text-primary font-bold transition-all hover:scale-105 shadow-lg hover:shadow-xl"
+                  className="px-8 py-4 rounded-xl bg-accent hover:bg-silver-light text-primary font-bold transition-all hover:scale-105 shadow-lg hover:shadow-xl"
                 >
                   Написать в WhatsApp
                 </a>

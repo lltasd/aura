@@ -134,7 +134,7 @@ export default function Booking({ onBookClick }: BookingProps) {
           >
             <button
               onClick={onBookClick}
-              className="group bg-gradient-to-r from-gold to-gold-light hover:from-gold-light hover:to-gold text-primary px-10 py-5 rounded-2xl font-bold text-lg transition-all transform hover:scale-105 shadow-2xl shadow-gold/30 inline-flex items-center gap-3"
+              className="group bg-gradient-to-r from-accent to-silver-light hover:from-silver-light hover:to-accent text-primary px-10 py-5 rounded-2xl font-bold text-lg transition-all transform hover:scale-105 shadow-2xl shadow-primary/30 inline-flex items-center gap-3"
             >
               <MessageSquare size={24} className="group-hover:rotate-12 transition-transform" />
               Записаться онлайн

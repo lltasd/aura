@@ -111,7 +111,7 @@ export default function Header({ onBookClick }: HeaderProps) {
             </div>
             <button
               onClick={onBookClick}
-              className="bg-gold hover:bg-gold-light text-primary px-5 py-1.5 rounded-full transition-all font-semibold text-sm shadow-lg hover:shadow-xl hover:scale-105"
+              className="bg-accent hover:bg-silver-light text-primary px-5 py-1.5 rounded-full transition-all font-semibold text-sm shadow-lg hover:shadow-xl hover:scale-105"
             >
               ЗАКАЗАТЬ ЗВОНОК
             </button>
@@ -214,7 +214,7 @@ export default function Header({ onBookClick }: HeaderProps) {
                   onBookClick()
                   setIsMobileMenuOpen(false)
                 }}
-                className="w-full bg-gold hover:bg-gold-light text-primary px-6 py-3 rounded-full transition-all font-semibold shadow-lg"
+                className="w-full bg-accent hover:bg-silver-light text-primary px-6 py-3 rounded-full transition-all font-semibold shadow-lg"
               >
                 ЗАКАЗАТЬ ЗВОНОК
               </button>

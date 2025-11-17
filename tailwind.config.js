@@ -7,21 +7,24 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Основная синяя гамма (только насыщенные оттенки)
         primary: {
-          DEFAULT: '#2E3F6E',
-          dark: '#1E2F5E',
-          light: '#3E4F7E',
+          DEFAULT: '#2563eb',
+          dark: '#1d4ed8',
+          darker: '#1e40af',
         },
-        accent: {
-          DEFAULT: '#B8C5E0',
-          light: '#D4DEEF',
-          dark: '#9BA8C5',
+
+        // Серебряная гамма
+        silver: {
+          light: '#e2e8f0',
+          DEFAULT: '#cbd5e1',
+          dark: '#475569',
         },
-        gold: {
-          DEFAULT: '#D4AF37',
-          light: '#E5C158',
-          dark: '#B8941F',
-        },
+
+        // Альтернативные названия для удобства
+        accent: '#cbd5e1',
+        'silver-light': '#e2e8f0',
+        'silver-dark': '#475569',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
