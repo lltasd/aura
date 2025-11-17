@@ -19,13 +19,7 @@ export default function ProceduresOverviewPage() {
     , [])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/40 to-slate-100 relative overflow-hidden">
-      <div className="fixed inset-0 opacity-40 pointer-events-none">
-        <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-blue-400/30 to-blue-600/20 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-10 right-20 w-[500px] h-[500px] bg-gradient-to-tl from-slate-400/25 to-blue-300/20 rounded-full blur-3xl animate-float-delayed" />
-        <div className="absolute top-1/3 left-1/2 w-80 h-80 bg-gradient-to-r from-blue-500/20 to-slate-300/25 rounded-full blur-3xl animate-float-slow" />
-      </div>
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-blue-600 to-transparent animate-shimmer" />
+    <div className="min-h-screen bg-white">
 
       <Header onBookClick={() => setIsContactOpen(true)} />
 

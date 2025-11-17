@@ -15,7 +15,7 @@ export default function Hero({ onBookClick }: HeroProps) {
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 right-20 w-64 h-64 bg-accent/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 left-20 w-96 h-96 bg-silver-light/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 left-20 w-96 h-96 bg-gold/5 rounded-full blur-3xl"></div>
         {/* Subtle roses */}
         <img
           src="/rose.png"
@@ -59,7 +59,7 @@ export default function Hero({ onBookClick }: HeroProps) {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
             <button
               onClick={onBookClick}
-              className="bg-accent hover:bg-silver-light text-primary px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105 shadow-lg flex items-center gap-2"
+              className="bg-gold hover:bg-gold-light text-primary px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105 shadow-lg flex items-center gap-2"
             >
               Заказать звонок
               <ArrowRight size={20} />

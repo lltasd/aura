@@ -7,21 +7,19 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Основная синяя гамма (только насыщенные оттенки)
+        // Primary blue palette (saturated shades)
         primary: {
           DEFAULT: '#2563eb',
           dark: '#1d4ed8',
           darker: '#1e40af',
         },
-
-        // Серебряная гамма
+        // Silver palette
         silver: {
           light: '#e2e8f0',
           DEFAULT: '#cbd5e1',
           dark: '#475569',
         },
-
-        // Альтернативные названия для удобства
+        // Aliases for convenience
         accent: '#cbd5e1',
         'silver-light': '#e2e8f0',
         'silver-dark': '#475569',

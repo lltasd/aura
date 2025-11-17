@@ -291,12 +291,12 @@ export default function About({ onBookClick }: AboutProps) {
           <div className="text-center mb-16">
             <div className="flex items-center justify-center gap-4 mb-8">
               <div className="h-px w-20 bg-gradient-to-r from-transparent via-primary to-transparent"></div>
-              <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary-dark rounded-2xl flex items-center justify-center rotate-45 shadow-xl">
+              <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center rotate-45 shadow-xl">
                 <Sparkles className="w-6 h-6 text-white -rotate-45" />
               </div>
-              <div className="h-px w-20 bg-gradient-to-l from-transparent via-primary-dark to-transparent"></div>
+              <div className="h-px w-20 bg-gradient-to-l from-transparent via-accent to-transparent"></div>
             </div>
-            <h3 className="text-5xl md:text-7xl font-black mb-8 bg-gradient-to-r from-primary via-primary-dark to-accent bg-clip-text text-transparent leading-tight">
+            <h3 className="text-5xl md:text-7xl font-black mb-8 bg-gradient-to-r from-primary via-accent to-accent bg-clip-text text-transparent leading-tight">
               Наши кабинеты
             </h3>
             <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
@@ -464,7 +464,7 @@ export default function About({ onBookClick }: AboutProps) {
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-10">
               <button
                 onClick={onBookClick}
-                className="group bg-gradient-to-r from-accent via-silver-light to-accent hover:from-silver-light hover:via-accent hover:to-silver-light text-primary px-12 py-6 rounded-2xl font-black text-xl transition-all transform hover:scale-110 shadow-2xl shadow-primary/50 hover:shadow-3xl hover:shadow-primary/60 inline-flex items-center gap-4 border-2 border-accent/20"
+                className="group bg-accent hover:bg-silver-light text-primary px-12 py-6 rounded-2xl font-black text-xl transition-colors shadow-md hover:shadow-lg inline-flex items-center gap-4 border-2 border-accent/20"
               >
                 <Calendar size={28} className="group-hover:rotate-12 transition-transform duration-300" />
                 Заказать звонок
