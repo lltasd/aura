@@ -4,10 +4,11 @@
 
 @layer base {
   body {
-    @apply bg-white text-slate-800 font-sans antialiased;
+    @apply bg-white text-slate-800 font-sans antialiased overflow-x-hidden;
   }
   html {
     scroll-behavior: smooth;
+    @apply overflow-x-hidden;
   }
 }
 

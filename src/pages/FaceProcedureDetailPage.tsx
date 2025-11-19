@@ -15,7 +15,7 @@ export default function FaceProcedureDetailPage() {
   return (
     <div className="min-h-screen bg-white">
       <Header onBookClick={() => setIsBookingModalOpen(true)} />
-      <div className="container mx-auto px-4 pt-36 pb-16 max-w-6xl">
+      <div className="container mx-auto px-4 pt-44 md:pt-48 pb-16 max-w-6xl">
         <Link to="/face-procedures" className="text-primary font-semibold hover:text-primary-dark">← Все процедуры</Link>
         <h1 className="text-3xl md:text-5xl font-bold text-primary mt-4 mb-6">{item.title}</h1>
 

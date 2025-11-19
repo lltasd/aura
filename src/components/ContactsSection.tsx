@@ -159,14 +159,7 @@ export default function ContactsSection() {
               >
                 <h4 className="font-bold text-gray-900 mb-4 text-lg">Мы на связи</h4>
                 <div className="flex flex-wrap gap-4">
-                  <a
-                    href={contactInfo.socialMedia.whatsapp}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-6 py-3 rounded-2xl bg-green-500 hover:bg-green-600 text-white font-bold transition-all hover:scale-110 shadow-lg hover:shadow-xl"
-                  >
-                    WhatsApp
-                  </a>
+                 
                   <a
                     href={contactInfo.socialMedia.telegram}
                     target="_blank"
@@ -182,6 +175,14 @@ export default function ContactsSection() {
                     className="px-6 py-3 rounded-2xl bg-white text-primary border-2 border-primary/20 hover:border-accent hover:text-accent font-bold transition-all hover:scale-110 shadow-lg hover:shadow-xl"
                   >
                     ВКонтакте
+                  </a>
+                   <a
+                    href={contactInfo.socialMedia.whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 rounded-2xl bg-green-500 hover:bg-green-600 text-white font-bold transition-all hover:scale-110 shadow-lg hover:shadow-xl"
+                  >
+                    WhatsApp
                   </a>
                 </div>
               </div>
@@ -280,7 +281,7 @@ export default function ContactsSection() {
                   rel="noopener noreferrer"
                   className="px-8 py-4 rounded-xl bg-gold hover:bg-gold-light text-primary font-bold transition-all hover:scale-105 shadow-lg hover:shadow-xl"
                 >
-                  Написать в WhatsApp
+                  Написать в Telegram
                 </a>
                 <button
                   type="button"

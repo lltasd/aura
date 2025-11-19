@@ -17,8 +17,9 @@ export default function FaceProceduresPage() {
       <main className="container mx-auto px-4 pt-44 pb-16 relative z-10">
         <div className="mb-16 text-center animate-fade-in-down">
           
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black bg-gradient-to-r from-blue-600 via-blue-700 to-slate-800 bg-clip-text text-transparent leading-tight mb-4 animate-gradient">
-            Процедуры для лица
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black bg-gradient-to-r from-blue-600 via-blue-700 to-slate-800 bg-clip-text text-transparent leading-tight mb-4 animate-gradient inline-flex items-center gap-4 justify-center">
+            <img src="/face.svg" alt="face" className="w-8 h-8 md:w-10 md:h-10 drop-shadow" />
+            <span>Процедуры для лица</span>
           </h1>
           <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
             Деликатные и эффективные методики ухода и омоложения кожи лица

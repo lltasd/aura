@@ -8,7 +8,7 @@ export default function Footer() {
     <footer id="site-footer" className="bg-primary-dark text-white">
       {/* Disclaimer */}
       <div className="bg-gradient-to-r from-gray-100 to-gray-50 text-gray-700 py-3 text-center text-sm border-b border-gray-200">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <p className="flex items-center justify-center gap-2">
             <span className="text-gold">Info</span>
             Информация на сайте не является публичной офертой и требует уточнения у менеджера
@@ -16,7 +16,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
           {/* Studio info */}
           <div className="space-y-6">
@@ -132,7 +132,7 @@ export default function Footer() {
                   className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-green-500/20 hover:shadow-lg"
                   aria-label="WhatsApp"
                 >
-                  <img src="/whatsapp.svg" alt="WhatsApp" className="w-7 h-7" />
+                  <img src="/whatsapp.svg" alt="WhatsApp" className="w-7 h-7" loading="lazy" decoding="async" />
                 </a>
                 <a
                   href={contactInfo.socialMedia.vk}
@@ -141,7 +141,7 @@ export default function Footer() {
                   className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-blue-600/20 hover:shadow-lg"
                   aria-label="VKontakte"
                 >
-                  <img src="/vk.svg" alt="VK" className="w-7 h-7" />
+                  <img src="/vk.svg" alt="VK" className="w-7 h-7" loading="lazy" decoding="async" />
                 </a>
                 <a
                   href={contactInfo.socialMedia.instagram}
@@ -150,7 +150,7 @@ export default function Footer() {
                   className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-pink-500/20 hover:shadow-lg"
                   aria-label="Instagram"
                 >
-                  <img src="/instagram.svg" alt="Instagram" className="w-7 h-7" />
+                  <img src="/instagram.svg" alt="Instagram" className="w-7 h-7" loading="lazy" decoding="async" />
                 </a>
                 <a
                   href={contactInfo.socialMedia.telegram}
@@ -159,7 +159,7 @@ export default function Footer() {
                   className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-sky-500/20 hover:shadow-lg"
                   aria-label="Telegram"
                 >
-                  <img src="/telegram.svg" alt="Telegram" className="w-7 h-7" />
+                  <img src="/telegram.svg" alt="Telegram" className="w-7 h-7" loading="lazy" decoding="async" />
                 </a>
               </div>
             </div>
@@ -169,7 +169,7 @@ export default function Footer() {
         <div className="border-t border-white/10 mt-10 pt-8">
           <div className="text-center space-y-2">
             <p className="text-sm text-white/70">
-              © 2025 Студия красоты Аура Донецк ДНР. Все права защищены.
+              2025 Студия красоты Аура Донецк ДНР. Все права защищены.
             </p>
             <p className="text-xs text-white/50">
               ИП Париева Анна Сергеевна | ОГРН 323930100242527, ИНН 614331224890

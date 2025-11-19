@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import ScrollToTop from './components/ScrollToTop'
 import { useEffect } from 'react'
 import HomePage from './pages/HomePage'
+import SpecialsPage from './pages/SpecialsPage'
 import AboutPage from './pages/AboutPage'
 import ContactsPage from './pages/ContactsPage'
 import BodyProceduresPage from './pages/BodyProceduresPage'
@@ -9,6 +11,7 @@ import FaceProceduresPage from './pages/FaceProceduresPage'
 import FaceProcedureDetailPage from './pages/FaceProcedureDetailPage'
 import ProceduresOverviewPage from './pages/ProceduresOverviewPage'
 import PricingPage from './pages/PricingPage'
+import SpecialistsPage from './pages/SpecialistsPage'
 // detail page for face can reuse body detail if structure same, but we create separate route to body component later if needed
 
 function App() {
@@ -34,6 +37,7 @@ function App() {
 
   return (
     <Router>
+      <ScrollToTop behavior="auto" />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
@@ -44,6 +48,8 @@ function App() {
         <Route path="/face-procedures" element={<FaceProceduresPage />} />
         <Route path="/face-procedures/:slug" element={<FaceProcedureDetailPage />} />
         <Route path="/pricing" element={<PricingPage />} />
+        <Route path="/specials" element={<SpecialsPage />} />
+        <Route path="/specialists" element={<SpecialistsPage />} />
       </Routes>
     </Router>
   )

@@ -1,6 +1,18 @@
 import { useEffect, useState } from 'react'
+import NewYearPromoModal from '../components/NewYearPromoModal'
+
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import WhatsAppButton from '../components/WhatsAppButton'
+import SpecialsRow from '../components/SpecialsRow'
+import ConsultationFormSection from '../components/ConsultationFormSection'
+import ReviewsSection from '../components/ReviewsSection'
+import AboutUsSection from '../components/AboutUsSection'
+import SpecialistsSection from '../components/SpecialistsSection'
+import GiftCertificateSection from '../components/GiftCertificateSection'
+
+import { specialists } from '../data/specialists'
+
 import { ContactModal } from '../components/BodyContouring'
 import { Link } from 'react-router-dom'
 import { bodyProcedures } from '../data/bodyProcedures'
@@ -8,13 +20,40 @@ import { faceProcedures } from '../data/faceProcedures'
 import { ArrowRight, Sparkles, Award, Shield, Users, Phone } from 'lucide-react'
 
 export default function HomePage() {
+
   const images = ['/slider5.png', '/slider1.png', '/slider2.png', '/slider4.png']
   const [active, setActive] = useState(0)
   const [isContactOpen, setIsContactOpen] = useState(false)
-  
+  const [showPromo, setShowPromo] = useState(false)
+
+  const [visibleServices, setVisibleServices] = useState(5)
+
   useEffect(() => {
+
     const id = setInterval(() => setActive((p) => (p + 1) % images.length), 3000)
     return () => clearInterval(id)
+  }, [])
+
+  // Show New Year promo once per day
+  useEffect(() => {
+    const key = 'ny_promo_seen_at'
+    const last = localStorage.getItem(key)
+    const now = Date.now()
+    const dayMs = 24 * 60 * 60 * 1000
+    if (!last || now - Number(last) > dayMs) {
+      setShowPromo(true)
+      localStorage.setItem(key, String(now))
+    }
+  }, [])
+
+  useEffect(() => {
+    const updateVisible = () => {
+      const isDesktop = window.matchMedia('(min-width: 1024px)').matches // lg breakpoint
+      setVisibleServices(isDesktop ? 9 : 5)
+    }
+    updateVisible()
+    window.addEventListener('resize', updateVisible)
+    return () => window.removeEventListener('resize', updateVisible)
   }, [])
 
   const items = [
@@ -25,6 +64,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-50">
       <Header onBookClick={() => setIsContactOpen(true)} />
+      <NewYearPromoModal isOpen={showPromo} onClose={() => setShowPromo(false)} />
 
       <main className="container mx-auto px-4 pt-44 pb-16">
         <section className="grid lg:grid-cols-3 gap-8 items-start">
@@ -87,7 +127,7 @@ export default function HomePage() {
                         className="flex items-center gap-3 p-5 rounded-2xl bg-gradient-to-br from-blue-50 to-white border border-blue-200/50 shadow-sm hover:shadow-lg hover:scale-105 transition-all duration-500 group/card"
                         style={{ transitionDelay: item.delay }}
                       >
-                        <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center flex-shrink-0 shadow-lg group-hover/card:scale-110 transition-transform duration-500">
+                        <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center border border-blue-300/50 shadow-lg group-hover/card:scale-110 transition-transform duration-500">
                           <item.icon className="w-5 h-5 text-white" />
                         </div>
                         <div className="text-sm font-bold text-slate-800">{item.text}</div>
@@ -136,7 +176,7 @@ export default function HomePage() {
           </div>
 
           {/* ПРАВАЯ КОЛОНКА */}
-          <aside className="space-y-6 lg:sticky lg:top-40 animate-fade-in" style={{ animationDelay: '300ms' }}>
+          <aside className="hidden lg:block space-y-6 lg:sticky lg:top-40 animate-fade-in" style={{ animationDelay: '300ms' }}>
             {/* Специальные предложения */}
             <div className="group relative">
               <div className="absolute -inset-2 bg-gradient-to-br from-blue-400/60 via-blue-300/40 to-blue-500/60 rounded-[2rem] opacity-50 group-hover:opacity-70 blur-2xl transition-all duration-1000" />
@@ -201,7 +241,7 @@ export default function HomePage() {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {items.map((p, index) => (
+            {items.slice(0, visibleServices).map((p, index) => (
               <article
                 key={`${p.kind}-${p.slug}`}
                 className="group relative animate-fade-in-up"
@@ -218,8 +258,14 @@ export default function HomePage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/20 to-transparent" />
                     
                     {/* Категория */}
-                    <div className="absolute top-5 left-5 px-4 py-2.5 rounded-full bg-white/20 backdrop-blur-2xl border border-white/40 text-white text-xs font-bold uppercase tracking-wide shadow-lg">
-                      {p.kind === 'face' ? ' Лицо' : ' Тело'}
+                    <div className="absolute top-5 left-5 px-4 py-2.5 rounded-full bg-white/20 backdrop-blur-2xl border border-white/40 text-white text-xs font-bold uppercase tracking-wide shadow-lg flex items-center gap-2">
+                      <img
+                        src={p.kind === 'face' ? '/face.svg' : '/body.svg'}
+                        alt={p.kind === 'face' ? 'face' : 'body'}
+                        className="w-4 h-4 drop-shadow"
+                        loading="lazy"
+                      />
+                      <span>{p.kind === 'face' ? 'Лицо' : 'Тело'}</span>
                     </div>
                   </div>
 
@@ -241,10 +287,31 @@ export default function HomePage() {
               </article>
             ))}
           </div>
+
+          {items.length > visibleServices && (
+            <div className="flex justify-center mt-10">
+              <button
+                onClick={() => setVisibleServices(items.length)}
+                className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold shadow-lg hover:shadow-2xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 hover:scale-[1.03]"
+              >
+                Смотреть больше
+              </button>
+            </div>
+          )}
         </section>
 
         {/* ПОЧЕМУ МЫ */}
-        <section className="mt-20 animate-fade-in" style={{ animationDelay: '400ms' }}>
+        
+        
+        
+        <SpecialsRow items={items.map(({ image, title }) => ({ image, title })).slice(0,6)} />
+        <ConsultationFormSection onOpen={() => setIsContactOpen(true)} />
+        <ReviewsSection />
+        <AboutUsSection />
+        <SpecialistsSection items={specialists.slice(0,6)} />
+        <GiftCertificateSection onSubmit={() => setIsContactOpen(true)} />
+
+<section className="mt-20 animate-fade-in" style={{ animationDelay: '400ms' }}>
           <div className="relative rounded-[2rem] overflow-hidden shadow-2xl border border-white/80 bg-white/95 backdrop-blur-xl p-8 sm:p-12">
             <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-slate-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
@@ -265,8 +332,9 @@ export default function HomePage() {
           </div>
         </section>
       </main>
-
-      <Footer />
+       
+        <Footer />
+        <WhatsAppButton />
       <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
 
       <style>{`

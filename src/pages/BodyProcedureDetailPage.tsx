@@ -15,7 +15,7 @@ export default function BodyProcedureDetailPage() {
   return (
     <div className="min-h-screen bg-white">
       <Header onBookClick={() => setIsBookingModalOpen(true)} />
-      <div className="container mx-auto px-4 pt-36 pb-16 max-w-5xl">
+      <div className="container mx-auto px-4 pt-44 md:pt-48 pb-16 max-w-5xl">
         <Link to="/body-procedures" className="text-primary font-semibold hover:text-primary-dark">← Все процедуры</Link>
         <h1 className="text-3xl md:text-5xl font-bold text-primary mt-4 mb-4">{item.title}</h1>
         <p className="text-gray-700 text-lg mb-8">{item.details.description}</p>

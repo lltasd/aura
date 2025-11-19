@@ -18,8 +18,9 @@ export default function BodyProceduresPage() {
         <div className="mb-16 text-center animate-fade-in-down">
             <div className="w-1.5 h-1.5 bg-blue-600 rounded-full animate-ping" />
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black bg-gradient-to-r from-blue-600 via-blue-700 to-slate-800 bg-clip-text text-transparent leading-tight mb-4 animate-gradient">
-            Процедуры для тела
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black bg-gradient-to-r from-blue-600 via-blue-700 to-slate-800 bg-clip-text text-transparent leading-tight mb-4 animate-gradient inline-flex items-center gap-4 justify-center">
+            <img src="/body.svg" alt="body" className="w-8 h-8 md:w-10 md:h-10 drop-shadow" />
+            <span>Процедуры для тела</span>
           </h1>
           <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
             Современные аппаратные методики для здоровья и красоты вашего тела
