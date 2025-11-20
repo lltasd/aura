@@ -1,7 +1,7 @@
 import { FormEvent, useState } from 'react'
 import { Calendar, Phone, Mail, Sparkles, CheckCircle2, User } from 'lucide-react'
 
-export default function ConsultationFormSection({ onOpen }: { onOpen: () => void }) {
+export default function ConsultationFormSection() {
   const [focused, setFocused] = useState<string | null>(null)
   const [checked, setChecked] = useState({ news: false, privacy: false })
   const [formData, setFormData] = useState({ name: '', phone: '', email: '' })

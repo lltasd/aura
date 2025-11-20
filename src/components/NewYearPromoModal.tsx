@@ -201,21 +201,3 @@ export default function NewYearPromoModal({ isOpen, onClose }: { isOpen: boolean
     </div>
   )
 }
-
-// Demo component to test the modal
-function App() {
-  const [isOpen, setIsOpen] = useState(false)
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 flex items-center justify-center p-8">
-      <button
-        onClick={() => setIsOpen(true)}
-        className="px-8 py-4 bg-white text-blue-600 rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300"
-      >
-        Открыть акцию 🎄
-      </button>
-
-      <NewYearPromoModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
-    </div>
-  )
-}
