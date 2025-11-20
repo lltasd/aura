@@ -43,7 +43,7 @@ export default function WhatsAppButton() {
         />
       )}
 
-      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 select-none">
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end gap-3 select-none">
         {/* Список действий */}
         <div className="flex flex-col items-end gap-3 transition-all duration-300">
           {actions.map((a, idx) => (
@@ -73,14 +73,14 @@ export default function WhatsAppButton() {
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-label={open ? 'Закрыть меню' : 'Открыть меню записи'}
-          className="relative w-20 h-20 sm:w-20 sm:h-20 rounded-full group focus:outline-none"
+          className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full group focus:outline-none"
         >
           {/* Пульсирующее внешнее кольцо */}
           <span className="absolute inset-0 rounded-full bg-slate-400/60 blur-[2px] animate-soft-pulse" />
 
           {/* Внутренняя кнопка */}
           <span className={`absolute inset-1 rounded-full border border-white/20 shadow-2xl flex items-center justify-center text-white font-black tracking-wide transition-all duration-300 ${open ? 'bg-slate-800' : 'bg-gradient-to-br from-slate-600 to-slate-500 group-hover:from-slate-700 group-hover:to-slate-600'}`}> 
-            <span className="text-xs sm:text-sm">{open ? <X className="w-6 h-6" /> : 'ЗАПИСЬ'}</span>
+            <span className="text-[10px] sm:text-sm">{open ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : 'ЗАПИСЬ'}</span>
           </span>
         </button>
       </div>

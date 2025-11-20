@@ -72,12 +72,12 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4"
           >
-            <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="bg-white rounded-xl sm:rounded-2xl shadow-2xl max-w-lg sm:max-w-xl md:max-w-2xl w-full max-h-[90vh] overflow-y-auto">
               {/* Header */}
-              <div className="bg-primary text-white p-6 rounded-t-xl flex items-center justify-between">
-                <h2 className="text-2xl font-bold">Заказать звонок / Записаться</h2>
+              <div className="bg-primary text-white p-4 sm:p-6 rounded-t-xl flex items-center justify-between">
+                <h2 className="text-xl sm:text-2xl font-bold">Заказать звонок / Записаться</h2>
                 <button
                   onClick={onClose}
                   className="hover:bg-white/20 rounded-lg p-2 transition"
@@ -89,7 +89,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
 
               {/* Form */}
               {!isSubmitted ? (
-                <form onSubmit={handleSubmit} className="p-6 space-y-6">
+                <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-5 sm:space-y-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
                       Ваше имя *
@@ -101,7 +101,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                      className="w-full px-3 py-2.5 sm:px-4 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                       placeholder="Введите ваше имя"
                     />
                   </div>
@@ -117,7 +117,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                       required
                       value={formData.phone}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                      className="w-full px-3 py-2.5 sm:px-4 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                       placeholder="+7 (___) ___-__-__"
                     />
                   </div>
@@ -134,7 +134,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                       name="service"
                       value={formData.service}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                      className="w-full px-3 py-2.5 sm:px-4 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                     >
                       <option value="">Выберите услугу</option>
                       {services.map((service) => (
@@ -145,7 +145,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                     </select>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="grid md:grid-cols-2 gap-3 sm:gap-4">
                     <div>
                       <label
                         htmlFor="date"
@@ -159,7 +159,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                         name="date"
                         value={formData.date}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                        className="w-full px-3 py-2.5 sm:px-4 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                       />
                     </div>
                     <div>
@@ -175,7 +175,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                         name="time"
                         value={formData.time}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                        className="w-full px-3 py-2.5 sm:px-4 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                       />
                     </div>
                   </div>
@@ -193,15 +193,15 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                       value={formData.comments}
                       onChange={handleChange}
                       rows={4}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                      className="w-full px-3 py-2.5 sm:px-4 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                       placeholder="Оставьте ваши пожелания или вопросы..."
                     />
                   </div>
 
-                  <div className="flex gap-4">
+                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                     <button
                       type="submit"
-                      className="flex-1 bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-lg font-semibold transition flex items-center justify-center gap-2"
+                      className="w-full sm:flex-1 bg-primary hover:bg-primary-dark text-white px-5 py-3 rounded-lg font-semibold transition flex items-center justify-center gap-2"
                     >
                       <Send size={20} />
                       Отправить заявку
@@ -209,7 +209,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                     <button
                       type="button"
                       onClick={onClose}
-                      className="px-6 py-3 border border-gray-300 rounded-lg font-semibold text-gray-700 hover:bg-gray-50 transition"
+                      className="w-full sm:w-auto px-5 py-3 border border-gray-300 rounded-lg font-semibold text-gray-700 hover:bg-gray-50 transition"
                     >
                       Отмена
                     </button>

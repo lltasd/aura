@@ -12,7 +12,22 @@ import FaceProcedureDetailPage from './pages/FaceProcedureDetailPage'
 import ProceduresOverviewPage from './pages/ProceduresOverviewPage'
 import PricingPage from './pages/PricingPage'
 import SpecialistsPage from './pages/SpecialistsPage'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useLocation } from 'react-router-dom'
 // detail page for face can reuse body detail if structure same, but we create separate route to body component later if needed
+
+function PageTransition({ children }: { children: React.ReactNode }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.25, ease: 'easeOut' }}
+    >
+      {children}
+    </motion.div>
+  )
+}
 
 function App() {
   useEffect(() => {
@@ -38,20 +53,29 @@ function App() {
   return (
     <Router>
       <ScrollToTop behavior="auto" />
-      <Routes>
+      <AnimatedRoutes />
+    </Router>
+  )
+}
+
+function AnimatedRoutes() {
+  const location = useLocation()
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contacts" element={<ContactsPage />} />
         <Route path="/procedures" element={<ProceduresOverviewPage />} />
         <Route path="/body-procedures" element={<BodyProceduresPage />} />
-        <Route path="/body-procedures/:slug" element={<BodyProcedureDetailPage />} />
+        <Route path="/body-procedures/:slug" element={<PageTransition><BodyProcedureDetailPage /></PageTransition>} />
         <Route path="/face-procedures" element={<FaceProceduresPage />} />
-        <Route path="/face-procedures/:slug" element={<FaceProcedureDetailPage />} />
+        <Route path="/face-procedures/:slug" element={<PageTransition><FaceProcedureDetailPage /></PageTransition>} />
         <Route path="/pricing" element={<PricingPage />} />
         <Route path="/specials" element={<SpecialsPage />} />
         <Route path="/specialists" element={<SpecialistsPage />} />
       </Routes>
-    </Router>
+    </AnimatePresence>
   )
 }
 

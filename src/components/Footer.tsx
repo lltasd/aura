@@ -5,13 +5,13 @@ import Logo from './Logo'
 
 export default function Footer() {
   return (
-    <footer id="site-footer" className="bg-primary-dark text-white">
+    <footer id="site-footer" className="text-white bg-gradient-to-b from-blue-950 via-blue-900 to-blue-950 border-t border-white/10">
       {/* Disclaimer */}
-      <div className="bg-gradient-to-r from-gray-100 to-gray-50 text-gray-700 py-3 text-center text-sm border-b border-gray-200">
+      <div className="bg-gradient-to-r from-slate-100 to-white text-slate-700 py-3 text-center text-sm border-b border-slate-200">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <p className="flex items-center justify-center gap-2">
-            <span className="text-gold">Info</span>
-            Информация на сайте не является публичной офертой и требует уточнения у менеджера
+            <span className="text-accent font-semibold">Info</span>
+            <span className="opacity-90">Информация на сайте не является публичной офертой и требует уточнения у менеджера</span>
           </p>
         </div>
       </div>
@@ -20,8 +20,8 @@ export default function Footer() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
           {/* Studio info */}
           <div className="space-y-6">
-            <Link to="/" className="inline-flex items-center gap-3 mb-4 hover:opacity-90 transition-all group">
-              <Logo size={52} className="drop-shadow-lg group-hover:scale-110 transition-transform" />
+            <Link to="/" className="inline-flex items-center gap-3 mb-4 hover:opacity-95 transition-all group">
+              <Logo size={52} className="drop-shadow-[0_6px_18px_rgba(0,0,0,0.35)] group-hover:scale-110 transition-transform" />
               <div>
                 <div className="font-display text-xl font-bold tracking-wide">АУРА</div>
                 <div className="text-accent text-xs tracking-widest">СТУДИЯ КРАСОТЫ</div>
@@ -60,7 +60,7 @@ export default function Footer() {
                 <li key={index}>
                   <a
                     href={item.href}
-                    className="text-sm text-white/80 hover:text-accent transition-all duration-300 flex items-center gap-2 group"
+                    className="text-sm text-white/80 hover:text-accent transition-all duration-300 flex items-center gap-2 group hover:translate-x-0.5"
                   >
                     <ChevronRight size={14} className="text-accent opacity-0 group-hover:opacity-100 transition-all duration-300 -ml-5 group-hover:ml-0" />
                     <span>{item.label}</span>
@@ -84,7 +84,7 @@ export default function Footer() {
                   {item.isRoute ? (
                     <Link
                       to={item.to!}
-                      className="text-sm text-white/80 hover:text-accent transition-all duration-300 flex items-center gap-2 group"
+                      className="text-sm text-white/80 hover:text-accent transition-all duration-300 flex items-center gap-2 group hover:translate-x-0.5"
                     >
                       <ChevronRight size={14} className="text-accent opacity-0 group-hover:opacity-100 transition-all duration-300 -ml-5 group-hover:ml-0" />
                       <span>{item.label}</span>
@@ -92,7 +92,7 @@ export default function Footer() {
                   ) : (
                     <a
                       href={item.href}
-                      className="text-sm text-white/80 hover:text-accent transition-all duration-300 flex items-center gap-2 group"
+                      className="text-sm text-white/80 hover:text-accent transition-all duration-300 flex items-center gap-2 group hover:translate-x-0.5"
                     >
                       <ChevronRight size={14} className="text-accent opacity-0 group-hover:opacity-100 transition-all duration-300 -ml-5 group-hover:ml-0" />
                       <span>{item.label}</span>
@@ -113,7 +113,7 @@ export default function Footer() {
                   href={`tel:${phone.replace(/\s/g, '').replace(/[()]/g, '')}`}
                   className="flex items-center gap-3 text-white/80 hover:text-accent transition-all duration-300 text-sm group"
                 >
-                  <div className="bg-white/10 backdrop-blur-md p-2 rounded-lg group-hover:bg-accent/20 transition-all duration-300 shadow-md">
+                  <div className="bg-white/10 backdrop-blur-md p-2 rounded-lg shadow-md ring-0 ring-accent/0 group-hover:bg-accent/20 group-hover:ring-2 group-hover:ring-accent/30 transition-all duration-300">
                     <Phone size={16} className="text-accent group-hover:scale-110 transition-transform" />
                   </div>
                   <span className="font-medium">{phone}</span>
@@ -129,7 +129,7 @@ export default function Footer() {
                   href={contactInfo.socialMedia.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-green-500/20 hover:shadow-lg"
+                  className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-green-500/20 hover:shadow-lg ring-0 ring-green-500/0 hover:ring-2 hover:ring-green-500/30"
                   aria-label="WhatsApp"
                 >
                   <img src="/whatsapp.svg" alt="WhatsApp" className="w-7 h-7" loading="lazy" decoding="async" />
@@ -138,7 +138,7 @@ export default function Footer() {
                   href={contactInfo.socialMedia.vk}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-blue-600/20 hover:shadow-lg"
+                  className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-blue-600/20 hover:shadow-lg ring-0 ring-blue-500/0 hover:ring-2 hover:ring-blue-600/30"
                   aria-label="VKontakte"
                 >
                   <img src="/vk.svg" alt="VK" className="w-7 h-7" loading="lazy" decoding="async" />
@@ -147,7 +147,7 @@ export default function Footer() {
                   href={contactInfo.socialMedia.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-pink-500/20 hover:shadow-lg"
+                  className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-pink-500/20 hover:shadow-lg ring-0 ring-pink-500/0 hover:ring-2 hover:ring-pink-500/30"
                   aria-label="Instagram"
                 >
                   <img src="/instagram.svg" alt="Instagram" className="w-7 h-7" loading="lazy" decoding="async" />
@@ -156,7 +156,7 @@ export default function Footer() {
                   href={contactInfo.socialMedia.telegram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-sky-500/20 hover:shadow-lg"
+                  className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-sky-500/20 hover:shadow-lg ring-0 ring-sky-500/0 hover:ring-2 hover:ring-sky-500/30"
                   aria-label="Telegram"
                 >
                   <img src="/telegram.svg" alt="Telegram" className="w-7 h-7" loading="lazy" decoding="async" />

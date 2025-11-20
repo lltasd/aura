@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Menu, X, Phone, Clock } from 'lucide-react'
 import { contactInfo } from '../data/services'
 import Logo from './Logo'
+import { motion, AnimatePresence } from 'framer-motion'
 
 interface HeaderProps {
   onBookClick: () => void
@@ -183,15 +184,25 @@ export default function Header({ onBookClick }: HeaderProps) {
 
       </div>
     </header>
+    <AnimatePresence>
     {isMobileMenuOpen && (
       <>
         {/* Backdrop */}
-        <div 
+        <motion.div 
           className="lg:hidden fixed inset-0 bg-slate-900/95 backdrop-blur-md z-[90]"
           onClick={() => setIsMobileMenuOpen(false)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
         />
         {/* Menu Content */}
-        <div className="lg:hidden fixed inset-0 z-[100] flex flex-col">
+        <motion.div 
+          className="lg:hidden fixed inset-0 z-[100] flex flex-col"
+          initial={{ x: 20, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: 20, opacity: 0 }}
+          transition={{ type: 'spring', stiffness: 260, damping: 24 }}
+        >
           {/* Top bar */}
           <div className="flex items-center justify-between px-6 py-4">
             <div className="flex items-center gap-3">
@@ -284,9 +295,10 @@ export default function Header({ onBookClick }: HeaderProps) {
               </button>
             </div>
           </div>
-        </div>
+        </motion.div>
       </>
     )}
+    </AnimatePresence>
     </>
   )
 }

@@ -145,34 +145,43 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Блок о руководителе */}
-            <div className="group relative animate-fade-in" style={{ animationDelay: '200ms' }}>
-              <div className="hidden" />
-              <div className="relative overflow-visible bg-transparent">
-                <div className="relative overflow-hidden pb-0">
-                  <img src="/svet.webp" alt="Руководитель студии" className="w-full h-auto max-h-[380px] sm:max-h-[420px] object-contain object-left transition-transform duration-1000 group-hover:scale-105" />
-                </div>
+  {/* Блок о руководителе */}
+      <div className="group relative animate-fade-in max-w-5xl w-full" style={{ animationDelay: '200ms' }}>
+        <div className="relative rounded-[2rem] bg-white/95 backdrop-blur-xl border border-white/80 shadow-2xl overflow-hidden transition-shadow duration-500 hover:shadow-3xl">
+          <div className="grid md:grid-cols-2 gap-6 md:gap-10 items-start p-6 sm:p-10">
+            <div className="space-y-4 self-start">
+              <div className="relative overflow-hidden rounded-2xl shadow-xl">
+                <img
+                  src="/svet.webp"
+                  alt="Руководитель студии"
+                  className="w-full h-[320px] sm:h-[420px] object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+              <div>
+                <h3 className="text-2xl sm:text-3xl font-black text-slate-900">Светлана Михайловна Химина</h3>
+                <p className="text-blue-600 font-bold mt-1">Руководитель студии красоты «Аура»</p>
+                <a
+                  href="tel:+79494154729"
+                  className="mt-4 inline-flex items-center gap-3 text-slate-700 hover:text-blue-600 font-semibold transition-all duration-300 hover:gap-4 group/phone"
+                >
+                  <span className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg group-hover/phone:shadow-xl group-hover/phone:scale-110 transition-all duration-300">
+                    <Phone className="w-5 h-5 text-white" />
+                  </span>
+                  <span className="text-lg">+7 (949) 415-47-29</span>
+                </a>
+              </div>
+            </div>
 
-                {/* Карточка с контактами под фото */}
-                <div className="mt-4 max-w-xl bg-white/95 backdrop-blur-2xl rounded-2xl p-5 border border-white/70 shadow-xl hover:shadow-blue-200/50 transition-all duration-300">
-                  <h3 className="text-xl sm:text-2xl font-black text-slate-900 mb-1.5">Светлана Михайловна Химина</h3>
-                  <p className="text-blue-600 font-bold mb-3">Руководитель студии красоты «Аура»</p>
-                  <a href="tel:+79494154729" className="inline-flex items-center gap-3 text-slate-700 hover:text-blue-600 font-semibold transition-all duration-300 hover:gap-4 group/phone">
-                    <span className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg group-hover/phone:scale-110 transition-transform duration-300">
-                      <Phone className="w-4 h-4 text-white" />
-                    </span>
-                    +7(949)415-47-29
-                  </a>
-                </div>
-
-                <div className="p-8 sm:p-10 space-y-5 text-slate-700 leading-relaxed bg-gradient-to-br from-white via-slate-50/30 to-white">
-                  <p className="text-lg font-medium text-slate-800">Я горжусь тем, что на рынке современной косметологии есть такое качество услуг и высокий сервис, как в студии красоты «Аура». Ежедневно я лично проверяю, все ли подготовлено к рабочему дню, начиная от угощений для пациентов и заканчивая внешним видом персонала.</p>
-                  <p>Каждое наше достижение — это результат кропотливого труда и глубоких знаний, которые мы с гордостью применяем в своей практике. Мы уверены, что высокое качество услуг невозможно без передовых аппаратов и лучших препаратов, которые мы используем.</p>
-                  <p>Мы нацелены на то, чтобы удовлетворить потребности наших клиентов и превзойти их ожидания, создавая прочные отношения, основанные на доверии и взаимопонимании.</p>
-                  <p className="text-blue-700 font-medium bg-blue-50/50 p-4 rounded-xl border border-blue-100">Благодарим вас за выбор нашей студии «Аура». Мы уверены, что вместе мы достигнем новых высот! Мы слышим ваши голоса, каждое мнение ценно для нас. Буду рада обратной связи в социальных сетях.</p>
+                  <div className="space-y-4 text-slate-700 leading-relaxed self-start">
+                    <p className="text-base sm:text-lg font-medium text-slate-800">Я горжусь тем, что на рынке современной косметологии есть такое качество услуг и высокий сервис, как в студии красоты «Аура». Ежедневно я лично проверяю, все ли подготовлено к рабочему дню, начиная от угощений для пациентов и заканчивая внешним видом персонала.</p>
+                    <p>Каждое наше достижение — это результат кропотливого труда и глубоких знаний, которые мы с гордостью применяем в своей практике. Мы уверены, что высокое качество услуг невозможно без передовых аппаратов и лучших препаратов, которые мы используем.</p>
+                    <p>Мы нацелены на то, чтобы удовлетворить потребности наших клиентов и превзойти их ожидания, создавая прочные отношения, основанные на доверии и взаимопонимании.</p>
+                    <p className="text-blue-700 font-medium bg-blue-50/50 p-4 rounded-xl border border-blue-100">Благодарим вас за выбор нашей студии «Аура». Мы уверены, что вместе мы достигнем новых высот! Мы слышим ваши голоса, каждое мнение ценно для нас. Буду рада обратной связи в социальных сетях.</p>
+                  </div>
                 </div>
               </div>
             </div>
+
           </div>
 
           {/* ПРАВАЯ КОЛОНКА */}
