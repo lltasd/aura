@@ -312,9 +312,8 @@ export default function HomePage() {
         {/* ПОЧЕМУ МЫ */}
         
         
-        
-        <SpecialsRow items={items.map(({ image, title }) => ({ image, title })).slice(0,6)} />
-        <ConsultationFormSection onOpen={() => setIsContactOpen(true)} />
+        {/* <SpecialsRow items={items.map(({ image, title }) => ({ image, title })).slice(0,6)} /> */}
+        <ConsultationFormSection />
         <ReviewsSection />
         <AboutUsSection />
         <SpecialistsSection items={specialists.slice(0,6)} />
