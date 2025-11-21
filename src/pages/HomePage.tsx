@@ -16,7 +16,7 @@ import { ContactModal } from '../components/BodyContouring'
 import { Link } from 'react-router-dom'
 import { bodyProcedures } from '../data/bodyProcedures'
 import { faceProcedures } from '../data/faceProcedures'
-import { ArrowRight, Sparkles, Award, Shield, Users, Phone } from 'lucide-react'
+import { ArrowRight, Sparkles, Award, Shield, Users, Phone, Quote } from 'lucide-react'
 
 export default function HomePage() {
 
@@ -61,7 +61,7 @@ export default function HomePage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-50">
+    <div className="min-h-screen overflow-x-hidden bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-50">
       <Header onBookClick={() => setIsContactOpen(true)} />
       <NewYearPromoModal isOpen={showPromo} onClose={() => setShowPromo(false)} />
 
@@ -157,34 +157,65 @@ export default function HomePage() {
                 />
               </div>
               <div>
-                <h3 className="text-2xl sm:text-3xl font-black text-slate-900">Светлана Михайловна Химина</h3>
-                <p className="text-blue-600 font-bold mt-1">Руководитель студии красоты «Аура»</p>
-                <a
-                  href="tel:+79494154729"
-                  className="mt-4 inline-flex items-center gap-3 text-slate-700 hover:text-blue-600 font-semibold transition-all duration-300 hover:gap-4 group/phone"
-                >
-                  <span className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg group-hover/phone:shadow-xl group-hover/phone:scale-110 transition-all duration-300">
-                    <Phone className="w-5 h-5 text-white" />
-                  </span>
-                  <span className="text-lg">+7 (949) 415-47-29</span>
-                </a>
-              </div>
-            </div>
-
-                  <div className="space-y-4 text-slate-700 leading-relaxed self-start">
-                    <p className="text-base sm:text-lg font-medium text-slate-800">Я горжусь тем, что на рынке современной косметологии есть такое качество услуг и высокий сервис, как в студии красоты «Аура». Ежедневно я лично проверяю, все ли подготовлено к рабочему дню, начиная от угощений для пациентов и заканчивая внешним видом персонала.</p>
-                    <p>Каждое наше достижение — это результат кропотливого труда и глубоких знаний, которые мы с гордостью применяем в своей практике. Мы уверены, что высокое качество услуг невозможно без передовых аппаратов и лучших препаратов, которые мы используем.</p>
-                    <p>Мы нацелены на то, чтобы удовлетворить потребности наших клиентов и превзойти их ожидания, создавая прочные отношения, основанные на доверии и взаимопонимании.</p>
-                    <p className="text-blue-700 font-medium bg-blue-50/50 p-4 rounded-xl border border-blue-100">Благодарим вас за выбор нашей студии «Аура». Мы уверены, что вместе мы достигнем новых высот! Мы слышим ваши голоса, каждое мнение ценно для нас. Буду рада обратной связи в социальных сетях.</p>
+                <div className="relative mt-1">
+                  <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-blue-400/30 via-blue-300/20 to-blue-500/30 blur-xl opacity-60" />
+                  <div className="relative rounded-2xl border border-white/60 bg-white/30 backdrop-blur-xl p-5 shadow-xl">
+                    <h3 className="text-2xl sm:text-3xl font-black text-slate-900">Светлана Михайловна Химина</h3>
+                    <p className="text-blue-600 font-bold mt-1">Руководитель студии красоты «Аура»</p>
+                    <a
+                      href="tel:+79494154729"
+                      className="mt-4 inline-flex items-center gap-3 text-slate-700 hover:text-blue-700 font-semibold transition-all duration-300 hover:gap-4 group/phone"
+                    >
+                      <span className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg group-hover/phone:shadow-xl group-hover/phone:scale-110 transition-all duration-300">
+                        <Phone className="w-5 h-5 text-white" />
+                      </span>
+                      <span className="text-lg">+7 (949) 415-47-29</span>
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
+            <div className="relative self-start">
+              <div className="absolute -inset-4 bg-gradient-to-br from-blue-400/10 via-blue-300/10 to-blue-500/10 rounded-3xl blur-2xl" />
+              <div className="relative rounded-2xl border border-blue-100/70 bg-gradient-to-br from-white via-blue-50/30 to-white p-6 sm:p-8 shadow-xl">
+                <div className="flex items-start gap-4">
+                  <div className="flex items-center gap-2.5 text-white">
+                    <div className="shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 text-white flex items-center justify-center shadow-lg">
+                      <Quote className="w-6 h-6" />
+                    </div>
+                  </div>
+                  <div className="text-slate-700 leading-relaxed">
+                    <p className="text-lg sm:text-xl font-medium text-slate-900/90">
+                      Я горжусь тем, что на рынке современной косметологии есть такое качество услуг и высокий сервис, как в студии красоты «Аура». Ежедневно я лично проверяю, все ли подготовлено к рабочему дню, начиная от угощений для пациентов и заканчивая внешним видом персонала.
+                    </p>
+                    <div className="mt-4 space-y-3 text-slate-700">
+                      <p>
+                        Каждое наше достижение — это результат кропотливого труда и глубоких знаний, которые мы с гордостью применяем в своей практике. Мы уверены, что высокое качество услуг невозможно без передовых аппаратов и лучших препаратов, которые мы используем.
+                      </p>
+                      <p>
+                        Мы нацелены на то, чтобы удовлетворить потребности наших клиентов и превзойти их ожидания, создавая прочные отношения, основанные на доверии и взаимопонимании.
+                      </p>
+                    </div>
+                    <div className="mt-5 p-4 rounded-xl bg-blue-50/60 border border-blue-100">
+                      <p className="text-blue-800 font-semibold">
+                        Благодарим вас за выбор нашей студии «Аура». Мы уверены, что вместе мы достигнем новых высот! Мы слышим ваши голоса, каждое мнение ценно для нас. Буду рада обратной связи в социальных сетях.
+                      </p>
+                    </div>
+                    <div className="mt-6 flex items-center gap-3">
+                      <div className="h-px flex-1 bg-gradient-to-r from-blue-200 to-transparent" />
+                      <span className="text-sm font-semibold text-slate-500">С. М. Химина</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
           </div>
-
           {/* ПРАВАЯ КОЛОНКА */}
-          <aside className="hidden lg:block space-y-6 lg:sticky lg:top-40 animate-fade-in" style={{ animationDelay: '300ms' }}>
+          <aside className="hidden lg:block space-y-6 lg:sticky lg:top-40" style={{ animationDelay: '300ms' }}>
             {/* Специальные предложения */}
             <div className="group relative">
               <div className="absolute -inset-2 bg-gradient-to-br from-blue-400/60 via-blue-300/40 to-blue-500/60 rounded-[2rem] opacity-50 group-hover:opacity-70 blur-2xl transition-all duration-1000" />
@@ -308,18 +339,18 @@ export default function HomePage() {
           )}
         </section>
 
-        {/* ПОЧЕМУ МЫ */}
-        
-        
-        {/* <SpecialsRow items={items.map(({ image, title }) => ({ image, title })).slice(0,6)} /> */}
-        <ConsultationFormSection />
-        <ReviewsSection />
+        {/* РАЗДЕЛЫ ДО ПОЧЕМУ МЫ */}
         <AboutUsSection />
-        <SpecialistsSection items={specialists.slice(0,6)} />
+        <SpecialistsSection items={specialists} />
         <GiftCertificateSection onSubmit={() => setIsContactOpen(true)} />
+        <ReviewsSection />
+        
+        <ConsultationFormSection />
 
-<section className="mt-20 animate-fade-in" style={{ animationDelay: '400ms' }}>
+        {/* ПОЧЕМУ МЫ */}
+        <section className="mt-20 animate-fade-in" style={{ animationDelay: '400ms' }}>
           <div className="relative rounded-[2rem] overflow-hidden shadow-2xl border border-white/80 bg-white/95 backdrop-blur-xl p-8 sm:p-12">
+
             <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-slate-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
             
@@ -333,15 +364,14 @@ export default function HomePage() {
                 <p>Студия красоты «Аура» в Донецке сочетает профессионализм, комфорт и современные технологии. Все наши специалисты - врачи с высшим медицинским образованием, которые регулярно проходят дополнительное обучение на курсах повышения квалификации и изучают самые передовые технологии.</p>
                 <p>Мы используем самое современное оборудование для косметологии, которое на сегодня в Донецке есть только у нас. Используем только проверенные материалы, чтобы каждая процедура была безопасной и максимально эффективной.</p>
                 <p>Здесь вы сможете не только ухаживать за своей внешностью, но и расслабиться в уютной атмосфере. Доверьте свою красоту специалистам студии «Аура». Мы поможем вам выглядеть великолепно каждый день!</p>
-                <p className="text-slate-500 text-base pt-5 border-t border-slate-200/60">Информация на сайте не является публичной офертой и требует уточнения у менеджера.</p>
               </div>
             </div>
           </div>
         </section>
       </main>
-       
-        <Footer />
-        <WhatsAppButton />
+
+      <Footer />
+      <WhatsAppButton />
       <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
 
       <style>{`

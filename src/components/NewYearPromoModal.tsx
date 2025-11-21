@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+
 import { useNavigate } from 'react-router-dom'
 import { X, Gift, Sparkles, Star, Snowflake } from 'lucide-react'
 
@@ -23,6 +24,24 @@ export default function NewYearPromoModal({ isOpen, onClose }: { isOpen: boolean
     navigate('/specials')
   }
 
+  // Memoize snowflakes so random params persist and don't cause teleports on re-render
+  const FLAKE_COUNT = 40
+  const flakes = useMemo(() => {
+    return Array.from({ length: FLAKE_COUNT }, () => {
+      const left = Math.random() * 100
+      const size = Math.random() * 16 + 10
+      const fallDur = Math.random() * 8 + 10 // 10-18s
+      const swayDur = fallDur   // keep same duration as fall for seamless reset
+      const fallDelay = -(Math.random() * fallDur)
+      const swayDelay = fallDelay
+      const blur = Math.random() > 0.5 ? 'blur-[1px]' : 'blur-0'
+      const opacity = Math.random() * 0.4 + 0.5
+      const swayAmp = Math.random() * 10 + 6 // 6-16px
+      const startTopVh = -10 - Math.random() * 90 // start between -10vh and -100vh
+      return { left, size, fallDur, swayDur, fallDelay, swayDelay, blur, opacity, swayAmp, startTopVh }
+    })
+  }, [])
+
   if (!isOpen) return null
 
   return (
@@ -36,42 +55,55 @@ export default function NewYearPromoModal({ isOpen, onClose }: { isOpen: boolean
         onClick={onClose}
       />
 
-      {/* Floating snowflakes */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(30)].map((_, i) => {
-          const left = Math.random() * 100
-          const size = Math.random() * 16 + 10
-          const fallDur = Math.random() * 8 + 10 // 10-18s
-          const swayDur = Math.random() * 3 + 3   // 3-6s
-          const delay = Math.random() * 5
-          const blur = Math.random() > 0.5 ? 'blur-[1px]' : 'blur-0'
-          const opacity = Math.random() * 0.4 + 0.5
-          return (
-            <Snowflake
-              key={i}
-              className={`absolute text-white drop-shadow-[0_0_6px_rgba(255,255,255,0.6)] ${blur}`}
+      {/* Floating snowflakes (between backdrop and modal) */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
+        {flakes.map((f, i) => (
+          <div
+            key={i}
+            className="absolute will-change-transform"
+            style={{
+              left: `${f.left}%`,
+              top: `${f.startTopVh}vh`,
+              animation: `fall ${f.fallDur}s linear ${f.fallDelay}s infinite`,
+            }}
+          >
+            <div
+              className={`will-change-transform ${f.blur}`}
               style={{
-                left: `${left}%`,
-                top: `-8%`,
-                opacity,
-                fontSize: `${size}px`,
-                animation: `fall ${fallDur}s linear ${delay}s infinite, sway ${swayDur}s ease-in-out ${delay}s infinite`
+                animation: `sway ${f.swayDur}s ease-in-out ${f.swayDelay}s infinite`,
+                ['--sway' as any]: `${f.swayAmp}px`,
               }}
-            />
-          )
-        })}
+            >
+              <Snowflake
+                className={`text-white drop-shadow-[0_0_6px_rgba(255,255,255,0.6)] will-change-[transform,opacity]`}
+                style={{
+                  opacity: f.opacity,
+                  fontSize: `${f.size}px`,
+                }}
+              />
+            </div>
+          </div>
+        ))}
       </div>
 
       <style>{`
         @keyframes fall {
-          0% { transform: translate3d(0, -5vh, 0) rotate(0deg); }
-          100% { transform: translate3d(0, 105vh, 0) rotate(360deg); }
+          0% { transform: translate3d(0, 0, 0); opacity: 0; }
+          12% { opacity: 0; }
+          28% { opacity: 1; }
+          72% { opacity: 1; }
+          88% { opacity: 0; }
+          100% { transform: translate3d(0, 220vh, 0); opacity: 0; }
         }
+
         @keyframes sway {
-          0% { transform: translateX(-10px); }
-          50% { transform: translateX(10px); }
-          100% { transform: translateX(-10px); }
+          0% { transform: translateX(0); }
+          25% { transform: translateX(var(--sway, 10px)); }
+          50% { transform: translateX(0); }
+          75% { transform: translateX(calc(var(--sway, 10px) * -1)); }
+          100% { transform: translateX(0); }
         }
+
         @keyframes float {
           0%, 100% { transform: translateY(0px); }
           50% { transform: translateY(-20px); }
@@ -98,7 +130,7 @@ export default function NewYearPromoModal({ isOpen, onClose }: { isOpen: boolean
 
       {/* Modal */}
       <div 
-        className={`relative w-full max-w-md md:max-w-3xl transition-all duration-700 ${
+        className={`relative z-20 w-full max-w-md md:max-w-3xl transition-all duration-700 ${
           mounted 
           ? 'opacity-100 scale-100 translate-y-0' 
           : 'opacity-0 scale-90 translate-y-8'

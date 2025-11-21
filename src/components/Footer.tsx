@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
-import { MapPin, Phone, Clock, ChevronRight } from 'lucide-react'
+import { MapPin, Phone, Clock, ChevronRight, AlertCircle } from 'lucide-react'
+
 import { contactInfo } from '../data/services'
 import Logo from './Logo'
 
@@ -9,8 +10,10 @@ export default function Footer() {
       {/* Disclaimer */}
       <div className="bg-gradient-to-r from-slate-100 to-white text-slate-700 py-3 text-center text-sm border-b border-slate-200">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="flex items-center justify-center gap-2">
-            <span className="text-accent font-semibold">Info</span>
+          <p className="flex items-center justify-center gap-3">
+            <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-600 text-white">
+              <AlertCircle size={14} />
+            </span>
             <span className="opacity-90">Информация на сайте не является публичной офертой и требует уточнения у менеджера</span>
           </p>
         </div>

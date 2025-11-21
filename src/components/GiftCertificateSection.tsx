@@ -19,7 +19,7 @@ export default function GiftCertificateSection({ onSubmit }: { onSubmit: () => v
 
       <div className="relative bg-white/40 backdrop-blur-xl rounded-3xl border-2 border-white/60 shadow-2xl overflow-hidden max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2">
-          <div className="p-8 sm:p-12 lg:p-16 flex flex-col justify-center bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white relative overflow-hidden order-2 lg:order-1">
+          <div className="p-8 sm:p-12 lg:p-16 flex flex-col justify-center bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white relative overflow-hidden order-1 lg:order-1">
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-32 translate-x-32" />
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full translate-y-24 -translate-x-24" />
 
@@ -53,7 +53,7 @@ export default function GiftCertificateSection({ onSubmit }: { onSubmit: () => v
             </div>
           </div>
 
-          <div className="p-8 sm:p-12 lg:p-16 bg-white/60 backdrop-blur-sm order-1 lg:order-2">
+          <div className="p-8 sm:p-12 lg:p-16 bg-white/60 backdrop-blur-sm order-2 lg:order-2">
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="relative">
                 <label className="block text-sm font-semibold text-slate-700 mb-2">Выберите номинал <span className="text-red-500">*</span></label>

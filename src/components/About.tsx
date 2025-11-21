@@ -479,12 +479,7 @@ export default function About({ onBookClick }: AboutProps) {
               </button>
             </div>
             
-            <div className="flex items-center justify-center gap-2 text-sm text-white/70 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full border border-white/20 max-w-2xl mx-auto">
-              <Sparkles className="w-4 h-4" />
-              <p>
-                Информация на сайте не является публичной офертой и требует уточнения у менеджера
-              </p>
-            </div>
+            
           </div>
         </div>
       </div>
