@@ -4,9 +4,10 @@ import Logo from './Logo'
 
 interface HeroProps {
   onBookClick: () => void
+  accentVariant?: 'gold' | 'silver'
 }
 
-export default function Hero({ onBookClick }: HeroProps) {
+export default function Hero({ onBookClick, accentVariant = 'silver' }: HeroProps) {
   return (
     <section
       id="home"
@@ -36,9 +37,9 @@ export default function Hero({ onBookClick }: HeroProps) {
           {/* Logo */}
           <div className="mb-8 flex justify-center">
             <div className="relative">
-              <div className="w-40 h-40 bg-accent/20 rounded-full flex items-center justify-center backdrop-blur-sm border-2 border-accent/30 shadow-2xl">
+             
                 <Logo size={120} className="drop-shadow-2xl" />
-              </div>
+              
             </div>
           </div>
 
@@ -59,7 +60,11 @@ export default function Hero({ onBookClick }: HeroProps) {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
             <button
               onClick={onBookClick}
-              className="bg-gold hover:bg-gold-light text-primary px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105 shadow-lg flex items-center gap-2"
+              className={`${
+                accentVariant === 'silver'
+                  ? 'bg-silver hover:bg-silver-light text-primary'
+                  : 'bg-gold hover:bg-gold-light text-primary'
+              } px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105 shadow-lg flex items-center gap-2`}
             >
               Заказать звонок
               <ArrowRight size={20} />

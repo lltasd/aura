@@ -3,8 +3,6 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import WhatsAppButton from '../components/WhatsAppButton'
 import { Link } from 'react-router-dom'
-import { bodyProcedures } from '../data/bodyProcedures'
-import { faceProcedures } from '../data/faceProcedures'
 import { X } from 'lucide-react'
 
 type SpecialItem = {
@@ -23,7 +21,7 @@ export default function SpecialsPage() {
 
   const items: SpecialItem[] = [
     {
-      image: '/path-to-maldives.jpg',
+      image: 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80',
       title: 'Розыгрыш 3-дневного путешествия на Мальдивы',
       category: 'Путешествие',
       discount: 'Розыгрыш',
@@ -37,7 +35,7 @@ export default function SpecialsPage() {
       validUntil: '31.12.2025'
     },
     {
-      image: '/path-to-birthday.jpg',
+      image: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80',
       title: 'День рождения салонов красоты «МильФей» — 18 лет!',
       category: 'Специальное предложение',
       discount: '18%',
@@ -51,7 +49,7 @@ export default function SpecialsPage() {
       validUntil: '23.11.2025'
     },
     {
-      image: '/path-to-fotona.jpg',
+      image: 'https://images.unsplash.com/photo-1604881981053-c8913a3c8763?auto=format&fit=crop&w=1200&q=80',
       title: 'Скидка -20% на лазерное омоложение Fotona 4D',
       category: 'Лазерные процедуры',
       discount: '-20%',
@@ -65,7 +63,7 @@ export default function SpecialsPage() {
       validUntil: '30.11.2025'
     },
     {
-      image: '/path-to-hydrafacial.jpg',
+      image: '/second.webp',
       title: 'Скидка -30% на комплекс HydraFacial+Heleo4',
       category: 'Уход за кожей',
       discount: '-30%',
@@ -78,36 +76,62 @@ export default function SpecialsPage() {
       ],
       validUntil: '15.12.2025'
     },
-    ...faceProcedures.map((p) => ({
-      image: p.image,
-      title: p.title,
-      category: 'Процедуры для лица',
-      discount: 'Акция',
-      description:
-        p.excerpt || 'Профессиональный уход за кожей лица с использованием современных технологий и препаратов премиум-класса.',
+    {
+      image: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80',
+      title: 'Новогодний бьюти-бокс в подарок',
+      category: 'Праздничная акция',
+      discount: 'Подарок',
+      description: 'Получите новогодний бьюти-бокс при записи на любую процедуру от 5000 ₽. Внутри — мини-набор профессионального ухода.',
       details: [
-        'Консультация специалиста',
-        'Индивидуальный подход',
-        'Сертифицированные препараты',
-        'Гарантия результата'
+        'Подарок при чеке от 5000 ₽',
+        'Количество бьюти-боксов ограничено',
+        'Состав может отличаться',
+        'Только при предварительной записи'
       ],
       validUntil: '31.12.2025'
-    })),
-    ...bodyProcedures.map((p) => ({
-      image: p.image,
-      title: p.title,
-      category: 'Процедуры для тела',
-      discount: 'Акция',
-      description:
-        p.excerpt || 'Эффективные процедуры для коррекции фигуры и ухода за телом с использованием передовых методик и аппаратуры.',
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1200&q=80',
+      title: 'Счастливые часы -25% на уходы',
+      category: 'Новогодние скидки',
+      discount: '-25%',
+      description: 'Скидка -25% на уходовые процедуры по будням с 11:00 до 15:00. Идеально, чтобы подготовиться к праздникам.',
       details: [
-        'Современное оборудование',
-        'Опытные специалисты',
-        'Комплексный подход',
-        'Видимые результаты'
+        'Действует по будням 11:00–15:00',
+        'Только на уходовые процедуры',
+        'По предварительной записи',
+        'Скидки не суммируются'
       ],
-      validUntil: '31.12.2025'
-    })),
+      validUntil: '29.12.2025'
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1606311841544-27f1b2e0d5b9?auto=format&fit=crop&w=1200&q=80',
+      title: '2+1 на лазерную эпиляцию',
+      category: 'Новогодние пакеты',
+      discount: '2+1',
+      description: 'Оплатите две зоны лазерной эпиляции — третью получите в подарок. Подходит для составления индивидуального пакета.',
+      details: [
+        'Подарочная зона — меньшей стоимости',
+        'Можно комбинировать зоны',
+        'Доступно для новых и текущих клиентов',
+        'По предварительной консультации'
+      ],
+      validUntil: '15.01.2026'
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1511963210422-040fac6e2a4a?auto=format&fit=crop&w=1200&q=80',
+      title: 'Сертификаты +10% номинала',
+      category: 'Подарочные сертификаты',
+      discount: '+10%',
+      description: 'Приобретайте подарочные сертификаты и получайте +10% к номиналу в качестве новогоднего бонуса.',
+      details: [
+        '+10% начисляется сверху номинала',
+        'Можно дарить и использовать по частям',
+        'Действует на все услуги',
+        'Не суммируется с другими акциями'
+      ],
+      validUntil: '10.01.2026'
+    },
   ]
 
   useEffect(() => {
@@ -149,7 +173,7 @@ export default function SpecialsPage() {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-50">
       <Header onBookClick={() => {}} />
 
-      <main className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-40 pb-16 animate-fadeIn">
+      <main className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-48 pb-16 animate-fadeIn">
         <nav className="text-sm text-slate-500 mb-6 opacity-0 animate-slideDown" style={{ animationDelay: '100ms', animationFillMode: 'forwards' }}>
           <Link to="/" className="hover:text-blue-700 transition-colors">Главная</Link>
           <span className="mx-2">›</span>
@@ -175,8 +199,12 @@ export default function SpecialsPage() {
                 <img 
                   src={item.image} 
                   alt={item.title} 
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
+                  onError={(e) => { e.currentTarget.onerror = null as any; e.currentTarget.src = '/slider1.png' }}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                 />
+
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
                 
                 <div className="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide shadow-lg">
@@ -213,6 +241,7 @@ export default function SpecialsPage() {
               <img 
                 src={selectedItem.image} 
                 alt={selectedItem.title}
+                referrerPolicy="no-referrer"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent" />

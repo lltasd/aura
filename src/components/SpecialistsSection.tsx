@@ -21,28 +21,10 @@ export default function SpecialistsSection({ items }: { items: Specialist[] }) {
     }
   }
 
-  // align near the right edge on mount and on resize so only one card peeks offscreen
+  // initialize scroll state and update on resize
   useEffect(() => {
-    const el = scrollRef.current
-    if (!el) return
-    const maxScroll = el.scrollWidth - el.clientWidth
-    // choose a fixed peek approximating one card slice depending on viewport
-    const vw = el.clientWidth
-    const peek = vw >= 1024 ? 220 : vw >= 640 ? 180 : 150
-    const target = Math.max(0, maxScroll - peek)
-    el.scrollTo({ left: target, behavior: 'auto' })
     handleScroll()
-
-    const onResize = () => {
-      const el2 = scrollRef.current
-      if (!el2) return
-      const maxScroll2 = el2.scrollWidth - el2.clientWidth
-      const vw2 = el2.clientWidth
-      const peek2 = vw2 >= 1024 ? 220 : vw2 >= 640 ? 180 : 150
-      const target2 = Math.max(0, maxScroll2 - peek2)
-      el2.scrollTo({ left: target2, behavior: 'auto' })
-      handleScroll()
-    }
+    const onResize = () => handleScroll()
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
   }, [])
@@ -85,69 +67,80 @@ export default function SpecialistsSection({ items }: { items: Specialist[] }) {
               </div>
 
               <div className="relative">
-                {/* Container-aligned track with slight right overflow so only one card peeks */}
-                <div className="relative w-full -mr-[6vw] sm:-mr-[8vw] lg:-mr-[10vw]">
-                  <div
-                    ref={scrollRef}
-                    onScroll={handleScroll}
-                    className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-2 scrollbar-hide justify-start pr-[6vw] sm:pr-[8vw] lg:pr-[10vw] pl-0"
-                    style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-                  >
-                    {items.map((specialist, index) => (
-                      <div
-                        key={index}
-                        className="snap-start min-w-[280px] sm:min-w-[300px] md:min-w-[320px] group flex-shrink-0"
-                      >
-                        <div className="bg-neutral-200 overflow-hidden transition-all duration-300 hover:shadow-lg">
-                          {/* Image container */}
-                          <div className="relative aspect-[3/4] overflow-hidden bg-neutral-200">
-                            {specialist.image ? (
-                              <img 
-                                src={specialist.image} 
-                                alt={specialist.name} 
-                                className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105" 
-                              />
-                            ) : (
-                              <div className="absolute inset-0 flex items-center justify-center bg-neutral-200">
-                                <div className="text-6xl text-neutral-400 font-bold">
-                                  {specialist.name.charAt(0)}
-                                </div>
+                <div
+                  ref={scrollRef}
+                  onScroll={handleScroll}
+                  className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-2 scrollbar-hide px-1"
+                  style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                >
+                  {items.map((specialist, index) => (
+                    <div
+                      key={index}
+                      className="snap-start w-[300px] group flex-shrink-0"
+                    >
+                      <div className="bg-white border border-neutral-200 overflow-hidden transition-all duration-300 hover:shadow-lg flex flex-col h-full">
+                        {/* Image container */}
+                        <div className="relative h-[400px] overflow-hidden bg-neutral-200">
+                          {specialist.image ? (
+                            <img 
+                              src={specialist.image} 
+                              alt={specialist.name} 
+                              className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105" 
+                            />
+                          ) : (
+                            <div className="absolute inset-0 flex items-center justify-center bg-neutral-200">
+                              <div className="text-6xl text-neutral-400 font-bold">
+                                {specialist.name.charAt(0)}
                               </div>
-                            )}
-                          </div>
+                            </div>
+                          )}
+                        </div>
 
-                          {/* Info section */}
-                          <div className="p-5 bg-white">
-                            <h4 className="font-bold text-neutral-900 text-base uppercase leading-tight mb-1.5 tracking-tight">
-                              {specialist.name}
-                            </h4>
-                            <p className="text-neutral-600 text-sm leading-relaxed">
-                              {specialist.role}
-                            </p>
-                          </div>
+                        {/* Info section */}
+                        <div className="p-5 min-h-[120px]">
+                          <h4
+                            className="font-bold text-neutral-900 text-base uppercase leading-tight mb-1.5 tracking-tight overflow-hidden"
+                            style={{
+                              display: '-webkit-box',
+                              WebkitLineClamp: 2,
+                              WebkitBoxOrient: 'vertical' as any
+                            }}
+                          >
+                            {specialist.name}
+                          </h4>
+                          <p
+                            className="text-neutral-600 text-sm leading-relaxed overflow-hidden"
+                            style={{
+                              display: '-webkit-box',
+                              WebkitLineClamp: 3,
+                              WebkitBoxOrient: 'vertical' as any
+                            }}
+                          >
+                            {specialist.role}
+                          </p>
                         </div>
                       </div>
-                    ))}
-                  </div>
-                  {/* Bottom controls aligned to the right, matching inner padding */}
-                  <div className="mt-4 flex justify-end gap-3 pr-[6vw] sm:pr-[8vw] lg:pr-[10vw]">
-                    <button
-                      onClick={() => scroll('left')}
-                      className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white text-neutral-700 shadow-md hover:shadow-lg hover:bg-neutral-50 transition-all disabled:opacity-40"
-                      aria-label="Scroll left"
-                      disabled={!canScrollLeft}
-                    >
-                      <ChevronLeft size={18} />
-                    </button>
-                    <button
-                      onClick={() => scroll('right')}
-                      className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white text-neutral-700 shadow-md hover:shadow-lg hover:bg-neutral-50 transition-all disabled:opacity-40"
-                      aria-label="Scroll right"
-                      disabled={!canScrollRight}
-                    >
-                      <ChevronRight size={18} />
-                    </button>
-                  </div>
+                    </div>
+                  ))}
+                </div>
+                {/* Bottom controls */}
+                <div className="mt-4 flex justify-end gap-3 px-1">
+                  <button
+                    onClick={() => scroll('left')}
+                    className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white text-neutral-700 shadow-md hover:shadow-lg hover:bg-neutral-50 transition-all disabled:opacity-40"
+                    aria-label="Scroll left"
+                    disabled={!canScrollLeft}
+                  >
+                    <ChevronLeft size={18} />
+                  </button>
+                  <button
+                    onClick={() => scroll('right')}
+                    className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white text-neutral-700 shadow-md hover:shadow-lg hover:bg-neutral-50 transition-all disabled:opacity-40"
+                    aria-label="Scroll right"
+                    disabled={!canScrollRight}
+                  >
+                    <ChevronRight size={18} />
+                  </button>
                 </div>
               </div>
             </div>

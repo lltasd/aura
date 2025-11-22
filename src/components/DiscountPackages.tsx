@@ -22,8 +22,8 @@ export default function DiscountPackages() {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
           }`}
         >
-          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-gold/20 to-gold/10 px-4 py-2 rounded-full mb-4">
-            <Sparkles className="text-gold" size={18} />
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-silver/20 to-silver/10 px-4 py-2 rounded-full mb-4">
+            <Sparkles className="text-silver-dark" size={18} />
             <span className="text-primary font-semibold text-sm">ПАКЕТЫ СКИДОЧНЫЕ</span>
           </div>
           <h2 className="text-3xl md:text-4xl font-display font-bold text-primary mb-3">
@@ -75,13 +75,13 @@ export default function DiscountPackages() {
               <div
                 key={index}
                 className={`bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-200 hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] flex flex-col group ${
-                  isBest ? 'ring-2 ring-gold' : ''
+                  isBest ? 'ring-2 ring-silver' : ''
                 } ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
                 style={{ transitionDelay: `${(index + 2) * 100}ms` }}
               >
                 {/* Best offer badge */}
                 {isBest && (
-                  <div className="bg-gradient-to-r from-gold to-gold-light text-primary px-4 py-2 text-center font-bold text-sm">
+                  <div className="bg-gradient-to-r from-silver to-silver-light text-primary px-4 py-2 text-center font-bold text-sm">
                     ⭐ ЛУЧШЕЕ ПРЕДЛОЖЕНИЕ
                   </div>
                 )}
@@ -89,7 +89,7 @@ export default function DiscountPackages() {
                 {/* Package header */}
                 <div className={`${
                   isBest 
-                    ? 'bg-gradient-to-br from-gold via-gold-light to-gold text-primary' 
+                    ? 'bg-gradient-to-br from-silver via-silver-light to-silver text-primary' 
                     : 'bg-gradient-to-br from-primary via-primary-dark to-primary text-white'
                 } p-6 text-center transition-all duration-200 group-hover:shadow-lg`}>
                   <h3 className="text-xl font-bold mb-1 group-hover:scale-105 transition-transform duration-200">{pkg.name}</h3>
@@ -107,7 +107,7 @@ export default function DiscountPackages() {
                   <ul className="space-y-2.5">
                     {pkg.services.map((service, idx) => (
                       <li key={idx} className="flex items-start gap-2.5 text-gray-700 group/item">
-                        <Check className="text-gold flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform duration-150" size={16} />
+                        <Check className="text-silver-dark flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform duration-150" size={16} />
                         <span className="text-sm leading-snug group-hover/item:text-primary transition-colors duration-150">{service}</span>
                       </li>
                     ))}
@@ -128,7 +128,7 @@ export default function DiscountPackages() {
                     </div>
                   </div>
                   <div className="text-center">
-                    <span className="inline-flex items-center gap-1.5 bg-gold text-primary px-3 py-1.5 rounded-full text-xs font-bold">
+                    <span className="inline-flex items-center gap-1.5 bg-silver text-primary px-3 py-1.5 rounded-full text-xs font-bold">
                       <TrendingDown size={12} />
                       Скидка {discount} ₽
                     </span>

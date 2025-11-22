@@ -33,16 +33,23 @@ export default function HomePage() {
     return () => clearInterval(id)
   }, [])
 
-  // Show New Year promo once per day
+  // Show New Year promo once per day (2025), allow ?promo=1 to force show
   useEffect(() => {
-    const key = 'ny_promo_seen_at'
-    const last = localStorage.getItem(key)
-    const now = Date.now()
-    const dayMs = 24 * 60 * 60 * 1000
-    if (!last || now - Number(last) > dayMs) {
-      setShowPromo(true)
-      localStorage.setItem(key, String(now))
-    }
+    try {
+      const params = new URLSearchParams(window.location.search)
+      if (params.get('promo') === '1') {
+        setShowPromo(true)
+        return
+      }
+      const key = 'ny_promo_seen_at_2025'
+      const last = localStorage.getItem(key)
+      const now = Date.now()
+      const dayMs = 24 * 60 * 60 * 1000
+      if (!last || now - Number(last) > dayMs) {
+        setShowPromo(true)
+        localStorage.setItem(key, String(now))
+      }
+    } catch {}
   }, [])
 
   useEffect(() => {

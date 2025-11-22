@@ -7,9 +7,10 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 interface HeaderProps {
   onBookClick: () => void
+  variant?: 'default' | 'dark'
 }
 
-export default function Header({ onBookClick }: HeaderProps) {
+export default function Header({ onBookClick, variant = 'default' }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [hideRose, setHideRose] = useState(false)
@@ -82,9 +83,13 @@ export default function Header({ onBookClick }: HeaderProps) {
     <>
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-primary/90 backdrop-blur-2xl backdrop-saturate-150 shadow-2xl border-b border-white/10'
-          : 'bg-primary shadow-xl'
+        variant === 'dark'
+          ? (isScrolled
+              ? 'bg-slate-900/90 backdrop-blur-2xl shadow-2xl border-b border-white/10'
+              : 'bg-slate-900/80 backdrop-blur-xl shadow-xl')
+          : (isScrolled
+              ? 'bg-primary/90 backdrop-blur-2xl backdrop-saturate-150 shadow-2xl border-b border-white/10'
+              : 'bg-primary shadow-xl')
       }`}
     >
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
