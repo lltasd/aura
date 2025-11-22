@@ -132,7 +132,7 @@ export default function FaceProcedureDetailPage() {
                 ) : item.slug === 'ultrasonic-face-cleaning' ? (
                   <div className="space-y-10">
                     <div className="grid md:grid-cols-2 gap-8 items-start">
-                      <img src="/kab3.webp" alt="Ультразвуковая чистка лица" className="w-full rounded-2xl border" />
+                      <img src="/ffsa.webp" alt="Ультразвуковая чистка лица" className="w-full rounded-2xl border" />
                       <div className="space-y-4 text-gray-700 leading-relaxed">
                         <p>
                           В настоящее время ультразвуковая чистка кожи лица является одной из самых востребованных процедур в косметологии благодаря способности мягко и безболезненно очищать кожу от загрязнений, токсинов, лишнего сала и верхнего ороговевшего эпидермиса.
