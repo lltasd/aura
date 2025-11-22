@@ -52,11 +52,13 @@ export default function Header({ onBookClick, variant = 'default' }: HeaderProps
     return () => observer.disconnect()
   }, [])
 
-  const navItems = [
+  const navItems: { label: string; href: string; isRoute: boolean; mobileOnly?: boolean }[] = [
     { label: 'ГЛАВНАЯ', href: '/', isRoute: true },
     { label: 'ВИДЫ ПРОЦЕДУР', href: '/procedures', isRoute: true },
     { label: 'ПРОЦЕДУРЫ ДЛЯ ЛИЦА', href: '/face-procedures', isRoute: true },
     { label: 'ПРОЦЕДУРЫ ДЛЯ ТЕЛА', href: '/body-procedures', isRoute: true },
+    // Mobile-only new section for now
+    { label: 'АППАРАТНАЯ КОСМЕТОЛОГИЯ', href: '/hardware-cosmetology', isRoute: true, mobileOnly: true },
     { label: 'О СТУДИИ', href: '/about', isRoute: true },
     { label: 'ЦЕНЫ НА УСЛУГИ', href: '/pricing', isRoute: true },
     { label: 'КОНТАКТЫ', href: '/contacts', isRoute: true },
@@ -154,7 +156,7 @@ export default function Header({ onBookClick, variant = 'default' }: HeaderProps
           </Link>
 
           <ul className="hidden lg:flex items-center gap-6 xl:gap-8">
-            {navItems.map((item) => (
+            {navItems.filter((i) => !i.mobileOnly).map((item) => (
               <li key={item.label}>
                 {item.isRoute ? (
                   <Link

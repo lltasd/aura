@@ -12,6 +12,7 @@ import FaceProcedureDetailPage from './pages/FaceProcedureDetailPage'
 import ProceduresOverviewPage from './pages/ProceduresOverviewPage'
 import PricingPage from './pages/PricingPage'
 import SpecialistsPage from './pages/SpecialistsPage'
+import HardwareCosmetologyPage from './pages/HardwareCosmetologyPage'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useLocation } from 'react-router-dom'
 // detail page for face can reuse body detail if structure same, but we create separate route to body component later if needed
@@ -67,6 +68,7 @@ function AnimatedRoutes() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contacts" element={<ContactsPage />} />
         <Route path="/procedures" element={<ProceduresOverviewPage />} />
+        <Route path="/hardware-cosmetology" element={<HardwareCosmetologyPage />} />
         <Route path="/body-procedures" element={<BodyProceduresPage />} />
         <Route path="/body-procedures/:slug" element={<PageTransition><BodyProcedureDetailPage /></PageTransition>} />
         <Route path="/face-procedures" element={<FaceProceduresPage />} />
