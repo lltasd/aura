@@ -66,7 +66,7 @@ export default function SpecialsRow({ items }: { items: SpecialItem[] }) {
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
               {items.map((p, i) => (
-                <div key={i} className="snap-start min-w-[280px] sm:min-w-[300px] md:min-w-[320px] group flex-shrink-0">
+                <div key={i} className="snap-start w-[280px] sm:w-[300px] md:w-[320px] group flex-shrink-0">
                   <div className="bg-neutral-200 overflow-hidden transition-all duration-300 hover:shadow-lg flex flex-col">
                     {/* Image container (match specialists aspect) */}
                     <div className="relative aspect-[3/4] overflow-hidden bg-neutral-200">
