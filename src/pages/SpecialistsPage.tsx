@@ -278,28 +278,28 @@ export default function SpecialistsPage() {
                 
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
                   <div className="text-center group">
-                    <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-white/10 backdrop-blur flex items-center justify-center group-hover:bg-white/20 transition-all duration-300">
+                    <div className=" flex items-center justify-center transition-all duration-300">
                       <div className="text-5xl font-black text-white">50<span className="text-blue-300">+</span></div>
                     </div>
                     <div className="text-slate-300 text-sm uppercase tracking-wider font-semibold">Специалистов</div>
                   </div>
                   
                   <div className="text-center group">
-                    <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-white/10 backdrop-blur flex items-center justify-center group-hover:bg-white/20 transition-all duration-300">
+                    <div className=" backdrop-blur flex items-center justify-center  transition-all duration-300">
                       <div className="text-5xl font-black text-white">15<span className="text-blue-300">+</span></div>
                     </div>
                     <div className="text-slate-300 text-sm uppercase tracking-wider font-semibold">Лет опыта</div>
                   </div>
                   
                   <div className="text-center group">
-                    <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-white/10 backdrop-blur flex items-center justify-center group-hover:bg-white/20 transition-all duration-300">
+                    <div className=" flex items-center justify-center  transition-all duration-300">
                       <div className="text-5xl font-black text-white">100<span className="text-blue-300">%</span></div>
                     </div>
                     <div className="text-slate-300 text-sm uppercase tracking-wider font-semibold">Сертифицированы</div>
                   </div>
                   
                   <div className="text-center group">
-                    <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-white/10 backdrop-blur flex items-center justify-center group-hover:bg-white/20 transition-all duration-300">
+                    <div className=" flex items-center justify-center  transition-all duration-300">
                       <div className="text-5xl font-black text-white">10k<span className="text-blue-300">+</span></div>
                     </div>
                     <div className="text-slate-300 text-sm uppercase tracking-wider font-semibold">Довольных клиентов</div>

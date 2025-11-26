@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import WhatsAppButton from '../components/WhatsAppButton'
@@ -7,6 +7,7 @@ import { ContactModal } from '../components/BodyContouring'
 import { devices } from '../data/devices'
 
 export default function HardwareCosmetologyPage() {
+  const navigate = useNavigate()
   const [isContactOpen, setIsContactOpen] = useState(false)
   const [loading, setLoading] = useState(true)
   const [selectedSalon, setSelectedSalon] = useState<string>('')
@@ -29,7 +30,7 @@ export default function HardwareCosmetologyPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50 overflow-x-hidden">
       <Header onBookClick={() => setIsContactOpen(true)} variant="dark" />
 
       <main className="pt-32 pb-20">
@@ -65,24 +66,24 @@ export default function HardwareCosmetologyPage() {
               <span className="text-slate-300">Аппаратная косметология</span>
             </nav>
 
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
               {/* Left Content */}
               <div className="opacity-0 animate-fadeInUp" style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}>
                 <div className="inline-block mb-6 px-6 py-2.5 bg-gradient-to-r from-blue-500/25 to-blue-600/25 border border-blue-400/40 rounded-full backdrop-blur-sm shadow-lg hover:shadow-blue-500/20 transition-all duration-300">
                   <span className="text-blue-200 text-sm font-bold uppercase tracking-wider">Современные технологии ухода</span>
                 </div>
-                <h1 className="text-6xl md:text-8xl font-black tracking-tight text-white uppercase mb-8 leading-none drop-shadow-2xl">
+                <h1 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tight text-white uppercase mb-6 leading-tight md:leading-none break-words drop-shadow-2xl">
                   Аппаратная<br />косметология
                 </h1>
-                <p className="text-slate-200 text-2xl leading-relaxed mb-8 font-light">
+                <p className="text-slate-200 text-lg sm:text-xl md:text-2xl leading-relaxed mb-6 font-light">
                   Эффективные аппаратные методики для лифтинга, омоложения и улучшения качества кожи
                 </p>
-                <p className="text-slate-300 text-lg leading-relaxed mb-10">
+                <p className="text-slate-300 text-base sm:text-lg md:text-xl leading-relaxed mb-8">
                   Подберём оптимальный аппарат и программу, исходя из задач вашей кожи и желаемого результата.
                 </p>
                 <button 
                   onClick={() => window.scrollTo({ top: window.innerHeight + 80, behavior: 'smooth' })} 
-                  className="group px-10 py-5 bg-gradient-to-r from-white to-blue-50 text-slate-900 font-bold uppercase tracking-wide rounded-xl hover:from-blue-50 hover:to-white transition-all duration-300 shadow-2xl hover:shadow-blue-500/30 hover:scale-105 border border-white/20"
+                  className="group px-6 py-4 md:px-10 md:py-5 bg-gradient-to-r from-white to-blue-50 text-slate-900 font-bold uppercase tracking-wide rounded-xl hover:from-blue-50 hover:to-white transition-all duration-300 shadow-2xl hover:shadow-blue-500/30 hover:scale-105 border border-white/20 text-base md:text-lg"
                 >
                   Смотреть аппараты
                   <span className="inline-block ml-2 group-hover:translate-x-2 transition-transform duration-300">→</span>
@@ -187,7 +188,7 @@ export default function HardwareCosmetologyPage() {
                     <div className="relative bg-gradient-to-br from-white to-slate-50/80 backdrop-blur-md rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-200/80 hover:border-blue-200 h-full flex flex-col group-hover:-translate-y-2">
                       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-blue-500/0 group-hover:from-blue-500/5 group-hover:to-transparent transition-all duration-500"></div>
                       <div className="p-8 flex-1 flex flex-col gap-5 relative z-10">
-                        <div className="flex items-start justify-between gap-6">
+                        <div className="flex flex-col md:flex-row items-start justify-between gap-4 md:gap-6">
                           <div className="flex-1">
                             <h3 className="text-xl font-black text-slate-900 mb-3 leading-tight group-hover:text-blue-900 transition-colors duration-300">
                               {dev.title}
@@ -205,13 +206,13 @@ export default function HardwareCosmetologyPage() {
                               </div>
                             ) : null}
                           </div>
-                          <div className="w-44 shrink-0 group-hover:scale-105 transition-transform duration-500">
-                            <img src={dev.image} alt={dev.title} className="w-full h-auto object-contain drop-shadow-xl" />
+                          <div className="w-full max-w-[260px] md:w-60 h-44 md:h-56 shrink-0 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+                            <img src={dev.image} alt={dev.title} className="max-w-full max-h-full object-contain drop-shadow-xl" />
                           </div>
                         </div>
-                        <div className="mt-4">
+                        <div className="mt-auto">
                           <button
-                            onClick={() => setIsContactOpen(true)}
+                            onClick={() => navigate(`/hardware-cosmetology/${dev.slug}`)}
                             className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-white to-slate-50 border-2 border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-800 hover:from-blue-50 hover:to-white hover:border-blue-400 transition-all duration-300 shadow-md hover:shadow-xl hover:scale-105 uppercase tracking-wide"
                           >
                             Подробнее

@@ -18,6 +18,7 @@ import { Link } from 'react-router-dom'
 import { bodyProcedures } from '../data/bodyProcedures'
 import { faceProcedures } from '../data/faceProcedures'
 import { ArrowRight, Sparkles, Award, Shield, Users, Phone, Quote } from 'lucide-react'
+import { specials } from '../data/specials'
 
 export default function HomePage() {
 
@@ -28,14 +29,11 @@ export default function HomePage() {
 
   const [visibleServices, setVisibleServices] = useState(5)
 
-  const specialsItems = [
-    { image: 'https://images.unsplash.com/photo-1604881981053-c8913a3c8763?auto=format&fit=crop&w=1200&q=80', title: 'Скидка -20% на лазерное омоложение Fotona 4D' },
-    { image: '/second.webp', title: 'Скидка -30% на комплекс HydraFacial+Heleo4' },
-    { image: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80', title: 'Новогодний бьюти-бокс в подарок' },
-    { image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1200&q=80', title: 'Счастливые часы -25% на уходы' },
-    { image: 'https://images.unsplash.com/photo-1606311841544-27f1b2e0d5b9?auto=format&fit=crop&w=1200&q=80', title: '2+1 на лазерную эпиляцию' },
-    { image: 'https://images.unsplash.com/photo-1511963210422-040fac6e2a4a?auto=format&fit=crop&w=1200&q=80', title: 'Сертификаты +10% номинала' },
-  ]
+  const specialsItems = Array.from(
+    new Map(
+      specials.map((s) => [s.title, { image: s.image, title: s.title } as { image: string; title: string }])
+    ).values()
+  )
 
   useEffect(() => {
 

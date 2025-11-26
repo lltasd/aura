@@ -130,13 +130,13 @@ export default function NewYearPromoModal({ isOpen, onClose }: { isOpen: boolean
 
       {/* Modal */}
       <div 
-        className={`relative z-20 w-full max-w-md md:max-w-3xl transition-all duration-700 ${
+        className={`relative z-20 w-full max-w-sm sm:max-w-md md:max-w-3xl max-h-[85vh] transition-all duration-700 ${
           mounted 
           ? 'opacity-100 scale-100 translate-y-0' 
           : 'opacity-0 scale-90 translate-y-8'
         }`}
       >
-        <div className="relative bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800 rounded-3xl shadow-2xl overflow-hidden border border-white/20">
+        <div className="relative bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800 rounded-3xl shadow-2xl overflow-hidden border border-white/20 max-h-[85vh]">
 
           {/* Animated gradient overlay */}
           <div className="absolute inset-0 opacity-30">
@@ -151,36 +151,36 @@ export default function NewYearPromoModal({ isOpen, onClose }: { isOpen: boolean
           </div>
 
           {/* Decorative circles */}
-          <div className="absolute -top-20 -right-20 w-80 h-80 bg-pink-400/20 rounded-full blur-3xl" />
-          <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-blue-400/20 rounded-full blur-3xl" />
+          <div className="hidden sm:block absolute -top-20 -right-20 w-80 h-80 bg-pink-400/20 rounded-full blur-3xl" />
+          <div className="hidden sm:block absolute -bottom-20 -left-20 w-80 h-80 bg-blue-400/20 rounded-full blur-3xl" />
           
           {/* Floating stars */}
-          <Star className="absolute top-8 right-32 w-6 h-6 text-yellow-300/60" style={{ animation: 'float 3s ease-in-out infinite' }} />
-          <Star className="absolute top-20 left-20 w-4 h-4 text-yellow-300/40" style={{ animation: 'float 4s ease-in-out infinite 1s' }} />
-          <Sparkles className="absolute bottom-32 right-20 w-5 h-5 text-blue-300/50" style={{ animation: 'float 3.5s ease-in-out infinite 0.5s' }} />
+          <Star className="hidden sm:block absolute top-8 right-32 w-6 h-6 text-yellow-300/60" style={{ animation: 'float 3s ease-in-out infinite' }} />
+          <Star className="hidden sm:block absolute top-20 left-20 w-4 h-4 text-yellow-300/40" style={{ animation: 'float 4s ease-in-out infinite 1s' }} />
+          <Sparkles className="hidden sm:block absolute bottom-32 right-20 w-5 h-5 text-blue-300/50" style={{ animation: 'float 3.5s ease-in-out infinite 0.5s' }} />
 
           {/* Close button */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 flex items-center justify-center transition-all duration-300 hover:rotate-90"
+            className="absolute top-4 right-4 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 flex items-center justify-center transition-all duration-300 hover:rotate-90"
           >
             <X className="w-5 h-5" />
           </button>
 
           <div className="relative">
             {/* Promo content */}
-            <div className="p-6 md:p-14 text-white flex flex-col justify-center">
+            <div className="p-4 sm:p-6 md:p-12 text-white flex flex-col justify-center overflow-y-auto max-h-[70vh]">
 
               <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6 w-fit border border-white/30">
                 <Gift className="w-4 h-4" />
                 <span className="text-sm font-bold">Новогодняя акция 2025</span>
               </div>
 
-              <h2 className="text-3xl md:text-5xl font-black leading-tight mb-4 pr-4">
+              <h2 className="text-2xl sm:text-3xl md:text-5xl font-black leading-tight mb-4 pr-4">
                 Волшебство начинается здесь!
               </h2>
 
-              <p className="text-white/95 text-lg leading-relaxed mb-8 pr-4">
+              <p className="text-white/95 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8 pr-4">
                 Участвуйте в новогоднем розыгрыше и получите шанс выиграть праздничные подарки и специальные предложения.
               </p>
 
@@ -207,10 +207,10 @@ export default function NewYearPromoModal({ isOpen, onClose }: { isOpen: boolean
               </div>
 
               {/* CTA buttons */}
-              <div className="mt-8 flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+              <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                 <button
                   onClick={handlePrimary}
-                  className="px-7 py-4 rounded-xl bg-gradient-to-r from-white to-blue-100 text-blue-700 font-extrabold shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-3 group"
+                  className="px-5 py-3 sm:px-7 sm:py-4 rounded-xl bg-gradient-to-r from-white to-blue-100 text-blue-700 font-extrabold shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-3 group"
                   style={{ animation: mounted ? 'pulse-glow 2s ease-in-out infinite' : 'none' }}
                 >
                   <Gift className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
@@ -218,7 +218,7 @@ export default function NewYearPromoModal({ isOpen, onClose }: { isOpen: boolean
                 </button>
                 <button
                   onClick={onClose}
-                  className="px-7 py-4 rounded-xl bg-white/10 text-white font-semibold border border-white/30 hover:bg-white/20 transition-all"
+                  className="px-5 py-3 sm:px-7 sm:py-4 rounded-xl bg-white/10 text-white font-semibold border border-white/30 hover:bg-white/20 transition-all"
                 >
                   Закрыть
                 </button>

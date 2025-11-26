@@ -84,7 +84,7 @@ export const devices: Device[] = [
     title: 'Фотодинамическая терапия Heleo4 LED PRO (новая модификация)',
     excerpt:
       'Новые возможности LED‑терапии в лечении и омоложении кожи.',
-    image: '/public/Heleo.jpg',
+    image: '/public/Heleo.png',
     tags: ['Для лица']
   }
 ]
