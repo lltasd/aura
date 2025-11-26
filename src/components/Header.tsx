@@ -5,6 +5,7 @@ import { contactInfo } from '../data/services'
 import Logo from './Logo'
 import { motion, AnimatePresence } from 'framer-motion'
 import NewYearPromoModal from './NewYearPromoModal'
+import SearchModal from './SearchModal'
 
 interface HeaderProps {
   onBookClick: () => void
@@ -16,6 +17,7 @@ export default function Header({ onBookClick, variant = 'default' }: HeaderProps
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [showMobilePhones, setShowMobilePhones] = useState(false)
   const [showPromo, setShowPromo] = useState(false)
+  const [showSearch, setShowSearch] = useState(false)
   const navigate = useNavigate()
 
   // Helpers: sanitize phone for tel: links and build telegram URL if handle is available
@@ -182,7 +184,7 @@ export default function Header({ onBookClick, variant = 'default' }: HeaderProps
                 <a href={telegramUrl} target="_blank" rel="noreferrer" className={`hover:text-accent`} aria-label="Telegram">
                   <MessageCircle size={20} />
                 </a>
-                <button className={`hover:text-accent`} aria-label="Search">
+                <button onClick={() => setShowSearch(true)} className={`hover:text-accent`} aria-label="Search">
                   <Search size={20} />
                 </button>
               </div>
@@ -202,7 +204,7 @@ export default function Header({ onBookClick, variant = 'default' }: HeaderProps
               >
                 <Phone size={18} />
               </button>
-              <button className="p-2 text-white hover:text-accent active:scale-95 transition" aria-label="Search">
+              <button onClick={() => setShowSearch(true)} className="p-2 text-white hover:text-accent active:scale-95 transition" aria-label="Search">
                 <Search size={18} />
               </button>
             </div>
@@ -357,6 +359,7 @@ export default function Header({ onBookClick, variant = 'default' }: HeaderProps
       )}
     </AnimatePresence>
     <NewYearPromoModal isOpen={showPromo} onClose={() => setShowPromo(false)} />
+    <SearchModal isOpen={showSearch} onClose={() => setShowSearch(false)} />
     <style>{`
       .drawer-scroll { scrollbar-width: thin; scrollbar-color: rgba(148,163,184,0.6) transparent; }
       .drawer-scroll::-webkit-scrollbar { width: 6px; }
