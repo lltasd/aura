@@ -1,7 +1,6 @@
-import { useState, type ReactNode } from 'react'
+import { useState } from 'react'
 import { Link, useParams, Navigate } from 'react-router-dom'
 import { faceProcedures } from '../data/faceProcedures'
-import type { FaceProcedure } from '../data/faceProcedures'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import BookingModal from '../components/BookingModal'
