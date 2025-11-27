@@ -321,13 +321,18 @@ export default function BodyContouring() {
                 setActiveCategory(key as keyof typeof bodyContouringServices)
                 setShowAll(false)
               }}
-              className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
+              className={`group inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 border ${
                 activeCategory === key
-                  ? 'bg-primary text-white shadow-lg shadow-primary/30 scale-105'
-                  : 'bg-white text-gray-700 hover:bg-primary/10 hover:text-primary border-2 border-gray-200 hover:border-primary/30'
+                  ? 'bg-primary text-white border-primary shadow-lg shadow-primary/30 scale-105'
+                  : 'bg-white text-gray-700 border-gray-200 hover:border-primary/40 hover:bg-primary/5 hover:text-primary'
               }`}
             >
-              {label}
+              <span className={`inline-flex items-center justify-center w-7 h-7 rounded-lg ${
+                activeCategory === key ? 'bg-white/20 text-white' : 'bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white'
+              }`}>
+                {categoryIcons[key as keyof typeof categoryIcons]}
+              </span>
+              <span>{label}</span>
             </button>
           ))}
         </div>
@@ -342,14 +347,14 @@ export default function BodyContouring() {
             {displayedServices.map((service: ServiceItem, index: number) => (
               <div
                 key={index}
-                className="bg-white rounded-2xl shadow-md hover:shadow-xl border-2 border-gray-100 hover:border-primary/30 transition-all duration-300 overflow-hidden group animate-fade-in"
+                className="bg-white/90 backdrop-blur rounded-2xl shadow-md hover:shadow-xl border border-gray-100 hover:border-primary/30 transition-all duration-300 overflow-hidden group animate-fade-in"
                 style={{ animationDelay: `${index * 50}ms` }}
               >
                 <div className="p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                   {/* Left side - Service info */}
                   <div className="flex-1">
                     <div className="flex items-start gap-3 mb-3">
-                      <div className="bg-primary/10 p-2 rounded-lg group-hover:bg-primary group-hover:scale-110 transition-all">
+                      <div className="bg-primary/10 p-2 rounded-xl group-hover:bg-primary group-hover:scale-110 transition-all">
                         <div className="text-primary group-hover:text-white transition-colors">
                           {categoryIcons[activeCategory]}
                         </div>
@@ -370,7 +375,7 @@ export default function BodyContouring() {
                   <div className="flex items-center gap-4">
                     <div className="text-right">
                       <div className="flex items-baseline gap-1 justify-end">
-                        <span className="text-3xl font-bold text-primary group-hover:scale-110 transition-transform inline-block">
+                        <span className="text-3xl font-extrabold text-primary group-hover:scale-110 transition-transform inline-block">
                           {service.price}
                         </span>
                         <span className="text-gray-500 font-medium">₽</span>
@@ -403,10 +408,10 @@ export default function BodyContouring() {
 
           {/* Show All Button */}
           {hasMoreServices && (
-            <div className="mt-6 text-center">
+            <div className="mt-8 text-center">
               <button
                 onClick={() => setShowAll(!showAll)}
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-bold rounded-xl border-2 border-primary/30 hover:bg-primary hover:text-white transition-all duration-300 shadow-md hover:shadow-xl group"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white/90 backdrop-blur text-primary font-bold rounded-2xl border border-primary/30 hover:bg-primary hover:text-white transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 group"
               >
                 <span>{showAll ? 'Скрыть' : `Показать все (${currentServices.length})`}</span>
                 <svg
@@ -427,10 +432,10 @@ export default function BodyContouring() {
           )}
 
           {/* Bottom info card */}
-          <div className="mt-8 bg-gradient-to-r from-primary/5 to-primary/10 rounded-2xl p-6 border-2 border-primary/20">
+          <div className="mt-10 bg-gradient-to-r from-primary/5 to-primary/10 rounded-2xl p-6 border border-primary/20 shadow-md">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               <div className="flex items-start gap-3">
-                <div className="bg-primary p-2 rounded-lg">
+                <div className="bg-primary p-2.5 rounded-xl shadow-sm">
                   <Sparkles className="w-5 h-5 text-white" />
                 </div>
                 <div>
@@ -448,9 +453,10 @@ export default function BodyContouring() {
               </button>
             </div>
           </div>
+
         </div>
       </div>
-
+  
       <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   )
