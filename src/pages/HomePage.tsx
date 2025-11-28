@@ -86,15 +86,20 @@ export default function HomePage() {
           <div className="lg:col-span-2 space-y-8">
             {/* Слайдер с описанием студии */}
             <div className="group relative animate-fade-in">
-              <div className="absolute -inset-2 bg-gradient-to-r from-blue-400 via-blue-300 to-blue-500 rounded-[2rem] opacity-30 group-hover:opacity-50 blur-2xl transition-all duration-1000" />
-              <div className="relative rounded-[2rem] overflow-hidden shadow-2xl border border-white/80 bg-white backdrop-blur-xl">
+              <div className="absolute -inset-2 bg-gradient-to-r from-blue-400 via-blue-300 to-blue-500 rounded-[2rem] opacity-20 sm:opacity-30 group-hover:opacity-40 sm:group-hover:opacity-50 blur-md sm:blur-2xl transition-all duration-1000" />
+              <div className="relative rounded-[2rem] overflow-hidden shadow-xl sm:shadow-2xl border border-white/80 bg-white backdrop-blur-0 sm:backdrop-blur-xl">
                 <div className="relative h-72 sm:h-96 md:h-[480px] bg-gradient-to-br from-blue-100/50 via-white to-slate-100/50 overflow-hidden">
                   {images.map((src, i) => (
                     <img
                       key={i}
                       src={src}
                       alt="Студия красоты Аура"
-                      className={`absolute inset-0 w-full h-full object-cover transition-all duration-[1500ms] ease-in-out ${i === active ? 'opacity-100 scale-100' : 'opacity-0 scale-110'}`}
+                      loading={i === 0 ? 'eager' : 'lazy'}
+                      decoding="async"
+                      fetchPriority={i === 0 ? 'high' : 'low'}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 100vw"
+                      aria-hidden={i !== active}
+                      className={`absolute inset-0 w-full h-full object-cover transition-all sm:duration-[1500ms] duration-500 ease-in-out ${i === active ? 'opacity-100 scale-100' : 'opacity-0 sm:scale-110 scale-105'}`}
                     />
                   ))}
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
@@ -115,9 +120,9 @@ export default function HomePage() {
                   </div>
 
                   {/* Декоративный элемент */}
-                  <div className="absolute top-8 right-8 bg-white/15 backdrop-blur-2xl rounded-2xl px-6 py-3 border border-white/40 shadow-2xl animate-float">
+                  <div className="absolute top-8 right-8 bg-white/10 sm:bg-white/15 backdrop-blur-0 sm:backdrop-blur-2xl rounded-2xl px-6 py-3 border border-white/40 shadow-lg sm:shadow-2xl sm:animate-float">
                     <div className="flex items-center gap-2.5 text-white">
-                      <Sparkles className="w-5 h-5 animate-pulse" />
+                      <Sparkles className="w-5 h-5 sm:animate-pulse" />
                       <span className="font-bold text-sm tracking-wide">Премиум качество</span>
                     </div>
                   </div>
@@ -319,12 +324,14 @@ export default function HomePage() {
                     <img 
                       src={p.image} 
                       alt={p.title} 
-                      className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 group-hover:rotate-1" 
+                      loading="lazy"
+                      decoding="async"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="w-full h-full object-cover transition-all duration-700 sm:duration-1000 group-hover:scale-110 group-hover:rotate-1" 
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/20 to-transparent" />
-                    
                     {/* Категория */}
-                    <div className="absolute top-5 left-5 px-4 py-2.5 rounded-full bg-white/20 backdrop-blur-2xl border border-white/40 text-white text-xs font-bold uppercase tracking-wide shadow-lg flex items-center gap-2">
+                    <div className="absolute top-5 left-5 px-4 py-2.5 rounded-full bg-white/20 backdrop-blur-md sm:backdrop-blur-2xl border border-white/40 text-white text-xs font-bold uppercase tracking-wide shadow-lg flex items-center gap-2">
                       <img
                         src={p.kind === 'face' ? '/face.svg' : '/body.svg'}
                         alt={p.kind === 'face' ? 'face' : 'body'}
@@ -380,8 +387,8 @@ export default function HomePage() {
         <section className="mt-20 animate-fade-in" style={{ animationDelay: '400ms' }}>
           <div className="relative rounded-[2rem] overflow-hidden shadow-2xl border border-white/80 bg-white/95 backdrop-blur-xl p-8 sm:p-12">
 
-            <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-slate-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+            <div className="hidden sm:block absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
+            <div className="hidden sm:block absolute bottom-0 left-0 w-96 h-96 bg-slate-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
             
             <div className="relative">
               <h3 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-blue-600 via-blue-500 to-slate-700 bg-clip-text text-transparent mb-8 tracking-tight leading-tight">
@@ -402,7 +409,6 @@ export default function HomePage() {
       <Footer />
       <WhatsAppButton />
       <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
-
       <style>{`
         @keyframes fade-in {
           from {
