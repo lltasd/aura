@@ -154,7 +154,7 @@ export default function Header({ onBookClick, variant = 'default' }: HeaderProps
             </div>
 
             {/* Center: logo */}
-            <Link to="/" className="flex items-center justify-center gap-3 hover:opacity-90 transition group -translate-x-2 sm:translate-x-0">
+            <Link to="/" className="flex items-center justify-center gap-3 hover:opacity-90 transition group -translate-x-4 sm:translate-x-0">
               <div className={`relative w-[64px] h-[64px] shrink-0 transition-transform duration-500 ease-out ${isScrolled ? 'scale-[.85]' : 'scale-100'}`}>
                 <Logo
                   size={64}
