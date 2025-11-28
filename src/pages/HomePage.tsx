@@ -159,51 +159,61 @@ export default function HomePage() {
               </div>
             </div>
 
-  {/* Блок о руководителе */}
-      <div className="group relative animate-fade-in max-w-5xl w-full" style={{ animationDelay: '200ms' }}>
-        <div className="relative rounded-[2rem] bg-white/95 backdrop-blur-xl border border-white/80 shadow-2xl overflow-hidden transition-shadow duration-500 hover:shadow-3xl">
-          <div className="grid md:grid-cols-2 gap-6 md:gap-10 items-start p-6 sm:p-10">
-            <div className="space-y-4 self-start">
-              <div className="relative overflow-hidden rounded-2xl shadow-xl">
-                <img
-                  src="/svet.webp"
-                  alt="Руководитель студии"
-                  className="w-full h-[320px] sm:h-[420px] object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-              <div>
-                <div className="relative mt-1">
-                  <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-blue-400/30 via-blue-300/20 to-blue-500/30 blur-xl opacity-60" />
-                  <div className="relative rounded-2xl border border-white/60 bg-white/30 backdrop-blur-xl p-5 shadow-xl">
-                    <h3 className="text-2xl sm:text-3xl font-black text-slate-900">Светлана Михайловна Химина</h3>
-                    <p className="text-blue-600 font-bold mt-1">Руководитель студии красоты «Аура»</p>
-                    <a
-                      href="tel:+79494154729"
-                      className="mt-4 inline-flex items-center gap-3 text-slate-700 hover:text-blue-700 font-semibold transition-all duration-300 hover:gap-4 group/phone"
-                    >
-                      <span className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg group-hover/phone:shadow-xl group-hover/phone:scale-110 transition-all duration-300">
-                        <Phone className="w-5 h-5 text-white" />
-                      </span>
-                      <span className="text-lg">+7 (949) 415-47-29</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="relative self-start">
-              <div className="absolute -inset-4 bg-gradient-to-br from-blue-400/10 via-blue-300/10 to-blue-500/10 rounded-3xl blur-2xl" />
-              <div className="relative rounded-2xl border border-blue-100/70 bg-gradient-to-br from-white via-blue-50/30 to-white p-6 sm:p-8 shadow-xl">
-                <div className="flex items-start gap-4">
-                  <div className="flex items-center gap-2.5 text-white">
-                    <div className="shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 text-white flex items-center justify-center shadow-lg">
-                      <Quote className="w-6 h-6" />
+            {/* БЛОК О РУКОВОДИТЕЛЕ - ОБНОВЛЕННЫЙ */}
+            <div className="group relative animate-fade-in" style={{ animationDelay: '200ms' }}>
+              <div className="absolute -inset-2 bg-gradient-to-r from-blue-400 via-blue-300 to-blue-500 rounded-[2rem] opacity-30 group-hover:opacity-50 blur-2xl transition-all duration-1000" />
+              <div className="relative bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-100">
+                <div className="grid md:grid-cols-5 gap-0">
+                  {/* Левая колонка с фото */}
+                  <div className="md:col-span-2 relative">
+                    <div className="h-full min-h-[500px] md:min-h-[600px] relative overflow-hidden">
+                      <img
+                        src="/svet.webp"
+                        alt="Светлана Михайловна Химина"
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
+                      
+                      {/* Информация поверх фото */}
+                      <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                        <h3 className="text-3xl font-black mb-2">
+                          Светлана Михайловна<br/>Химина
+                        </h3>
+                        <p className="text-blue-200 font-semibold text-lg mb-4">
+                          Руководитель студии красоты «Аура»
+                        </p>
+                        <a
+                          href="tel:+79494154729"
+                          className="inline-flex items-center gap-3 bg-white/20 backdrop-blur-md hover:bg-white/30 px-5 py-3 rounded-xl transition-all duration-300 border border-white/30"
+                        >
+                          <div className="w-10 h-10 rounded-lg bg-blue-500 flex items-center justify-center">
+                            <Phone className="w-5 h-5 text-white" />
+                          </div>
+                          <span className="font-semibold">+7 (949) 415-47-29</span>
+                        </a>
+                      </div>
                     </div>
                   </div>
-                  <div className="text-slate-700 leading-relaxed">
-                    <p className="text-lg sm:text-xl font-medium text-slate-900/90">
-                      Я горжусь тем, что на рынке современной косметологии есть такое качество услуг и высокий сервис, как в студии красоты «Аура». Ежедневно я лично проверяю, все ли подготовлено к рабочему дню, начиная от угощений для пациентов и заканчивая внешним видом персонала.
-                    </p>
-                    <div className="mt-4 space-y-3 text-slate-700">
+
+                  {/* Правая колонка с текстом */}
+                  <div className="md:col-span-3 p-8 md:p-12 flex flex-col justify-center">
+                    {/* Иконка цитаты */}
+                    <div className="mb-6">
+                      <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-400 to-blue-600 shadow-lg">
+                        <Quote className="w-7 h-7 text-white" />
+                      </div>
+                    </div>
+
+                    {/* Основная цитата */}
+                    <blockquote className="text-xl md:text-2xl font-medium text-slate-800 leading-relaxed mb-8">
+                      Я горжусь тем, что на рынке современной косметологии есть такое качество услуг и высокий сервис, как в студии красоты «Аура».
+                    </blockquote>
+
+                    {/* Дополнительный текст */}
+                    <div className="space-y-4 text-slate-600 leading-relaxed">
+                      <p>
+                        Ежедневно я лично проверяю, все ли подготовлено к рабочему дню, начиная от угощений для пациентов и заканчивая внешним видом персонала.
+                      </p>
                       <p>
                         Каждое наше достижение — это результат кропотливого труда и глубоких знаний, которые мы с гордостью применяем в своей практике. Мы уверены, что высокое качество услуг невозможно без передовых аппаратов и лучших препаратов, которые мы используем.
                       </p>
@@ -211,24 +221,26 @@ export default function HomePage() {
                         Мы нацелены на то, чтобы удовлетворить потребности наших клиентов и превзойти их ожидания, создавая прочные отношения, основанные на доверии и взаимопонимании.
                       </p>
                     </div>
-                    <div className="mt-5 p-4 rounded-xl bg-blue-50/60 border border-blue-100">
-                      <p className="text-blue-800 font-semibold">
+
+                    {/* Выделенное сообщение */}
+                    <div className="mt-8 p-6 rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100/50 border-l-4 border-blue-500">
+                      <p className="text-slate-800 font-semibold leading-relaxed">
                         Благодарим вас за выбор нашей студии «Аура». Мы уверены, что вместе мы достигнем новых высот! Мы слышим ваши голоса, каждое мнение ценно для нас. Буду рада обратной связи в социальных сетях.
                       </p>
                     </div>
-                    <div className="mt-6 flex items-center gap-3">
-                      <div className="h-px flex-1 bg-gradient-to-r from-blue-200 to-transparent" />
-                      <span className="text-sm font-semibold text-slate-500">С. М. Химина</span>
+
+                    {/* Подпись */}
+                    <div className="mt-8 flex items-center gap-4">
+                      <div className="flex-1 h-px bg-gradient-to-r from-slate-300 to-transparent"></div>
+                      <span className="text-slate-500 font-semibold italic">С. М. Химина</span>
+                      <div className="flex-1 h-px bg-gradient-to-l from-slate-300 to-transparent"></div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
 
-          </div>
           {/* ПРАВАЯ КОЛОНКА */}
           <aside className="hidden lg:block space-y-6 lg:sticky lg:top-40" style={{ animationDelay: '300ms' }}>
             {/* Специальные предложения */}
