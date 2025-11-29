@@ -35,7 +35,7 @@ export default function DeviceDetailPage() {
                   <div className="space-y-8">
                     <div className="relative group overflow-hidden rounded-3xl shadow-xl">
                       <img 
-                        src="/public/Volnew.png" 
+                        src="/Volnew.png" 
                         alt="VOLNEWMER главное изображение" 
                         className="w-full h-auto object-cover transform transition-transform duration-500 group-hover:scale-105" 
                       />
@@ -44,14 +44,14 @@ export default function DeviceDetailPage() {
                     <div className="grid grid-cols-2 gap-6">
                       <div className="relative group overflow-hidden rounded-2xl shadow-lg">
                         <img 
-                          src="/public/vol_2.png" 
+                          src="/Volnew.png" 
                           alt="VOLNEWMER детали" 
                           className="w-full h-auto object-cover transform transition-transform duration-500 group-hover:scale-105" 
                         />
                       </div>
                       <div className="relative group overflow-hidden rounded-2xl shadow-lg">
                         <img 
-                          src="/public/vol_3.png" 
+                          src="/Volnew.png" 
                           alt="VOLNEWMER применение" 
                           className="w-full h-auto object-cover transform transition-transform duration-500 group-hover:scale-105" 
                         />
