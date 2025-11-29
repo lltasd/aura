@@ -85,6 +85,7 @@ export default function SpecialistsSection({ items }: { items: Specialist[] }) {
                             <img 
                               src={specialist.image} 
                               alt={specialist.name} 
+                              onError={(e) => { (e.currentTarget as HTMLImageElement).onerror = null; (e.currentTarget as HTMLImageElement).src = '/first.webp' }}
                               className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105" 
                             />
                           ) : (

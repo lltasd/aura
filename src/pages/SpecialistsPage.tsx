@@ -230,6 +230,7 @@ export default function SpecialistsPage() {
                         <img 
                           src={specialist.image} 
                           alt={specialist.name} 
+                          onError={(e) => { (e.currentTarget as HTMLImageElement).onerror = null; (e.currentTarget as HTMLImageElement).src = '/first.webp' }}
                           className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-700 group-hover:scale-105" 
                         />
                         {/* Subtle gradient overlay */}
