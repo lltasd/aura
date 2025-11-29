@@ -5,10 +5,13 @@ import WhatsAppButton from '../components/WhatsAppButton'
 import { Link } from 'react-router-dom'
 import { X } from 'lucide-react'
 import { specials, SpecialItem } from '../data/specials'
+import EmailBookingModal from '../components/EmailBookingModal'
 
 export default function SpecialsPage() {
   const [loading, setLoading] = useState(true)
   const [selectedItem, setSelectedItem] = useState<SpecialItem | null>(null)
+  const [emailOpen, setEmailOpen] = useState(false)
+  const [emailTitle, setEmailTitle] = useState<string>('Быстрая запись')
 
   const items: SpecialItem[] = specials
 
@@ -133,8 +136,6 @@ export default function SpecialsPage() {
           </div>
         </div>
 
-        
-
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-12">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {items.map((item, i) => (
@@ -236,7 +237,10 @@ export default function SpecialsPage() {
                 <div className="text-sm text-slate-500">
                   Акция действует до: <span className="font-semibold text-slate-700">{selectedItem.validUntil}</span>
                 </div>
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-lg hover:scale-105">
+                <button
+                  onClick={() => { setEmailTitle(`Запись: ${selectedItem.title}`); setEmailOpen(true); setSelectedItem(null) }}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-lg hover:scale-105"
+                >
                   Записаться
                 </button>
               </div>
@@ -247,6 +251,12 @@ export default function SpecialsPage() {
 
       <Footer />
       <WhatsAppButton />
+
+      <EmailBookingModal
+        isOpen={emailOpen}
+        onClose={() => setEmailOpen(false)}
+        title={emailTitle}
+      />
 
       <style>{`
         @keyframes fadeIn {
