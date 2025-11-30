@@ -124,18 +124,8 @@ export default function SpecialsPage() {
                 </div>
               </div>
             </div>
-
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-0 animate-fadeIn" style={{ animationDelay: '1000ms', animationFillMode: 'forwards' }}>
-              <div className="flex flex-col items-center gap-2 text-slate-400">
-                <span className="text-xs uppercase tracking-wider">Листайте вниз</span>
-                <div className="w-6 h-10 border-2 border-slate-400/30 rounded-full flex justify-center p-1">
-                  <div className="w-1 h-3 bg-slate-400 rounded-full animate-bounce"></div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
-
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-12">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {items.map((item, i) => (

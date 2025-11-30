@@ -121,15 +121,6 @@ export default function HardwareCosmetologyPage() {
               </div>
             </div>
 
-            {/* Scroll indicator */}
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-0 animate-fadeIn" style={{ animationDelay: '1000ms', animationFillMode: 'forwards' }}>
-              <div className="flex flex-col items-center gap-2 text-slate-300 group cursor-pointer">
-                <span className="text-xs uppercase tracking-wider group-hover:text-blue-300 transition-colors">Листайте вниз</span>
-                <div className="w-6 h-10 border-2 border-slate-400/40 rounded-full flex justify-center p-1 group-hover:border-blue-400/60 transition-colors">
-                  <div className="w-1.5 h-3 bg-slate-300 rounded-full animate-bounce group-hover:bg-blue-300"></div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
 

@@ -48,12 +48,15 @@ export default function SpecialsRow({ items }: { items: SpecialItem[] }) {
       <div className="pointer-events-none absolute inset-y-0 left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] bg-neutral-100" />
 
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 flex items-center justify-between">
-          <h3 className="text-3xl md:text-4xl font-black tracking-tight text-neutral-700 uppercase">СПЕЦИАЛЬНЫЕ ПРЕДЛОЖЕНИЯ</h3>
-          <Link to="/specials" className="text-neutral-600 hover:text-neutral-800 font-medium text-sm inline-flex items-center gap-2 transition-all">
+        <div className="mb-10 flex items-center justify-between flex-wrap gap-x-3 gap-y-1">
+          <Link 
+            to="/specials" 
+            className="text-neutral-600 hover:text-neutral-800 font-medium text-sm inline-flex items-center gap-2 transition-all shrink-0 order-[-1] w-full justify-end text-right mt-4 mb-0 sm:order-none sm:w-auto sm:justify-start sm:text-inherit sm:mt-0 sm:mb-0"
+          >
             Смотреть всё
             <span className="text-base">→</span>
           </Link>
+          <h3 className="text-3xl md:text-4xl font-black tracking-tight text-neutral-700 uppercase">СПЕЦИАЛЬНЫЕ ПРЕДЛОЖЕНИЯ</h3>
         </div>
 
         <div className="relative">
