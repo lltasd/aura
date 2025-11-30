@@ -129,7 +129,7 @@ export default function HomePage() {
                 </div>
 
                 <div className="p-8 sm:p-12 space-y-6 bg-gradient-to-br from-white via-blue-50/20 to-white">
-                  <h2 className="text-3xl md:text-5xl font-black bg-gradient-to-r from-blue-600 via-blue-500 to-slate-700 bg-clip-text text-transparent leading-tight tracking-tight">
+                  <h2 className="text-3xl md:text-5xl font-black bg-gradient-to-r from-blue-600 to-blue-700 sm:via-blue-500 sm:to-slate-700 bg-clip-text text-transparent leading-tight tracking-tight">
                     СТУДИЯ КРАСОТЫ АУРА
                     <span className="block text-2xl md:text-3xl mt-3 bg-gradient-to-r from-slate-600 to-slate-800 bg-clip-text text-transparent">ДОНЕЦК ДНР</span>
                   </h2>
@@ -305,7 +305,7 @@ export default function HomePage() {
         {/* УСЛУГИ */}
         <section className="mt-20">
           <div className="text-center mb-14 animate-fade-in">
-            <h3 className="text-4xl md:text-5xl font-black bg-gradient-to-r from-blue-600 via-blue-500 to-slate-700 bg-clip-text text-transparent mb-4 tracking-tight">
+            <h3 className="text-4xl md:text-5xl font-black bg-gradient-to-r from-blue-600 to-blue-700 sm:via-blue-500 sm:to-slate-700 bg-clip-text text-transparent mb-4 tracking-tight">
               НАШИ УСЛУГИ
             </h3>
             <p className="text-slate-600 text-lg max-w-2xl mx-auto">Профессиональный уход за лицом и телом с использованием современного оборудования</p>
@@ -391,7 +391,7 @@ export default function HomePage() {
             <div className="hidden sm:block absolute bottom-0 left-0 w-96 h-96 bg-slate-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
             
             <div className="relative">
-              <h3 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-blue-600 via-blue-500 to-slate-700 bg-clip-text text-transparent mb-8 tracking-tight leading-tight">
+              <h3 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-blue-600 to-blue-700 sm:via-blue-500 sm:to-slate-700 bg-clip-text text-transparent mb-8 tracking-tight leading-tight">
                 ПОЧЕМУ НАШИ КЛИЕНТЫ ВЫБИРАЮТ СТУДИЮ КРАСОТЫ «АУРА»?
               </h3>
               
