@@ -173,22 +173,22 @@ export default function NewYearPromoModal({ isOpen, onClose }: { isOpen: boolean
 
               <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6 w-fit border border-white/30">
                 <Gift className="w-4 h-4" />
-                <span className="text-sm font-bold">Новогодняя акция 2025</span>
+                <span className="text-sm font-bold">Специальное предложение</span>
               </div>
 
               <h2 className="text-2xl sm:text-3xl md:text-5xl font-black leading-tight mb-4 pr-4">
-                Волшебство начинается здесь!
+                Розыгрыш набора посуды к Новому году
               </h2>
 
               <p className="text-white/95 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8 pr-4">
-                Участвуйте в новогоднем розыгрыше и получите шанс выиграть праздничные подарки и специальные предложения.
+                Участвуют чеки от 8.000. Участвуйте в розыгрыше от Aypa и получите шанс выиграть эксклюзивный набор посуды Tefal! Сохраняйте чеки от 8.000 с 15.11 по 30.12.
               </p>
 
               <div className="space-y-4 hidden md:block">
                 {[
-                  { icon: Gift, text: 'Подарочные сертификаты' },
-                  { icon: Star, text: 'Эксклюзивные скидки' },
-                  { icon: Sparkles, text: 'Праздничные призы' },
+                  { icon: Gift, text: 'Набор посуды Tefal' },
+                  { icon: Star, text: '3 счастливых победителя' },
+                  { icon: Sparkles, text: 'Итоги 30 декабря' },
                 ].map(({ icon: Icon, text }, i) => (
                   <div 
                     key={i} 
@@ -214,7 +214,7 @@ export default function NewYearPromoModal({ isOpen, onClose }: { isOpen: boolean
                   style={{ animation: mounted ? 'pulse-glow 2s ease-in-out infinite' : 'none' }}
                 >
                   <Gift className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
-                  <span>Смотреть специальные предложения</span>
+                  <span>Узнать подробности</span>
                 </button>
                 <button
                   onClick={onClose}
@@ -224,7 +224,7 @@ export default function NewYearPromoModal({ isOpen, onClose }: { isOpen: boolean
                 </button>
               </div>
 
-              <p className="text-xs text-white/80 mt-4">Акция действует до 31 декабря 2025</p>
+              <p className="text-xs text-white/80 mt-4">Акция действует с 15.11 по 30.12</p>
 
             </div>
           </div>

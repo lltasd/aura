@@ -80,7 +80,7 @@ export default function HomePage() {
       <Header onBookClick={() => setIsContactOpen(true)} />
       <NewYearPromoModal isOpen={showPromo} onClose={() => setShowPromo(false)} />
 
-      <main className="container mx-auto px-4 pt-44 pb-16">
+      <main className="container mx-auto px-4 pt-36 sm:pt-44 pb-16">
         <section className="grid lg:grid-cols-3 gap-8 items-start">
           {/* ЛЕВАЯ КОЛОНКА */}
           <div className="lg:col-span-2 space-y-8">

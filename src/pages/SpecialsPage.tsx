@@ -35,16 +35,10 @@ export default function SpecialsPage() {
 
   if (loading) {
     return (
-      <div className="fixed inset-0 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 flex items-center justify-center z-50">
+      <div className="fixed inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 flex items-center justify-center z-50">
         <div className="text-center">
-          <div className="relative w-24 h-24 mx-auto mb-6">
-            <div className="absolute inset-0 border-4 border-blue-200 rounded-full animate-ping opacity-75"></div>
-            <div className="absolute inset-0 border-4 border-t-blue-600 border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin"></div>
-            <div className="absolute inset-2 border-4 border-t-transparent border-r-indigo-600 border-b-transparent border-l-transparent rounded-full animate-spin" style={{ animationDirection: 'reverse', animationDuration: '1s' }}></div>
-          </div>
-          <div className="text-slate-600 font-medium text-lg tracking-wide animate-pulse">
-            Загрузка специальных предложений...
-          </div>
+          <div className="w-20 h-20 border-4 border-slate-600 border-t-blue-400 rounded-full animate-spin mx-auto mb-6"></div>
+          <div className="text-white font-bold text-lg tracking-wide">Загрузка...</div>
         </div>
       </div>
     )
