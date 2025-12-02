@@ -81,13 +81,15 @@ export default function HomePage() {
       <NewYearPromoModal isOpen={showPromo} onClose={() => setShowPromo(false)} />
 
       <main className="container mx-auto px-4 pt-36 sm:pt-44 pb-16">
-        <section className="grid lg:grid-cols-3 gap-8 items-start">
+        <section className="grid lg:grid-cols-3 gap-6 sm:gap-8 items-start">
+
           {/* ЛЕВАЯ КОЛОНКА */}
           <div className="lg:col-span-2 space-y-8">
             {/* Слайдер с описанием студии */}
             <div className="group relative animate-fade-in">
               <div className="absolute -inset-2 bg-gradient-to-r from-blue-400 via-blue-300 to-blue-500 rounded-[2rem] opacity-20 sm:opacity-30 group-hover:opacity-40 sm:group-hover:opacity-50 blur-md sm:blur-2xl transition-all duration-1000" />
-              <div className="relative rounded-[2rem] overflow-hidden shadow-xl sm:shadow-2xl border border-white/80 bg-white backdrop-blur-0 sm:backdrop-blur-xl">
+              <div className="relative rounded-[2rem] overflow-hidden shadow-lg sm:shadow-2xl border border-slate-200 bg-white">
+
                 <div className="relative h-72 sm:h-96 md:h-[480px] bg-gradient-to-br from-blue-100/50 via-white to-slate-100/50 overflow-hidden">
                   {images.map((src, i) => (
                     <img
@@ -103,7 +105,7 @@ export default function HomePage() {
                     />
                   ))}
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
-                  
+
                   {/* Индикаторы слайдера */}
                   <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3">
                     {images.map((_, i) => (
@@ -111,8 +113,8 @@ export default function HomePage() {
                         key={i}
                         onClick={() => setActive(i)}
                         className={`h-2.5 rounded-full transition-all duration-500 backdrop-blur-sm ${
-                          i === active 
-                            ? 'bg-white w-12 shadow-lg shadow-white/50' 
+                          i === active
+                            ? 'bg-white w-12 shadow-lg shadow-white/50'
                             : 'bg-white/60 w-2.5 hover:bg-white/90 hover:w-8'
                         }`}
                       />
@@ -128,20 +130,21 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                <div className="p-8 sm:p-12 space-y-6 bg-gradient-to-br from-white via-blue-50/20 to-white">
+                <div className="p-6 sm:p-12 space-y-6 bg-gradient-to-br from-white via-blue-50/20 to-white">
                   <h2 className="text-3xl md:text-5xl font-black bg-gradient-to-r from-blue-600 to-blue-700 sm:via-blue-500 sm:to-slate-700 bg-clip-text text-transparent leading-tight tracking-tight">
                     СТУДИЯ КРАСОТЫ АУРА
                     <span className="block text-2xl md:text-3xl mt-3 bg-gradient-to-r from-slate-600 to-slate-800 bg-clip-text text-transparent">ДОНЕЦК ДНР</span>
                   </h2>
 
                   {/* Ключевые преимущества */}
-                  <div className="grid sm:grid-cols-3 gap-4 py-2">
+                  <div className="grid sm:grid-cols-3 gap-3 sm:gap-4 py-2">
+
                     {[
                       { icon: Award, text: 'Основана в 2018', delay: '0ms' },
                       { icon: Shield, text: 'FDA, ЕС, РФ', delay: '100ms' },
                       { icon: Users, text: 'Два филиала', delay: '200ms' }
                     ].map((item, idx) => (
-                      <div 
+                      <div
                         key={idx}
                         className="flex items-center gap-3 p-5 rounded-2xl bg-gradient-to-br from-blue-50 to-white border border-blue-200/50 shadow-sm hover:shadow-lg hover:scale-105 transition-all duration-500 group/card"
                         style={{ transitionDelay: item.delay }}
@@ -167,7 +170,8 @@ export default function HomePage() {
             {/* БЛОК О РУКОВОДИТЕЛЕ - ОБНОВЛЕННЫЙ */}
             <div className="group relative animate-fade-in" style={{ animationDelay: '200ms' }}>
               <div className="absolute -inset-2 bg-gradient-to-r from-blue-400 via-blue-300 to-blue-500 rounded-[2rem] opacity-30 group-hover:opacity-50 blur-2xl transition-all duration-1000" />
-              <div className="relative bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-100">
+              <div className="relative bg-white rounded-3xl shadow-xl sm:shadow-2xl overflow-hidden border border-slate-200">
+
                 <div className="grid md:grid-cols-5 gap-0">
                   {/* Левая колонка с фото */}
                   <div className="md:col-span-2 relative">
@@ -178,11 +182,11 @@ export default function HomePage() {
                         className="absolute inset-0 w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
-                      
+
                       {/* Информация поверх фото */}
                       <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
                         <h3 className="text-3xl font-black mb-2">
-                          Светлана Михайловна<br/>Химина
+                          Светлана Михайловна<br />Химина
                         </h3>
                         <p className="text-blue-200 font-semibold text-lg mb-4">
                           Руководитель студии красоты «Аура»
@@ -252,6 +256,7 @@ export default function HomePage() {
             <div className="group relative">
               <div className="absolute -inset-2 bg-gradient-to-br from-blue-400/60 via-blue-300/40 to-blue-500/60 rounded-[2rem] opacity-50 group-hover:opacity-70 blur-2xl transition-all duration-1000" />
               <div className="relative p-8 rounded-[2rem] bg-white/95 backdrop-blur-xl border border-white/80 shadow-2xl">
+
                 <div className="flex items-center gap-3 mb-7">
                   <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center border border-blue-300/50 shadow-lg">
                     <Sparkles className="w-6 h-6 text-blue-600 animate-pulse" />
@@ -268,7 +273,7 @@ export default function HomePage() {
                     { title: 'День рождения', discount: '-% возраста', subtitle: '3 дня до и после', delay: '200ms' },
                     { title: 'Абонемент', discount: '-30%', subtitle: 'от 5 процедур', delay: '300ms' }
                   ].map((offer, idx) => (
-                    <div 
+                    <div
                       key={idx}
                       className="p-6 rounded-2xl bg-gradient-to-br from-white to-blue-50/50 border border-blue-200/60 hover:bg-gradient-to-br hover:from-blue-50 hover:to-blue-100/50 hover:border-blue-300 transition-all duration-500 hover:scale-105 hover:shadow-lg cursor-pointer group/offer"
                       style={{ transitionDelay: offer.delay }}
@@ -291,7 +296,7 @@ export default function HomePage() {
                   </p>
                 </div>
 
-                <button 
+                <button
                   onClick={() => setIsContactOpen(true)}
                   className="w-full mt-7 px-6 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-black rounded-2xl shadow-xl hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-500 text-lg hover:scale-105 active:scale-95"
                 >
@@ -304,14 +309,14 @@ export default function HomePage() {
 
         {/* УСЛУГИ */}
         <section className="mt-20">
-          <div className="text-center mb-14 animate-fade-in">
+          <div className="text-center mb-12 sm:mb-14 animate-fade-in">
             <h3 className="text-4xl md:text-5xl font-black bg-gradient-to-r from-blue-600 to-blue-700 sm:via-blue-500 sm:to-slate-700 bg-clip-text text-transparent mb-4 tracking-tight">
               НАШИ УСЛУГИ
             </h3>
             <p className="text-slate-600 text-lg max-w-2xl mx-auto">Профессиональный уход за лицом и телом с использованием современного оборудования</p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {items.slice(0, visibleServices).map((p, index) => (
               <article
                 key={`${p.kind}-${p.slug}`}
@@ -319,19 +324,19 @@ export default function HomePage() {
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 via-blue-300 to-blue-500 rounded-[2rem] opacity-0 group-hover:opacity-40 blur-2xl transition-all duration-700" />
-                <div className="relative bg-white/95 backdrop-blur-sm rounded-[2rem] overflow-hidden shadow-xl group-hover:shadow-2xl transition-all duration-700 border border-white/80 h-full flex flex-col hover:scale-[1.02]">
+                <div className="relative bg-white/95 rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden shadow-lg sm:shadow-xl group-hover:shadow-2xl transition-all duration-700 border border-slate-200 h-full flex flex-col sm:hover:scale-[1.02]">
                   <div className="relative aspect-[16/10] overflow-hidden">
-                    <img 
-                      src={p.image} 
-                      alt={p.title} 
+                    <img
+                      src={p.image}
+                      alt={p.title}
                       loading="lazy"
                       decoding="async"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="w-full h-full object-cover transition-all duration-700 sm:duration-1000 group-hover:scale-110 group-hover:rotate-1" 
+                      className="w-full h-full object-cover transition-all duration-700 sm:duration-1000 group-hover:scale-110 group-hover:rotate-1"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/20 to-transparent" />
                     {/* Категория */}
-                    <div className="absolute top-5 left-5 px-4 py-2.5 rounded-full bg-white/20 backdrop-blur-md sm:backdrop-blur-2xl border border-white/40 text-white text-xs font-bold uppercase tracking-wide shadow-lg flex items-center gap-2">
+                    <div className="absolute top-4 left-4 sm:top-5 sm:left-5 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-full bg-white/20 backdrop-blur-md sm:backdrop-blur-2xl border border-white/40 text-white text-[11px] sm:text-xs font-bold uppercase tracking-wide shadow-lg flex items-center gap-2">
                       <img
                         src={p.kind === 'face' ? '/face.svg' : '/body.svg'}
                         alt={p.kind === 'face' ? 'face' : 'body'}
@@ -342,15 +347,15 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  <div className="p-7 flex-1 flex flex-col bg-gradient-to-br from-white via-blue-50/30 to-white">
-                    <h4 className="text-xl font-black text-slate-800 mb-3 leading-tight group-hover:text-blue-600 transition-colors duration-300">
+                  <div className="p-5 sm:p-7 flex-1 flex flex-col bg-gradient-to-br from-white via-blue-50/30 to-white">
+                    <h4 className="text-lg sm:text-xl font-black text-slate-800 mb-2 sm:mb-3 leading-tight group-hover:text-blue-600 transition-colors duration-300">
                       {p.title}
                     </h4>
-                    <p className="text-sm text-slate-600 leading-relaxed mb-6 flex-1 line-clamp-4">{p.excerpt}</p>
-                    
+                    <p className="text-sm text-slate-600 leading-relaxed mb-4 sm:mb-6 flex-1 line-clamp-4">{p.excerpt}</p>
+
                     <Link
                       to={p.kind === 'face' ? `/face-procedures/${p.slug}` : `/body-procedures/${p.slug}`}
-                      className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold text-sm rounded-xl shadow-lg hover:shadow-xl hover:shadow-blue-500/50 transition-all duration-500 group-hover:gap-3 hover:scale-105 active:scale-95"
+                      className="inline-flex items-center justify-center gap-2 px-5 py-3 sm:px-6 sm:py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold text-sm rounded-xl shadow-lg hover:shadow-xl hover:shadow-blue-500/50 transition-all duration-500 group-hover:gap-3 sm:hover:scale-105 active:scale-95"
                     >
                       <span>ПОДРОБНЕЕ</span>
                       <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
@@ -362,10 +367,10 @@ export default function HomePage() {
           </div>
 
           {items.length > visibleServices && (
-            <div className="flex justify-center mt-10">
+            <div className="flex justify-center mt-8 sm:mt-10">
               <button
                 onClick={() => setVisibleServices(items.length)}
-                className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold shadow-lg hover:shadow-2xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 hover:scale-[1.03]"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-7 sm:py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold shadow-lg hover:shadow-2xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 active:scale-95 sm:hover:scale-[1.03]"
               >
                 Смотреть больше
               </button>

@@ -51,8 +51,6 @@ export default function Header({ onBookClick, variant = 'default' }: HeaderProps
   const navItems: { label: string; href: string; isRoute: boolean; mobileOnly?: boolean }[] = [
     { label: 'ГЛАВНАЯ', href: '/', isRoute: true },
     { label: 'ВИДЫ ПРОЦЕДУР', href: '/procedures', isRoute: true },
-    { label: 'ПРОЦЕДУРЫ ДЛЯ ЛИЦА', href: '/face-procedures', isRoute: true },
-    { label: 'ПРОЦЕДУРЫ ДЛЯ ТЕЛА', href: '/body-procedures', isRoute: true },
     { label: 'АППАРАТНАЯ КОСМЕТОЛОГИЮ', href: '/hardware-cosmetology', isRoute: true },
     { label: 'НАШИ СПЕЦИАЛИСТЫ', href: '/specialists', isRoute: true },
     { label: 'СПЕЦИАЛЬНЫЕ ПРЕДЛОЖЕНИЯ', href: '/specials', isRoute: true, mobileOnly: true },
