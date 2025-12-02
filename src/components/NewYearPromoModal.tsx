@@ -161,24 +161,3 @@ export default function NewYearPromoModal({ isOpen, onClose }: { isOpen: boolean
     </div>
   )
 }
-
-// Пример использования:
-function App() {
-  const [isOpen, setIsOpen] = useState(true)
-  
-  return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-      <button 
-        onClick={() => setIsOpen(true)}
-        className="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
-      >
-        Открыть акцию
-      </button>
-      
-      <NewYearPromoModal 
-        isOpen={isOpen} 
-        onClose={() => setIsOpen(false)} 
-      />
-    </div>
-  )
-}

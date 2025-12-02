@@ -1,7 +1,7 @@
 import { useMemo, useState, useEffect, useRef } from 'react'
 import { Sparkles, ArrowRight, Zap, ChevronDown, Check } from 'lucide-react'
 
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { bodyProcedures } from '../data/bodyProcedures'
 import { faceProcedures } from '../data/faceProcedures'
 import { devices } from '../data/devices'
@@ -23,7 +23,6 @@ export default function ProceduresOverviewPage() {
   const [salonIndex, setSalonIndex] = useState<number>(0)
   const [deviceIndex, setDeviceIndex] = useState<number>(0)
 
-  const navigate = useNavigate()
   const salonRef = useRef<HTMLDivElement>(null)
   const deviceRef = useRef<HTMLDivElement>(null)
   const typeRef = useRef<HTMLDivElement>(null)
