@@ -97,7 +97,8 @@ export default function NewYearPromoModal({ isOpen, onClose }: { isOpen: boolean
                 </h2>
 
                 <p className="text-slate-300 text-base md:text-lg leading-relaxed mb-8">
-                  Участвуйте в розыгрыше от Aypa и получите шанс выиграть эксклюзивный набор посуды Tefal. Сохраняйте чеки от 8.000 сом с 15 ноября по 30 декабря.
+                  Участвуйте в розыгрыше от Aypa и получите шанс выиграть эксклюзивные наборы посуды Tefal. Сохраняйте чеки от 8.000 руб, и используйте их в наших лототронах!
+                   С 15 ноября по 30 декабря.
                 </p>
 
                 {/* Info cards */}
@@ -105,7 +106,7 @@ export default function NewYearPromoModal({ isOpen, onClose }: { isOpen: boolean
                   {[
                     { icon: Gift, title: 'Главный приз', text: 'Набор посуды Tefal' },
                     { icon: Users, title: 'Количество победителей', text: '3 счастливчика' },
-                    { icon: Calendar, title: 'Подведение итогов', text: '30 декабря 2024' },
+                    { icon: Calendar, title: 'Подведение итогов', text: '30 декабря 2025' },
                   ].map(({ icon: Icon, title, text }, i) => (
                     <div 
                       key={i} 

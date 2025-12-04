@@ -76,7 +76,7 @@ export const devices: Device[] = [
     title: 'Лазерная эпиляция на аппарате InMode Diolaze XL',
     excerpt:
       'Эффективная эпиляция с гибридным лазером и высокой скоростью обработки.',
-    image: '/diolaze-xl.webp',
+    image: '/diolaze-xl.png',
     tags: ['Для тела']
   },
   {

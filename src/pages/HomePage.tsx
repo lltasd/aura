@@ -368,12 +368,12 @@ export default function HomePage() {
 
           {items.length > visibleServices && (
             <div className="flex justify-center mt-8 sm:mt-10">
-              <button
-                onClick={() => setVisibleServices(items.length)}
+              <Link
+                to="/procedures"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-7 sm:py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold shadow-lg hover:shadow-2xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 active:scale-95 sm:hover:scale-[1.03]"
               >
                 Смотреть больше
-              </button>
+              </Link>
             </div>
           )}
         </section>
@@ -383,7 +383,7 @@ export default function HomePage() {
         <SpecialistsSection items={specialists} />
         <GiftCertificateSection onSubmit={() => setIsContactOpen(true)} />
         <ReviewsSection />
-        
+
         <ConsultationFormSection />
 
         <SpecialsRow items={specialsItems} />
@@ -409,6 +409,7 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
       </main>
 
       <Footer />
