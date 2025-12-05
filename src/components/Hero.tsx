@@ -53,7 +53,7 @@ export default function Hero({ onBookClick, accentVariant = 'silver' }: HeroProp
           </div>
 
           {/* Main heading with enhanced styling */}
-          <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 animate-fade-in bg-gradient-to-r from-white via-accent to-white bg-clip-text text-transparent drop-shadow-lg">
+          <h1 className="text-5xl md:text-7xl font-hero font-black mb-6 animate-fade-in bg-gradient-to-r from-white via-accent to-white bg-clip-text text-transparent drop-shadow-lg">
             СТУДИЯ КРАСОТЫ АУРА
           </h1>
 

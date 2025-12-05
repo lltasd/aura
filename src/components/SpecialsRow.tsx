@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
+import { useInView } from '../hooks/useInView'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 type SpecialItem = {
@@ -42,21 +43,28 @@ export default function SpecialsRow({ items }: { items: SpecialItem[] }) {
     scrollRef.current.scrollTo({ left: x, behavior: 'smooth' })
   }
 
+  const { ref: sectionRef, isInView } = useInView<HTMLElement>({ threshold: 0.2 })
+
   return (
-    <section className="relative mt-20 py-16">
+    <section
+      ref={sectionRef}
+      className={`relative mt-20 py-16 transition-all duration-700 ease-out ${
+        isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+      }`}
+    >
       {/* Full-bleed background */}
-      <div className="pointer-events-none absolute inset-y-0 left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] bg-neutral-100" />
+      <div className="pointer-events-none absolute inset-y-0 left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] bg-gradient-to-b from-blue-50 via-blue-50/70 to-slate-50" />
 
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-10 flex items-center justify-between flex-wrap gap-x-3 gap-y-1">
           <Link 
             to="/specials" 
-            className="text-neutral-600 hover:text-neutral-800 font-medium text-sm inline-flex items-center gap-2 transition-all shrink-0 order-[-1] w-full justify-end text-right mt-4 mb-0 sm:order-none sm:w-auto sm:justify-start sm:text-inherit sm:mt-0 sm:mb-0"
+            className="text-blue-600 hover:text-blue-800 font-medium text-sm inline-flex items-center gap-2 transition-all shrink-0 order-[-1] w-full justify-end text-right mt-4 mb-0 sm:order-none sm:w-auto sm:justify-start sm:text-inherit sm:mt-0 sm:mb-0"
           >
             Смотреть всё
             <span className="text-base">→</span>
           </Link>
-          <h3 className="text-3xl md:text-4xl font-black tracking-tight text-neutral-700 uppercase">СПЕЦИАЛЬНЫЕ ПРЕДЛОЖЕНИЯ</h3>
+          <h3 className="text-3xl md:text-4xl font-black font-display tracking-tight text-blue-700 uppercase">СПЕЦИАЛЬНЫЕ ПРЕДЛОЖЕНИЯ</h3>
         </div>
 
         <div className="relative">
@@ -70,9 +78,9 @@ export default function SpecialsRow({ items }: { items: SpecialItem[] }) {
             >
               {items.map((p, i) => (
                 <div key={i} className="snap-start w-[280px] sm:w-[300px] md:w-[320px] group flex-shrink-0">
-                  <div className="bg-neutral-200 overflow-hidden transition-all duration-300 hover:shadow-lg flex flex-col">
+                  <div className="bg-white/95 border border-blue-100 rounded-3xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col">
                     {/* Image container (match specialists aspect) */}
-                    <div className="relative aspect-[3/4] overflow-hidden bg-neutral-200">
+                    <div className="relative aspect-[3/4] overflow-hidden bg-slate-100">
                       <img 
                         src={p.image} 
                         alt={p.title} 
@@ -84,7 +92,7 @@ export default function SpecialsRow({ items }: { items: SpecialItem[] }) {
                     </div>
 
                     {/* Info footer */}
-                    <div className="p-5 bg-white min-h-[72px]">
+                    <div className="p-5 bg-white/95 min-h-[72px]">
                       <h4 className="font-bold text-neutral-900 text-base uppercase leading-tight tracking-tight line-clamp-2">
                         {p.title}
                       </h4>

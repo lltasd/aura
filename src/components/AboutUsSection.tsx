@@ -1,6 +1,75 @@
+import { useEffect, useRef, useState } from 'react'
+import { useInView } from '../hooks/useInView'
+import { useTypewriter } from '../hooks/useTypewriter'
+
 export default function AboutUsSection() {
+  const sectionRef = useRef<HTMLElement | null>(null)
+
+  const [yearValue, setYearValue] = useState(0)
+  const [clientsValue, setClientsValue] = useState(0)
+  const hasAnimatedRef = useRef(false)
+
+  useEffect(() => {
+    const targetYear = 2018
+    const targetClients = 500
+    const duration = 2000
+
+    const element = sectionRef.current
+    if (!element) return
+
+    const handleIntersect: IntersectionObserverCallback = (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !hasAnimatedRef.current) {
+          hasAnimatedRef.current = true
+          observer.unobserve(entry.target)
+
+          const startTime = performance.now()
+
+          const animate = (currentTime: number) => {
+            const elapsed = currentTime - startTime
+            const progress = Math.min(elapsed / duration, 1)
+
+            setYearValue(Math.floor(targetYear * progress))
+            setClientsValue(Math.floor(targetClients * progress))
+
+            if (progress < 1) {
+              requestAnimationFrame(animate)
+            }
+          }
+
+          requestAnimationFrame(animate)
+        }
+      })
+    }
+
+    const observer = new IntersectionObserver(handleIntersect, {
+      threshold: 0.3,
+    })
+
+    observer.observe(element)
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [])
+
+  const { ref: inViewRef, isInView } = useInView<HTMLElement>({ threshold: 0.2 })
+  const typedTitle = useTypewriter('О НАС', {
+    speed: 90,
+    startDelay: 150,
+    enabled: isInView,
+  })
+
   return (
-    <section className="py-20 bg-gradient-to-b from-white via-slate-50/30 to-white">
+    <section
+      ref={(el) => {
+        sectionRef.current = el
+        inViewRef.current = el
+      }}
+      className={`py-20 bg-gradient-to-b from-white via-slate-50/30 to-white transition-all duration-700 ease-out ${
+        isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+      }`}
+    >
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="relative rounded-[3rem] overflow-hidden shadow-2xl">
           {/* Декоративный фон */}
@@ -28,8 +97,8 @@ export default function AboutUsSection() {
                 {/* Заголовок с декоративной линией */}
                 <div className="mb-8">
                   <div className="inline-block">
-                    <h3 className="text-4xl md:text-5xl font-black tracking-tight text-slate-800 mb-3">
-                      О НАС
+                    <h3 className="text-4xl md:text-5xl font-black font-display tracking-tight text-blue-700 mb-3">
+                      {typedTitle || 'О НАС'}
                     </h3>
                     <div className="h-1 w-20 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full" />
                   </div>
@@ -59,12 +128,16 @@ export default function AboutUsSection() {
                 {/* Декоративные элементы внизу текста */}
                 <div className="mt-10 flex items-center gap-8">
                   <div className="flex flex-col">
-                    <span className="text-3xl font-black text-blue-600">2018</span>
+                    <span className="text-3xl font-black text-blue-600 transition-colors duration-300">
+                      {yearValue.toLocaleString('ru-RU')}
+                    </span>
                     <span className="text-sm text-slate-600 font-medium">Год основания</span>
                   </div>
                   <div className="h-12 w-px bg-slate-300" />
                   <div className="flex flex-col">
-                    <span className="text-3xl font-black text-blue-600">500+</span>
+                    <span className="text-3xl font-black text-blue-600 transition-colors duration-300">
+                      {clientsValue.toLocaleString('ru-RU')}+
+                    </span>
                     <span className="text-sm text-slate-600 font-medium">Довольных клиентов</span>
                   </div>
                 </div>

@@ -1,11 +1,20 @@
 import { Star, ChevronLeft, ChevronRight, ThumbsUp } from 'lucide-react'
 import { useState, useRef, useEffect } from 'react'
+import { useInView } from '../hooks/useInView'
 
 export default function ReviewsSection() {
+
   const scrollRef = useRef<HTMLDivElement>(null)
   const [showLeftArrow, setShowLeftArrow] = useState(false)
   const [showRightArrow, setShowRightArrow] = useState(true)
   const [expanded, setExpanded] = useState<Set<number>>(new Set())
+
+  const statsRef = useRef<HTMLDivElement | null>(null)
+  const [reviewsCount, setReviewsCount] = useState(0)
+  const [ratingValue, setRatingValue] = useState(0)
+  const [recommendPercent, setRecommendPercent] = useState(0)
+  const [yearsOnMarket, setYearsOnMarket] = useState(0)
+  const statsAnimatedRef = useRef(false)
 
   // Импортируйте reviews из вашего файла данных
   // import { reviews } from './data/reviews'
@@ -96,6 +105,54 @@ export default function ReviewsSection() {
     handleScroll()
   }, [])
 
+  useEffect(() => {
+    const targetReviews = 52
+    const targetRating = 5
+    const targetRecommend = 98
+    const targetYears = 3
+    const duration = 2000
+
+    const element = statsRef.current
+    if (!element) return
+
+    const handleIntersect: IntersectionObserverCallback = (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !statsAnimatedRef.current) {
+          statsAnimatedRef.current = true
+          observer.unobserve(entry.target)
+
+          const startTime = performance.now()
+
+          const animate = (currentTime: number) => {
+            const elapsed = currentTime - startTime
+            const progress = Math.min(elapsed / duration, 1)
+
+            setReviewsCount(Math.floor(targetReviews * progress))
+            setRatingValue(targetRating * progress)
+            setRecommendPercent(Math.floor(targetRecommend * progress))
+            setYearsOnMarket(Math.floor(targetYears * progress))
+
+            if (progress < 1) {
+              requestAnimationFrame(animate)
+            }
+          }
+
+          requestAnimationFrame(animate)
+        }
+      })
+    }
+
+    const observer = new IntersectionObserver(handleIntersect, {
+      threshold: 0.3,
+    })
+
+    observer.observe(element)
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [])
+
   // Генерация цвета аватара на основе имени
   const getAvatarColor = (name: string) => {
     const colors = [
@@ -112,12 +169,19 @@ export default function ReviewsSection() {
     return colors[index]
   }
 
+  const { ref: sectionInViewRef, isInView: sectionInView } = useInView<HTMLElement>({ threshold: 0.2 })
+
   return (
-    <section className="mt-24 pb-24 bg-gradient-to-b from-slate-50 to-white">
+    <section
+      ref={sectionInViewRef}
+      className={`mt-24 pb-24 bg-gradient-to-b from-slate-50 to-white transition-all duration-700 ease-out ${
+        sectionInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+      }`}
+    >
       <div className="container mx-auto px-4">
         {/* Заголовок секции */}
         <div className="mb-12 text-center">
-          <h2 className="text-4xl md:text-5xl font-black tracking-tight bg-gradient-to-r from-slate-700 to-slate-900 bg-clip-text text-transparent uppercase mb-3">
+          <h2 className="text-4xl md:text-5xl font-black font-display tracking-tight text-blue-700 uppercase mb-3">
             отзывы
           </h2>
           <p className="text-slate-600 text-lg">Что говорят наши клиенты</p>
@@ -229,26 +293,33 @@ export default function ReviewsSection() {
         </div>
 
         {/* Статистика внизу */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+        <div
+          ref={statsRef}
+          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto"
+        >
           <div className="text-center p-6 bg-white rounded-2xl shadow-md border border-slate-100">
-            <div className="text-3xl font-black text-slate-900 mb-1">52</div>
+            <div className="text-3xl font-black text-slate-900 mb-1">
+              {reviewsCount}
+            </div>
             <div className="text-sm text-slate-600 font-medium">Отзыва</div>
           </div>
           <div className="text-center p-6 bg-white rounded-2xl shadow-md border border-slate-100">
             <div className="text-3xl font-black text-slate-900 mb-1 flex items-center justify-center gap-1">
-              5.0 <Star className="w-6 h-6 fill-yellow-400 text-yellow-400" />
+              {ratingValue.toFixed(1)}{' '}
+              <Star className="w-6 h-6 fill-yellow-400 text-yellow-400" />
             </div>
             <div className="text-sm text-slate-600 font-medium">Средний рейтинг</div>
           </div>
           <div className="text-center p-6 bg-white rounded-2xl shadow-md border border-slate-100">
-            <div className="text-3xl font-black text-slate-900 mb-1">98%</div>
+            <div className="text-3xl font-black text-slate-900 mb-1">{recommendPercent}%</div>
             <div className="text-sm text-slate-600 font-medium">Рекомендуют</div>
           </div>
           <div className="text-center p-6 bg-white rounded-2xl shadow-md border border-slate-100">
-            <div className="text-3xl font-black text-slate-900 mb-1">3 года</div>
+            <div className="text-3xl font-black text-slate-900 mb-1">{yearsOnMarket} года</div>
             <div className="text-sm text-slate-600 font-medium">На рынке</div>
           </div>
         </div>
+
       </div>
 
       <style>{`

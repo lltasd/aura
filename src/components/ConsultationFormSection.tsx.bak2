@@ -1,7 +1,5 @@
 ﻿import { FormEvent, useState } from 'react'
 import { Calendar, Phone, Mail, Sparkles, CheckCircle2, User } from 'lucide-react'
-import { useInView } from '../hooks/useInView'
-import { motion } from 'framer-motion'
 
 export default function ConsultationFormSection() {
   const [focused, setFocused] = useState<string | null>(null)
@@ -11,116 +9,76 @@ export default function ConsultationFormSection() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     if (!checked.privacy) {
-      alert('Пожалуйста, согласитесь на обработку персональных данных')
+      alert('РџРѕР¶Р°Р»СѓР№СЃС‚Р°, СЃРѕРіР»Р°СЃРёС‚РµСЃСЊ РЅР° РѕР±СЂР°Р±РѕС‚РєСѓ РїРµСЂСЃРѕРЅР°Р»СЊРЅС‹С… РґР°РЅРЅС‹С…')
       return
     }
     if (!formData.name || !formData.phone) {
-      alert('Пожалуйста, заполните обязательные поля')
+      alert('РџРѕР¶Р°Р»СѓР№СЃС‚Р°, Р·Р°РїРѕР»РЅРёС‚Рµ РѕР±СЏР·Р°С‚РµР»СЊРЅС‹Рµ РїРѕР»СЏ')
       return
     }
-    alert('Спасибо! Мы свяжемся с вами в ближайшее время.')
+    alert('РЎРїР°СЃРёР±Рѕ! РњС‹ СЃРІСЏР¶РµРјСЃСЏ СЃ РІР°РјРё РІ Р±Р»РёР¶Р°Р№С€РµРµ РІСЂРµРјСЏ.')
   }
 
-  const { ref: sectionRef, isInView } = useInView<HTMLElement>({ threshold: 0.2 })
-
   return (
-    <section
-      ref={sectionRef}
-      className="mt-20 mb-20 px-4"
-    >
-      <div className="bg-white/40 backdrop-blur-xl rounded-3xl border-0 shadow-2xl overflow-hidden max-w-7xl mx-auto">
+    <section className="mt-20 mb-20 relative px-4">
+      {/* Р”РµРєРѕСЂР°С‚РёРІРЅС‹Рµ СЌР»РµРјРµРЅС‚С‹ С„РѕРЅР° */}
+      <div className="absolute inset-0 bg-gradient-to-br from-silver-light via-silver to-silver-light rounded-3xl opacity-60" />
+      <div className="absolute -top-10 -right-10 w-40 h-40 bg-accent/20 rounded-full blur-3xl" />
+      <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl" />
+      
+      <div className="relative bg-white/40 backdrop-blur-xl rounded-3xl border-0 shadow-2xl overflow-hidden max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2">
-          {/* Левая часть - Заголовок и декор */}
-          <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 1, ease: 'easeOut' }}
-            className="p-8 sm:p-12 lg:p-16 flex flex-col justify-center bg-gradient-to-br from-primary via-primary-light to-primary-dark text-white relative overflow-hidden"
-          >
-            {/* Декоративные круги */}
+          {/* Р›РµРІР°СЏ С‡Р°СЃС‚СЊ - Р—Р°РіРѕР»РѕРІРѕРє Рё РґРµРєРѕСЂ */}
+          <div className="p-8 sm:p-12 lg:p-16 flex flex-col justify-center bg-gradient-to-br from-primary via-primary-light to-primary-dark text-white relative overflow-hidden">
+            {/* Р”РµРєРѕСЂР°С‚РёРІРЅС‹Рµ РєСЂСѓРіРё */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-32 translate-x-32" />
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full translate-y-24 -translate-x-24" />
             
             <div className="relative z-10">
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.2, duration: 0.6 }}
-                className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6"
-              >
+              <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
                 <Sparkles className="w-4 h-4" />
-                <span className="text-sm font-semibold">Бесплатно</span>
-              </motion.div>
+                <span className="text-sm font-semibold">Р‘РµСЃРїР»Р°С‚РЅРѕ</span>
+              </div>
               
-              <motion.h3 
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.3, duration: 0.6 }}
-                className="text-3xl md:text-4xl lg:text-5xl font-black leading-tight mb-6"
-              >
-                ЗАПИШИТЕСЬ НА КОНСУЛЬТАЦИЮ
-              </motion.h3>
+              <h3 className="text-3xl md:text-4xl lg:text-5xl font-black leading-tight mb-6">
+                Р—РђРџРРЁРРўР•РЎР¬ РќРђ РљРћРќРЎРЈР›Р¬РўРђР¦РР®
+              </h3>
               
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.4, duration: 0.6 }}
-                className="text-white/90 text-lg mb-8 leading-relaxed"
-              >
-                Получите профессиональную консультацию и узнайте, какие процедуры подойдут именно вам
-              </motion.p>
+              <p className="text-white/90 text-lg mb-8 leading-relaxed">
+                РџРѕР»СѓС‡РёС‚Рµ РїСЂРѕС„РµСЃСЃРёРѕРЅР°Р»СЊРЅСѓСЋ РєРѕРЅСЃСѓР»СЊС‚Р°С†РёСЋ Рё СѓР·РЅР°Р№С‚Рµ, РєР°РєРёРµ РїСЂРѕС†РµРґСѓСЂС‹ РїРѕРґРѕР№РґСѓС‚ РёРјРµРЅРЅРѕ РІР°Рј
+              </p>
 
-              {/* Преимущества */}
+              {/* РџСЂРµРёРјСѓС‰РµСЃС‚РІР° */}
               <div className="space-y-4">
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: 0.5, duration: 0.6 }}
-                  className="flex items-center gap-3"
-                >
+                <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center flex-shrink-0">
                     <CheckCircle2 className="w-5 h-5" />
                   </div>
-                  <span className="font-medium">Индивидуальный подход</span>
-                </motion.div>
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: 0.6, duration: 0.6 }}
-                  className="flex items-center gap-3"
-                >
+                  <span className="font-medium">РРЅРґРёРІРёРґСѓР°Р»СЊРЅС‹Р№ РїРѕРґС…РѕРґ</span>
+                </div>
+                <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center flex-shrink-0">
                     <CheckCircle2 className="w-5 h-5" />
                   </div>
-                  <span className="font-medium">Консультация специалиста</span>
-                </motion.div>
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: 0.7, duration: 0.6 }}
-                  className="flex items-center gap-3"
-                >
+                  <span className="font-medium">РљРѕРЅСЃСѓР»СЊС‚Р°С†РёСЏ СЃРїРµС†РёР°Р»РёСЃС‚Р°</span>
+                </div>
+                <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center flex-shrink-0">
                     <CheckCircle2 className="w-5 h-5" />
                   </div>
-                  <span className="font-medium">Без скрытых платежей</span>
-                </motion.div>
+                  <span className="font-medium">Р‘РµР· СЃРєСЂС‹С‚С‹С… РїР»Р°С‚РµР¶РµР№</span>
+                </div>
               </div>
             </div>
-          </motion.div>
+          </div>
 
-          {/* Правая часть - Форма */}
-          <motion.div 
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 1, ease: 'easeOut' }}
-            className="p-8 sm:p-12 lg:p-16 bg-white/60 backdrop-blur-sm"
-          >
+          {/* РџСЂР°РІР°СЏ С‡Р°СЃС‚СЊ - Р¤РѕСЂРјР° */}
+          <div className="p-8 sm:p-12 lg:p-16 bg-white/60 backdrop-blur-sm">
             <div className="space-y-5">
-              {/* Поле Имя */}
+              {/* РџРѕР»Рµ РРјСЏ */}
               <div className="relative">
                 <label className="block text-sm font-semibold text-slate-700 mb-2">
-                  Ваше имя <span className="text-red-500">*</span>
+                  Р’Р°С€Рµ РёРјСЏ <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
                   <User className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors ${
@@ -129,7 +87,7 @@ export default function ConsultationFormSection() {
                   <input
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="Введите ваше имя"
+                    placeholder="Р’РІРµРґРёС‚Рµ РІР°С€Рµ РёРјСЏ"
                     onFocus={() => setFocused('name')}
                     onBlur={() => setFocused(null)}
                     className="w-full pl-12 pr-4 py-4 rounded-2xl border-2 border-slate-300 focus:border-accent focus:outline-none bg-white shadow-sm transition-all hover:shadow-md"
@@ -140,7 +98,7 @@ export default function ConsultationFormSection() {
               {/* РџРѕР»Рµ РўРµР»РµС„РѕРЅ */}
               <div className="relative">
                 <label className="block text-sm font-semibold text-slate-700 mb-2">
-                  Номер телефона <span className="text-red-500">*</span>
+                  РќРѕРјРµСЂ С‚РµР»РµС„РѕРЅР° <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
                   <Phone className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors ${
@@ -161,7 +119,7 @@ export default function ConsultationFormSection() {
               {/* РџРѕР»Рµ Email */}
               <div className="relative">
                 <label className="block text-sm font-semibold text-slate-700 mb-2">
-                  Email (необязательно)
+                  Email (РЅРµРѕР±СЏР·Р°С‚РµР»СЊРЅРѕ)
                 </label>
                 <div className="relative">
                   <Mail className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors ${
@@ -202,7 +160,7 @@ export default function ConsultationFormSection() {
                     </div>
                   </div>
                   <span className="text-sm text-slate-700 group-hover:text-slate-900 transition-colors leading-relaxed">
-                    Хочу получать новости и специальные предложения
+                    РҐРѕС‡Сѓ РїРѕР»СѓС‡Р°С‚СЊ РЅРѕРІРѕСЃС‚Рё Рё СЃРїРµС†РёР°Р»СЊРЅС‹Рµ РїСЂРµРґР»РѕР¶РµРЅРёСЏ
                   </span>
                 </label>
 
@@ -227,7 +185,7 @@ export default function ConsultationFormSection() {
                     </div>
                   </div>
                   <span className="text-sm text-slate-700 group-hover:text-slate-900 transition-colors leading-relaxed">
-                    Согласен на обработку персональных данных <span className="text-red-500">*</span>
+                    РЎРѕРіР»Р°СЃРµРЅ РЅР° РѕР±СЂР°Р±РѕС‚РєСѓ РїРµСЂСЃРѕРЅР°Р»СЊРЅС‹С… РґР°РЅРЅС‹С… <span className="text-red-500">*</span>
                   </span>
                 </label>
               </div>
@@ -238,22 +196,22 @@ export default function ConsultationFormSection() {
                 className="w-full mt-6 px-8 py-4 rounded-2xl bg-gradient-to-r from-primary to-primary-dark text-white font-bold text-lg shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-3 group"
               >
                 <Calendar className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                <span>Записаться на консультацию</span>
+                <span>Р—Р°РїРёСЃР°С‚СЊСЃСЏ РЅР° РєРѕРЅСЃСѓР»СЊС‚Р°С†РёСЋ</span>
               </button>
 
               {/* РРЅС„РѕСЂРјР°С†РёСЏ Рѕ РєРѕРЅС„РёРґРµРЅС†РёР°Р»СЊРЅРѕСЃС‚Рё */}
               <div className="flex items-start gap-2 mt-4 p-4 bg-accent-light/50 rounded-xl border border-accent/30">
                 <CheckCircle2 className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  Нажимая на кнопку, вы соглашаетесь с{' '}
+                  РќР°Р¶РёРјР°СЏ РЅР° РєРЅРѕРїРєСѓ, РІС‹ СЃРѕРіР»Р°С€Р°РµС‚РµСЃСЊ СЃ{' '}
                   <span className="text-accent hover:text-accent-dark font-medium underline cursor-pointer">
-                    Политикой конфиденциальности
+                    РџРѕР»РёС‚РёРєРѕР№ РєРѕРЅС„РёРґРµРЅС†РёР°Р»СЊРЅРѕСЃС‚Рё
                   </span>
-                  . Мы не передаем ваши данные третьим лицам.
+                  . РњС‹ РЅРµ РїРµСЂРµРґР°РµРј РІР°С€Рё РґР°РЅРЅС‹Рµ С‚СЂРµС‚СЊРёРј Р»РёС†Р°Рј.
                 </p>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

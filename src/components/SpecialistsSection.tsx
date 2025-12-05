@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
+import { useInView } from '../hooks/useInView'
+
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 type Specialist = {
@@ -9,6 +11,7 @@ type Specialist = {
 }
 
 export default function SpecialistsSection({ items }: { items: Specialist[] }) {
+
   const scrollRef = useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(true)
@@ -43,12 +46,19 @@ export default function SpecialistsSection({ items }: { items: Specialist[] }) {
     }
   }
 
+  const { ref: sectionRef, isInView } = useInView<HTMLElement>({ threshold: 0.2 })
+
   return (
     <>
       {/* Specialists Section */}
-      <section className="relative mt-20 py-16">
+      <section
+        ref={sectionRef}
+        className={`relative mt-20 py-16 transition-all duration-700 ease-out ${
+          isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+        }`}
+      >
         {/* Full-bleed background */}
-        <div className="pointer-events-none absolute inset-y-0 left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] bg-neutral-100" />
+        <div className="pointer-events-none absolute inset-y-0 left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] bg-gradient-to-b from-blue-50 via-blue-50/70 to-slate-50" />
 
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="px-4 sm:px-6 lg:px-8">
@@ -56,12 +66,12 @@ export default function SpecialistsSection({ items }: { items: Specialist[] }) {
               <div className="mb-10 flex items-center justify-between flex-wrap gap-x-3 gap-y-1">
                 <Link 
                   to="/specialists" 
-                  className="text-neutral-600 hover:text-neutral-800 font-medium text-sm inline-flex items-center gap-2 transition-all shrink-0 order-[-1] w-full justify-end text-right mt-4 mb-0 sm:order-none sm:w-auto sm:justify-start sm:text-inherit sm:mt-0 sm:mb-0"
+                  className="text-blue-600 hover:text-blue-800 font-medium text-sm inline-flex items-center gap-2 transition-all shrink-0 order-[-1] w-full justify-end text-right mt-4 mb-0 sm:order-none sm:w-auto sm:justify-start sm:text-inherit sm:mt-0 sm:mb-0"
                 >
                   Смотреть всё
                   <span className="text-base">→</span>
                 </Link>
-                <h3 className="text-3xl md:text-4xl font-black tracking-tight text-neutral-700 uppercase">
+                <h3 className="text-3xl md:text-4xl font-black font-display tracking-tight text-blue-700 uppercase">
                   Наши специалисты
                 </h3>
               </div>
@@ -78,9 +88,11 @@ export default function SpecialistsSection({ items }: { items: Specialist[] }) {
                       key={index}
                       className="snap-start w-[300px] group flex-shrink-0"
                     >
-                      <div className="bg-white border border-neutral-200 overflow-hidden transition-all duration-300 hover:shadow-lg flex flex-col h-full">
+                      <div className="bg-white/95 border border-blue-100 rounded-3xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col h-full">
+
                         {/* Image container */}
-                        <div className="relative h-[400px] overflow-hidden bg-neutral-200">
+                        <div className="relative h-[400px] overflow-hidden bg-slate-100">
+
                           {specialist.image ? (
                             <img 
                               src={specialist.image} 
@@ -98,7 +110,8 @@ export default function SpecialistsSection({ items }: { items: Specialist[] }) {
                         </div>
 
                         {/* Info section */}
-                        <div className="p-5 min-h-[120px]">
+                        <div className="p-5 min-h-[120px] bg-white/90">
+
                           <h4
                             className="font-bold text-neutral-900 text-base uppercase leading-tight mb-1.5 tracking-tight overflow-hidden"
                             style={{

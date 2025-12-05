@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+
 import NewYearPromoModal from '../components/NewYearPromoModal'
 
 import Header from '../components/Header'
@@ -17,12 +18,15 @@ import { ContactModal } from '../components/BodyContouring'
 import { Link } from 'react-router-dom'
 import { bodyProcedures } from '../data/bodyProcedures'
 import { faceProcedures } from '../data/faceProcedures'
-import { ArrowRight, Sparkles, Award, Shield, Users, Phone, Quote } from 'lucide-react'
+import { ArrowRight, Sparkles, Award, Shield, Users, Phone } from 'lucide-react'
 import { specials } from '../data/specials'
+import { useTypewriter } from '../hooks/useTypewriter'
+import { useInView } from '../hooks/useInView'
+import { useParallax } from '../hooks/useParallax'
 
 export default function HomePage() {
 
-  const images = ['/slider5.png', '/slider1.png', '/slider2.png', '/slider4.png']
+  const images = ['/slider5.png', '/slider1.png', '/slider2.png']
   const [active, setActive] = useState(0)
   const [isContactOpen, setIsContactOpen] = useState(false)
   const [showPromo, setShowPromo] = useState(false)
@@ -34,6 +38,16 @@ export default function HomePage() {
       specials.map((s) => [s.title, { image: s.image, title: s.title } as { image: string; title: string }])
     ).values()
   )
+
+  const { ref: directorBlockRef, isInView: directorInView } = useInView<HTMLDivElement>({ threshold: 0.4 })
+
+  const { ref: servicesTitleRef, style: servicesTitleStyle } = useParallax({ strength: 0.25 })
+
+  const typedDirectorName = useTypewriter('Светлана Михайловна\nХимина', {
+    speed: 70,
+    startDelay: 300,
+    enabled: directorInView,
+  })
 
   useEffect(() => {
 
@@ -131,9 +145,9 @@ export default function HomePage() {
                 </div>
 
                 <div className="p-6 sm:p-12 space-y-6 bg-gradient-to-br from-white via-blue-50/20 to-white">
-                  <h2 className="text-3xl md:text-5xl font-black bg-gradient-to-r from-blue-600 to-blue-700 sm:via-blue-500 sm:to-slate-700 bg-clip-text text-transparent leading-tight tracking-tight">
+                  <h2 className="text-3xl md:text-5xl font-black font-display bg-gradient-to-r from-blue-600 to-blue-700 sm:via-blue-500 sm:to-slate-700 bg-clip-text text-transparent leading-tight tracking-tight">
                     СТУДИЯ КРАСОТЫ АУРА
-                    <span className="block text-2xl md:text-3xl mt-3 bg-gradient-to-r from-slate-600 to-slate-800 bg-clip-text text-transparent">ДОНЕЦК ДНР</span>
+                    <span className="block text-2xl md:text-3xl mt-3 font-display font-black bg-gradient-to-r from-slate-600 to-slate-800 bg-clip-text text-transparent">ДОНЕЦК ДНР</span>
                   </h2>
 
                   {/* Ключевые преимущества */}
@@ -184,10 +198,25 @@ export default function HomePage() {
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
 
                       {/* Информация поверх фото */}
-                      <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-                        <h3 className="text-3xl font-black mb-2">
-                          Светлана Михайловна<br />Химина
+                      <div
+                        ref={directorBlockRef}
+                        className="absolute bottom-0 left-0 right-0 p-8 text-white"
+                      >
+                        <h3 className="text-3xl font-black mb-2 font-display">
+                          {typedDirectorName
+                            ? typedDirectorName.split('\n').map((line, idx) => (
+                                <span key={idx} className="block">
+                                  {line}
+                                </span>
+                              ))
+                            : (
+                                <>
+                                  <span className="block">Светлана Михайловна</span>
+                                  <span className="block">Химина</span>
+                                </>
+                              )}
                         </h3>
+
                         <p className="text-blue-200 font-semibold text-lg mb-4">
                           Руководитель студии красоты «Аура»
                         </p>
@@ -206,10 +235,10 @@ export default function HomePage() {
 
                   {/* Правая колонка с текстом */}
                   <div className="md:col-span-3 p-8 md:p-12 flex flex-col justify-center">
-                    {/* Иконка цитаты */}
+                    {/* Иконка статуса */}
                     <div className="mb-6">
                       <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-400 to-blue-600 shadow-lg">
-                        <Quote className="w-7 h-7 text-white" />
+                        <Award className="w-7 h-7 text-white" />
                       </div>
                     </div>
 
@@ -309,10 +338,15 @@ export default function HomePage() {
 
         {/* УСЛУГИ */}
         <section className="mt-20">
-          <div className="text-center mb-12 sm:mb-14 animate-fade-in">
-            <h3 className="text-4xl md:text-5xl font-black bg-gradient-to-r from-blue-600 to-blue-700 sm:via-blue-500 sm:to-slate-700 bg-clip-text text-transparent mb-4 tracking-tight">
+          <div
+            ref={servicesTitleRef}
+            style={servicesTitleStyle}
+            className="text-center mb-12 sm:mb-14 animate-fade-in will-change-transform"
+          >
+            <h3 className="text-4xl md:text-5xl font-black font-display bg-gradient-to-r from-blue-600 to-blue-700 sm:via-blue-500 sm:to-slate-700 bg-clip-text text-transparent mb-4 tracking-tight">
               НАШИ УСЛУГИ
             </h3>
+
             <p className="text-slate-600 text-lg max-w-2xl mx-auto">Профессиональный уход за лицом и телом с использованием современного оборудования</p>
           </div>
 

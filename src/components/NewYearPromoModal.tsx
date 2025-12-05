@@ -93,11 +93,11 @@ export default function NewYearPromoModal({ isOpen, onClose }: { isOpen: boolean
                 </div>
 
                 <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight mb-4">
-                  Розыгрыш набора посуды к Новому году
+                  Розыгрыш наборов посуды к Новому году
                 </h2>
 
                 <p className="text-slate-300 text-base md:text-lg leading-relaxed mb-8">
-                  Участвуйте в розыгрыше от Aypa и получите шанс выиграть эксклюзивные наборы посуды Tefal. Сохраняйте чеки от 8.000 руб, и используйте их в наших лототронах!
+                  Участвуйте в розыгрыше от студии Aypa. Получите шанс выиграть эксклюзивные наборы посуды Tefal. Сохраняйте чеки от 8.000 руб, и используйте их в наших лототронах!
                    С 15 ноября по 30 декабря.
                 </p>
 
@@ -129,12 +129,7 @@ export default function NewYearPromoModal({ isOpen, onClose }: { isOpen: boolean
 
                 {/* CTA buttons */}
                 <div className="flex flex-col md:flex-row md:flex-wrap gap-3 md:gap-4 items-stretch md:items-center md:mt-2">
-                  <button
-                    onClick={() => setRegOpen(true)}
-                    className="w-full md:w-auto px-6 py-3 rounded-xl bg-blue-500 hover:bg-blue-600 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2"
-                  >
-                    Зарегистрироваться
-                  </button>
+                  
                   <button
                     onClick={handlePrimary}
                     className="w-full md:w-auto px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2"
