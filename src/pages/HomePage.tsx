@@ -361,67 +361,102 @@ export default function HomePage() {
         </section>
 
         {/* УСЛУГИ */}
-        <section className="mt-20">
-          <div
-            ref={servicesTitleRef}
-            style={servicesTitleStyle}
-            className="text-center mb-12 sm:mb-14 animate-fade-in will-change-transform"
+        <section className="mt-20" ref={servicesTitleRef}>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ 
+              opacity: 1, 
+              y: 0,
+              transition: { 
+                duration: 0.6,
+                ease: [0.16, 1, 0.3, 1]
+              }
+            }}
+            viewport={{ once: true, margin: "-100px" }}
+            className="text-center mb-12 sm:mb-14 will-change-transform"
           >
-            <h3 className="text-4xl md:text-5xl font-black font-display bg-gradient-to-r from-blue-600 to-blue-700 sm:via-blue-500 sm:to-slate-700 bg-clip-text text-transparent mb-4 tracking-tight">
+            <motion.h3 
+              className="text-4xl md:text-5xl font-black font-display bg-gradient-to-r from-blue-600 to-blue-700 sm:via-blue-500 sm:to-slate-700 bg-clip-text text-transparent mb-4 tracking-tight"
+            >
               НАШИ УСЛУГИ
-            </h3>
+            </motion.h3>
 
-            <p className="text-slate-600 text-lg max-w-2xl mx-auto">Профессиональный уход за лицом и телом с использованием современного оборудования</p>
-          </div>
+            <motion.p 
+              className="text-slate-600 text-lg max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            >
+              Профессиональный уход за лицом и телом с использованием современного оборудования
+            </motion.p>
+          </motion.div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {items.slice(0, visibleServices).map((p, index) => (
-              <article
-                key={`${p.kind}-${p.slug}`}
-                className="group relative animate-fade-in-up"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 via-blue-300 to-blue-500 rounded-[2rem] opacity-0 group-hover:opacity-40 blur-2xl transition-all duration-700" />
-                <div className="relative bg-white/95 rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden shadow-lg sm:shadow-xl group-hover:shadow-2xl transition-all duration-700 border border-slate-200 h-full flex flex-col sm:hover:scale-[1.02]">
-                  <div className="relative aspect-[16/10] overflow-hidden">
-                    <img
-                      src={p.image}
-                      alt={p.title}
-                      loading="lazy"
-                      decoding="async"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="w-full h-full object-cover transition-all duration-700 sm:duration-1000 group-hover:scale-110 group-hover:rotate-1"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/20 to-transparent" />
-                    {/* Категория */}
-                    <div className="absolute top-4 left-4 sm:top-5 sm:left-5 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-full bg-white/20 backdrop-blur-md sm:backdrop-blur-2xl border border-white/40 text-white text-[11px] sm:text-xs font-bold uppercase tracking-wide shadow-lg flex items-center gap-2">
+            {items.slice(0, visibleServices).map((p, index) => {
+              // Calculate row and column for staggered animation
+              const row = Math.floor(index / 3);
+              const col = index % 3;
+              const delay = 0.1 * col + 0.2 * row;
+              
+              return (
+                <motion.article
+                  key={`${p.kind}-${p.slug}`}
+                  className="group relative"
+                  initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                  whileInView={{ 
+                    opacity: 1, 
+                    y: 0, 
+                    scale: 1,
+                    transition: {
+                      delay: delay,
+                      duration: 0.6,
+                      ease: [0.16, 1, 0.3, 1]
+                    }
+                  }}
+                  viewport={{ once: true, margin: "-50px" }}
+                >
+                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 via-blue-300 to-blue-500 rounded-[2rem] opacity-0 group-hover:opacity-40 blur-2xl transition-all duration-700" />
+                  <div className="relative bg-white/95 rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden shadow-lg sm:shadow-xl group-hover:shadow-2xl transition-all duration-700 border border-slate-200 h-full flex flex-col sm:hover:scale-[1.02]">
+                    <div className="relative aspect-[16/10] overflow-hidden">
                       <img
-                        src={p.kind === 'face' ? '/face.svg' : '/body.svg'}
-                        alt={p.kind === 'face' ? 'face' : 'body'}
-                        className="w-4 h-4 drop-shadow"
+                        src={p.image}
+                        alt={p.title}
                         loading="lazy"
+                        decoding="async"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="w-full h-full object-cover transition-all duration-700 sm:duration-1000 group-hover:scale-110 group-hover:rotate-1"
                       />
-                      <span>{p.kind === 'face' ? 'Лицо' : 'Тело'}</span>
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/20 to-transparent" />
+                      {/* Категория */}
+                      <div className="absolute top-4 left-4 sm:top-5 sm:left-5 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-full bg-white/20 backdrop-blur-md sm:backdrop-blur-2xl border border-white/40 text-white text-[11px] sm:text-xs font-bold uppercase tracking-wide shadow-lg flex items-center gap-2">
+                        <img
+                          src={p.kind === 'face' ? '/face.svg' : '/body.svg'}
+                          alt={p.kind === 'face' ? 'face' : 'body'}
+                          className="w-4 h-4 drop-shadow"
+                          loading="lazy"
+                        />
+                        <span>{p.kind === 'face' ? 'Лицо' : 'Тело'}</span>
+                      </div>
+                    </div>
+
+                    <div className="p-5 sm:p-7 flex-1 flex flex-col bg-gradient-to-br from-white via-blue-50/30 to-white">
+                      <h4 className="text-lg sm:text-xl font-black text-slate-800 mb-2 sm:mb-3 leading-tight group-hover:text-blue-600 transition-colors duration-300">
+                        {p.title}
+                      </h4>
+                      <p className="text-sm text-slate-600 leading-relaxed mb-4 sm:mb-6 flex-1 line-clamp-4">{p.excerpt}</p>
+
+                      <Link
+                        to={p.kind === 'face' ? `/face-procedures/${p.slug}` : `/body-procedures/${p.slug}`}
+                        className="inline-flex items-center justify-center gap-2 px-5 py-3 sm:px-6 sm:py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold text-sm rounded-xl shadow-lg hover:shadow-xl hover:shadow-blue-500/50 transition-all duration-500 group-hover:gap-3 sm:hover:scale-105 active:scale-95"
+                      >
+                        <span>ПОДРОБНЕЕ</span>
+                        <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+                      </Link>
                     </div>
                   </div>
-
-                  <div className="p-5 sm:p-7 flex-1 flex flex-col bg-gradient-to-br from-white via-blue-50/30 to-white">
-                    <h4 className="text-lg sm:text-xl font-black text-slate-800 mb-2 sm:mb-3 leading-tight group-hover:text-blue-600 transition-colors duration-300">
-                      {p.title}
-                    </h4>
-                    <p className="text-sm text-slate-600 leading-relaxed mb-4 sm:mb-6 flex-1 line-clamp-4">{p.excerpt}</p>
-
-                    <Link
-                      to={p.kind === 'face' ? `/face-procedures/${p.slug}` : `/body-procedures/${p.slug}`}
-                      className="inline-flex items-center justify-center gap-2 px-5 py-3 sm:px-6 sm:py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold text-sm rounded-xl shadow-lg hover:shadow-xl hover:shadow-blue-500/50 transition-all duration-500 group-hover:gap-3 sm:hover:scale-105 active:scale-95"
-                    >
-                      <span>ПОДРОБНЕЕ</span>
-                      <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
-                    </Link>
-                  </div>
-                </div>
-              </article>
-            ))}
+                </motion.article>
+              );
+            })}
           </div>
 
           {items.length > visibleServices && (
