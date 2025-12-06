@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
-import { useInView, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 import NewYearPromoModal from '../components/NewYearPromoModal'
 
@@ -22,7 +22,6 @@ import { faceProcedures } from '../data/faceProcedures'
 import { ArrowRight, Sparkles, Award, Shield, Users, Phone } from 'lucide-react'
 import { specials } from '../data/specials'
 import { useTypewriter } from '../hooks/useTypewriter'
-import { useParallax } from '../hooks/useParallax'
 
 export default function HomePage() {
 
@@ -39,18 +38,42 @@ export default function HomePage() {
     ).values()
   )
 
-  const { ref: directorBlockRef, isInView: directorInView } = useInView<HTMLDivElement>({ threshold: 0.4 })
-
-  const { ref: servicesTitleRef, style: servicesTitleStyle } = useParallax({ strength: 0.25 })
+  const directorBlockRef = useRef<HTMLDivElement>(null)
+  const [isDirectorInView, setIsDirectorInView] = useState(false)
+  const [isSpecialOffersInView, setIsSpecialOffersInView] = useState(false)
+  
+  const servicesTitleRef = useRef<HTMLDivElement>(null)
   
   // Ref for special offers section
-  const specialOffersRef = useRef(null)
-  const isSpecialOffersInView = useInView(specialOffersRef, { once: true, amount: 0.2 })
+  const specialOffersRef = useRef<HTMLDivElement>(null)
+  
+  // Check if director block is in view
+  useEffect(() => {
+    const checkIfInView = () => {
+      if (directorBlockRef.current) {
+        const rect = directorBlockRef.current.getBoundingClientRect()
+        setIsDirectorInView(rect.top < window.innerHeight * 0.8 && rect.bottom > 0)
+      }
+      
+      // Check if special offers section is in view
+      if (specialOffersRef.current) {
+        const rect = specialOffersRef.current.getBoundingClientRect()
+        setIsSpecialOffersInView(rect.top < window.innerHeight * 0.8 && rect.bottom > 0)
+      }
+    }
+    
+    // Initial check
+    checkIfInView()
+    
+    // Set up scroll listener
+    window.addEventListener('scroll', checkIfInView, { passive: true })
+    return () => window.removeEventListener('scroll', checkIfInView)
+  }, [])
 
   const typedDirectorName = useTypewriter('Светлана Михайловна\nХимина', {
     speed: 70,
     startDelay: 300,
-    enabled: directorInView,
+    enabled: isDirectorInView,
   })
 
   useEffect(() => {
