@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 import { useInView } from '../hooks/useInView'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 type SpecialItem = {
   image: string
@@ -43,15 +44,50 @@ export default function SpecialsRow({ items }: { items: SpecialItem[] }) {
     scrollRef.current.scrollTo({ left: x, behavior: 'smooth' })
   }
 
-  const { ref: sectionRef, isInView } = useInView<HTMLElement>({ threshold: 0.2 })
+  // Create refs and visibility state for each card
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([])
+  const [visibleCards, setVisibleCards] = useState<boolean[]>([])
+  
+  // Initialize visibility array with false values
+  useEffect(() => {
+    setVisibleCards(Array(items.length).fill(false))
+  }, [items.length])
+  
+  // Set up intersection observer for each card
+  useEffect(() => {
+    const observers: IntersectionObserver[] = []
+    
+    cardRefs.current.forEach((card, index) => {
+      if (!card) return
+      
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setVisibleCards(prev => {
+              const newState = [...prev]
+              newState[index] = true
+              return newState
+            })
+            observer.disconnect()
+          }
+        },
+        {
+          threshold: 0.3, // 30% of the card must be visible
+          rootMargin: '0px 0px -50px 0px' // Bottom margin to trigger slightly before scrolled into full view
+        }
+      )
+      
+      observer.observe(card)
+      observers.push(observer)
+    })
+    
+    return () => {
+      observers.forEach(observer => observer.disconnect())
+    }
+  }, [items.length])
 
   return (
-    <section
-      ref={sectionRef}
-      className={`relative mt-20 py-16 transition-all duration-700 ease-out ${
-        isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
-      }`}
-    >
+    <section className="relative mt-20 py-16">
       {/* Full-bleed background */}
       <div className="pointer-events-none absolute inset-y-0 left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] bg-gradient-to-b from-blue-50 via-blue-50/70 to-slate-50" />
 
@@ -76,30 +112,82 @@ export default function SpecialsRow({ items }: { items: SpecialItem[] }) {
               className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-2 scrollbar-hide justify-start pr-[6vw] sm:pr-[8vw] lg:pr-[10vw] pl-0"
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
-              {items.map((p, i) => (
-                <div key={i} className="snap-start w-[280px] sm:w-[300px] md:w-[320px] group flex-shrink-0">
-                  <div className="bg-white/95 border border-blue-100 rounded-3xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col">
-                    {/* Image container (match specialists aspect) */}
-                    <div className="relative aspect-[3/4] overflow-hidden bg-slate-100">
-                      <img 
-                        src={p.image} 
-                        alt={p.title} 
-                        className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105" 
-                      />
-                      <div className="absolute top-4 left-4 px-3 py-1.5 rounded-full bg-white/80 text-slate-800 text-[10px] font-black uppercase tracking-wide shadow-sm">
-                        Акция
+              <AnimatePresence>
+                {items.map((p, i) => (
+                  <motion.div 
+                    key={i} 
+                    ref={el => cardRefs.current[i] = el}
+                    className="snap-start w-[280px] sm:w-[300px] md:w-[320px] group flex-shrink-0"
+                    initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                    animate={visibleCards[i] ? { 
+                      opacity: 1, 
+                      y: 0,
+                      scale: 1,
+                      transition: {
+                        duration: 0.6,
+                        ease: [0.16, 1, 0.3, 1],
+                        delay: 0.1 * (i % 3) // Stagger based on position but in groups of 3
+                      }
+                    } : {}}
+                  >
+                    <div className="bg-white/95 border border-blue-100 rounded-3xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col h-full">
+                      {/* Image container */}
+                      <motion.div 
+                        className="relative aspect-[3/4] overflow-hidden bg-slate-100"
+                        whileHover={{ scale: 1.03 }}
+                        transition={{ duration: 0.4 }}
+                      >
+                        <motion.img 
+                          src={p.image} 
+                          alt={p.title}
+                          initial={{ scale: 1.05 }}
+                          animate={visibleCards[i] ? { 
+                            scale: 1,
+                            transition: { 
+                              duration: 0.8,
+                              delay: 0.1 * (i % 3) + 0.1
+                            }
+                          } : {}}
+                          className="absolute inset-0 w-full h-full object-cover object-center"
+                        />
+                        <motion.div 
+                          className="absolute top-4 left-4 px-3 py-1.5 rounded-full bg-white/80 text-slate-800 text-[10px] font-black uppercase tracking-wide shadow-sm"
+                          initial={{ x: -10, opacity: 0 }}
+                          animate={visibleCards[i] ? { 
+                            x: 0, 
+                            opacity: 1,
+                            transition: { 
+                              delay: 0.1 * (i % 3) + 0.2,
+                              duration: 0.4 
+                            }
+                          } : {}}
+                        >
+                          Акция
+                        </motion.div>
+                      </motion.div>
+
+                      {/* Info footer */}
+                      <div className="p-5 bg-white/95 min-h-[72px]">
+                        <motion.h4 
+                          className="font-bold text-neutral-900 text-base uppercase leading-tight tracking-tight line-clamp-2"
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={visibleCards[i] ? { 
+                            opacity: 1, 
+                            y: 0,
+                            transition: { 
+                              delay: 0.1 * (i % 3) + 0.15,
+                              duration: 0.4,
+                              ease: "easeOut"
+                            }
+                          } : {}}
+                        >
+                          {p.title}
+                        </motion.h4>
                       </div>
                     </div>
-
-                    {/* Info footer */}
-                    <div className="p-5 bg-white/95 min-h-[72px]">
-                      <h4 className="font-bold text-neutral-900 text-base uppercase leading-tight tracking-tight line-clamp-2">
-                        {p.title}
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-              ))}
+                  </motion.div>
+                ))}
+              </AnimatePresence>
             </div>
 
             {/* Bottom controls aligned to the right, matching padding */}

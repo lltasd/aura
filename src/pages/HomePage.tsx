@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
+import { useInView, motion } from 'framer-motion'
 
 import NewYearPromoModal from '../components/NewYearPromoModal'
 
@@ -21,7 +22,6 @@ import { faceProcedures } from '../data/faceProcedures'
 import { ArrowRight, Sparkles, Award, Shield, Users, Phone } from 'lucide-react'
 import { specials } from '../data/specials'
 import { useTypewriter } from '../hooks/useTypewriter'
-import { useInView } from '../hooks/useInView'
 import { useParallax } from '../hooks/useParallax'
 
 export default function HomePage() {
@@ -42,6 +42,10 @@ export default function HomePage() {
   const { ref: directorBlockRef, isInView: directorInView } = useInView<HTMLDivElement>({ threshold: 0.4 })
 
   const { ref: servicesTitleRef, style: servicesTitleStyle } = useParallax({ strength: 0.25 })
+  
+  // Ref for special offers section
+  const specialOffersRef = useRef(null)
+  const isSpecialOffersInView = useInView(specialOffersRef, { once: true, amount: 0.2 })
 
   const typedDirectorName = useTypewriter('Светлана Михайловна\nХимина', {
     speed: 70,
@@ -237,25 +241,22 @@ export default function HomePage() {
                   <div className="md:col-span-3 p-8 md:p-12 flex flex-col justify-center">
                     {/* Иконка статуса */}
                     <div className="mb-6">
-                      <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-400 to-blue-600 shadow-lg">
+                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-lg mb-6">
                         <Award className="w-7 h-7 text-white" />
                       </div>
-                    </div>
-
-                    {/* Основная цитата */}
-                    <blockquote className="text-xl md:text-2xl font-medium text-slate-800 leading-relaxed mb-8">
-                      Я горжусь тем, что на рынке современной косметологии есть такое качество услуг и высокий сервис, как в студии красоты «Аура».
-                    </blockquote>
-
-                    {/* Дополнительный текст */}
-                    <div className="space-y-4 text-slate-600 leading-relaxed">
-                      <p>
-                        Ежедневно я лично проверяю, все ли подготовлено к рабочему дню, начиная от угощений для пациентов и заканчивая внешним видом персонала.
-                      </p>
-                      <p>
+                      
+                      {/* Основная цитата */}
+                      <div className="relative mb-8">
+                        <div className="absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-400 to-blue-600 rounded-full" />
+                        <p className="text-xl md:text-2xl font-medium text-slate-800 leading-relaxed pl-6 italic relative">
+                          Я горжусь тем, что на рынке современной косметологии есть такое качество услуг и высокий сервис, как в студии красоты «Аура».
+                        </p>
+                      </div>
+                      
+                      <p className="text-slate-600 leading-relaxed mb-4">
                         Каждое наше достижение — это результат кропотливого труда и глубоких знаний, которые мы с гордостью применяем в своей практике. Мы уверены, что высокое качество услуг невозможно без передовых аппаратов и лучших препаратов, которые мы используем.
                       </p>
-                      <p>
+                      <p className="text-slate-600 leading-relaxed">
                         Мы нацелены на то, чтобы удовлетворить потребности наших клиентов и превзойти их ожидания, создавая прочные отношения, основанные на доверии и взаимопонимании.
                       </p>
                     </div>
@@ -282,9 +283,32 @@ export default function HomePage() {
           {/* ПРАВАЯ КОЛОНКА */}
           <aside className="hidden lg:block space-y-6 lg:sticky lg:top-40" style={{ animationDelay: '300ms' }}>
             {/* Специальные предложения */}
-            <div className="group relative">
-              <div className="absolute -inset-2 bg-gradient-to-br from-blue-400/60 via-blue-300/40 to-blue-500/60 rounded-[2rem] opacity-50 group-hover:opacity-70 blur-2xl transition-all duration-1000" />
-              <div className="relative p-8 rounded-[2rem] bg-white/95 backdrop-blur-xl border border-white/80 shadow-2xl">
+            <motion.div 
+              ref={specialOffersRef}
+              className="group relative"
+              initial={{ opacity: 0, filter: 'blur(10px)' }}
+              animate={{ 
+                opacity: isSpecialOffersInView ? 1 : 0, 
+                filter: isSpecialOffersInView ? 'blur(0)' : 'blur(10px)'
+              }}
+              transition={{ 
+                duration: 0.8, 
+                ease: 'easeOut',
+                delay: 0.3
+              }}
+            >
+              <motion.div 
+                className="absolute -inset-2 bg-gradient-to-br from-blue-400/60 via-blue-300/40 to-blue-500/60 rounded-[2rem] opacity-50 group-hover:opacity-70 blur-2xl transition-all duration-1000"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: isSpecialOffersInView ? 0.5 : 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+              />
+              <motion.div 
+                className="relative p-8 rounded-[2rem] bg-white/95 backdrop-blur-xl border border-white/80 shadow-2xl"
+                initial={{ y: 20 }}
+                animate={{ y: isSpecialOffersInView ? 0 : 20 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
 
                 <div className="flex items-center gap-3 mb-7">
                   <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center border border-blue-300/50 shadow-lg">
@@ -331,8 +355,8 @@ export default function HomePage() {
                 >
                   ЗАПИСАТЬСЯ СЕЙЧАС
                 </button>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </aside>
         </section>
 
