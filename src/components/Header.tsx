@@ -80,14 +80,14 @@ export default function Header({ onBookClick, variant = 'default' }: HeaderProps
     <>
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        variant === 'dark'
-          ? (isScrolled
-              ? 'bg-slate-900/90 backdrop-blur-2xl shadow-2xl border-b border-white/10'
-              : 'bg-slate-900/80 backdrop-blur-xl shadow-xl')
-          : (isScrolled
-              ? 'bg-primary/90 backdrop-blur-2xl backdrop-saturate-150 shadow-2xl border-b border-white/10'
-              : 'bg-primary shadow-xl')
-      }`}
+	    variant === 'dark'
+	      ? (isScrolled
+	          ? 'bg-gradient-to-r from-slate-800 via-primary-dark to-slate-800 lg:from-slate-950 lg:via-primary-dark lg:to-slate-900 backdrop-blur-2xl shadow-2xl border-b border-white/10'
+	          : 'bg-gradient-to-r from-slate-800 via-primary-dark to-slate-800 lg:from-slate-950 lg:via-primary-dark lg:to-slate-900 shadow-xl')
+	      : (isScrolled
+	          ? 'bg-primary/90 backdrop-blur-2xl backdrop-saturate-150 shadow-2xl border-b border-white/10'
+	          : 'bg-primary shadow-xl')
+	  }`}
     >
       <div className="container mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 relative">
         {/* Decorative rose (non-interactive, does not affect layout) */}

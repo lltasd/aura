@@ -181,9 +181,12 @@ export default function ReviewsSection() {
       <div className="container mx-auto px-4">
         {/* Заголовок секции */}
         <div className="mb-12 text-center">
-          <h2 className="text-4xl md:text-5xl font-black font-display tracking-tight text-blue-700 uppercase mb-3">
+          <h2 className="text-4xl md:text-5xl font-black font-display tracking-tight text-blue-900 uppercase mb-3">
             отзывы
           </h2>
+          <div className="flex justify-center mb-4">
+            <div className="h-1 w-20 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full" />
+          </div>
           <p className="text-slate-600 text-lg">Что говорят наши клиенты</p>
         </div>
 

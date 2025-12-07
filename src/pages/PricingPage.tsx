@@ -17,8 +17,9 @@ export default function PricingPage() {
     <div className="min-h-screen bg-gradient-to-b from-white to-accent/10">
       <Header onBookClick={() => setIsBookingModalOpen(true)} />
       <Hero onBookClick={() => setIsBookingModalOpen(true)} />
+              <DiscountPackages />
       <Services />
-      <DiscountPackages />
+
       <BodyContouring />
       <Pricing />
       <Booking onBookClick={() => setIsBookingModalOpen(true)} />

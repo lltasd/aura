@@ -164,7 +164,7 @@ export default function Booking({ onBookClick }: BookingProps) {
           >
             <button
               onClick={onBookClick}
-              className="group relative bg-gradient-to-r from-silver-dark to-silver hover:from-silver hover:to-silver-light text-primary px-12 py-5 rounded-2xl font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-silver/50 inline-flex items-center gap-3 overflow-hidden"
+              className="group relative bg-gradient-to-r from-silver to-silver-light hover:from-silver-light hover:to-white text-primary px-12 py-5 rounded-2xl font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-silver/50 inline-flex items-center gap-3 overflow-hidden"
             >
               <div className="absolute inset-0 bg-white/20 translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
               <MessageSquare size={24} className="relative z-10 group-hover:rotate-12 transition-transform" />

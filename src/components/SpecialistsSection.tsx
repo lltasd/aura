@@ -71,9 +71,12 @@ export default function SpecialistsSection({ items }: { items: Specialist[] }) {
                   Смотреть всё
                   <span className="text-base">→</span>
                 </Link>
-                <h3 className="text-3xl md:text-4xl font-black font-display tracking-tight text-blue-700 uppercase">
-                  Наши специалисты
-                </h3>
+                <div className="flex flex-col items-start sm:items-start">
+                  <h3 className="text-3xl md:text-4xl font-black font-display tracking-tight text-blue-900 uppercase">
+                    Наши специалисты
+                  </h3>
+                  <div className="mt-2 h-1 w-32 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full" />
+                </div>
               </div>
 
               <div className="relative">
