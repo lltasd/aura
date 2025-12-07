@@ -11,7 +11,7 @@ export default function Hero({ onBookClick, accentVariant = 'silver' }: HeroProp
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-primary via-primary-dark to-primary pt-24 overflow-hidden"
+      className="relative min-h-screen flex items-start sm:items-center justify-center bg-gradient-to-br from-primary via-primary-dark to-primary pt-24 pb-10 overflow-hidden"
     >
       {/* Enhanced Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
@@ -64,16 +64,16 @@ export default function Hero({ onBookClick, accentVariant = 'silver' }: HeroProp
             <div className="h-px w-16 bg-gradient-to-l from-transparent to-accent"></div>
           </div>
 
-          <p className="text-xl md:text-2xl text-accent mb-4 font-light animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <p className="text-xl md:text-2xl text-accent mb-3 font-light animate-fade-in" style={{ animationDelay: '0.2s' }}>
             Профессиональная лазерная эпиляция и аппаратная коррекция фигуры
           </p>
 
-          <p className="text-lg text-white/90 mb-12 max-w-2xl mx-auto leading-relaxed animate-fade-in" style={{ animationDelay: '0.4s' }}>
+          <p className="text-lg text-white/90 mb-6 max-w-2xl mx-auto leading-relaxed animate-fade-in" style={{ animationDelay: '0.4s' }}>
             Современное оборудование, опытные специалисты и индивидуальный подход к каждому клиенту
           </p>
 
           {/* Enhanced CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6 animate-fade-in" style={{ animationDelay: '0.6s' }}>
             <button
               onClick={onBookClick}
               className={`group relative ${
@@ -98,7 +98,7 @@ export default function Hero({ onBookClick, accentVariant = 'silver' }: HeroProp
           </div>
 
           {/* Enhanced Contact info */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-white/90 mb-8 animate-fade-in" style={{ animationDelay: '0.8s' }}>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-white/90 mb-2 animate-fade-in" style={{ animationDelay: '0.8s' }}>
             <a
               href={`tel:${contactInfo.phones[0]}`}
               className="group flex items-center gap-2 hover:text-accent transition-all duration-300 px-4 py-2 rounded-lg hover:bg-white/5"
@@ -121,7 +121,7 @@ export default function Hero({ onBookClick, accentVariant = 'silver' }: HeroProp
           </div>
 
           {/* Enhanced Social media icons */}
-          <div className="flex justify-center gap-4 animate-fade-in" style={{ animationDelay: '1s' }}>
+          <div className="flex justify-center gap-4 mt-2 sm:mt-10 lg:mt-12 animate-fade-in" style={{ animationDelay: '1s' }}>
             <a
               href={contactInfo.socialMedia.whatsapp}
               target="_blank"
