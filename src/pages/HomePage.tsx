@@ -11,14 +11,9 @@ import AboutUsSection from '../components/AboutUsSection'
 import SpecialistsSection from '../components/SpecialistsSection'
 import GiftCertificateSection from '../components/GiftCertificateSection'
 import SpecialsRow from '../components/SpecialsRow'
-
-import { specialists } from '../data/specialists'
-
 import { ContactModal } from '../components/BodyContouring'
-import { Link } from 'react-router-dom'
-import { bodyProcedures } from '../data/bodyProcedures'
-import { faceProcedures } from '../data/faceProcedures'
 import { Sparkles, Award, Shield, Users, Phone } from 'lucide-react'
+import { specialists } from '../data/specialists'
 import { specials } from '../data/specials'
 
 // Компонент WhyUsSection с анимацией при скролле
@@ -132,8 +127,6 @@ export default function HomePage() {
   const [isContactOpen, setIsContactOpen] = useState(false)
   const [showPromo, setShowPromo] = useState(false)
 
-  const [visibleServices, setVisibleServices] = useState(5)
-
   const specialsItems = Array.from(
     new Map(
       specials.map((s) => [s.title, { image: s.image, title: s.title } as { image: string; title: string }])
@@ -141,10 +134,7 @@ export default function HomePage() {
   )
 
   const directorBlockRef = useRef<HTMLDivElement>(null)
-  const [isDirectorInView, setIsDirectorInView] = useState(false)
   const [isSpecialOffersInView, setIsSpecialOffersInView] = useState(false)
-  
-  const servicesTitleRef = useRef<HTMLDivElement>(null)
   
   // Ref for special offers section
   const specialOffersRef = useRef<HTMLDivElement>(null)
@@ -152,27 +142,20 @@ export default function HomePage() {
   // Check if director block is in view
   useEffect(() => {
     const checkIfInView = () => {
-      if (directorBlockRef.current) {
-        const rect = directorBlockRef.current.getBoundingClientRect()
-        setIsDirectorInView(rect.top < window.innerHeight * 0.8 && rect.bottom > 0)
-      }
-      
       // Check if special offers section is in view
       if (specialOffersRef.current) {
         const rect = specialOffersRef.current.getBoundingClientRect()
         setIsSpecialOffersInView(rect.top < window.innerHeight * 0.8 && rect.bottom > 0)
       }
     }
-    
+
     // Initial check
     checkIfInView()
-    
+
     // Set up scroll listener
     window.addEventListener('scroll', checkIfInView, { passive: true })
     return () => window.removeEventListener('scroll', checkIfInView)
   }, [])
-
-  const directorName = 'Светлана Михайловна\nХимина'
 
   useEffect(() => {
 
@@ -198,21 +181,6 @@ export default function HomePage() {
       }
     } catch {}
   }, [])
-
-  useEffect(() => {
-    const updateVisible = () => {
-      const isDesktop = window.matchMedia('(min-width: 1024px)').matches // lg breakpoint
-      setVisibleServices(isDesktop ? 9 : 5)
-    }
-    updateVisible()
-    window.addEventListener('resize', updateVisible)
-    return () => window.removeEventListener('resize', updateVisible)
-  }, [])
-
-  const items = [
-    ...faceProcedures.map((p) => ({ ...p, kind: 'face' as const })),
-    ...bodyProcedures.map((p) => ({ ...p, kind: 'body' as const })),
-  ]
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-50">
