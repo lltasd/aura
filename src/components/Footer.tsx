@@ -24,7 +24,7 @@ export default function Footer() {
           {/* Studio info */}
           <div className="space-y-6">
             <Link to="/" className="inline-flex items-center gap-3 mb-4 hover:opacity-95 transition-all group">
-              <Logo size={52} className="drop-shadow-[0_6px_18px_rgba(0,0,0,0.35)] group-hover:scale-110 transition-transform" />
+              <Logo size={44} className="drop-shadow-[0_6px_18px_rgba(0,0,0,0.35)] group-hover:scale-110 transition-transform" />
               <div>
                 <div className="font-display text-xl font-bold tracking-wide">АУРА</div>
                 <div className="text-accent text-xs tracking-widest">СТУДИЯ КРАСОТЫ</div>

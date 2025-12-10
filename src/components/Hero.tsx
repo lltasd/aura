@@ -47,8 +47,11 @@ export default function Hero({ onBookClick, accentVariant = 'silver' }: HeroProp
           {/* Logo with glow effect */}
           <div className="mb-8 flex justify-center">
             <div className="relative group">
-              <div className="absolute inset-0 bg-accent/20 rounded-full blur-xl sm:blur-2xl group-hover:bg-accent/30 transition-all duration-500"></div>
-              <Logo size={120} className="drop-shadow-2xl relative z-10 transition-transform duration-500 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-accent/20 rounded-full blur-md sm:blur-xl group-hover:bg-accent/30 transition-all duration-500"></div>
+              <Logo
+                size={100}
+                className="drop-shadow-2xl relative z-10 transition-transform duration-500 scale-75 sm:scale-100 group-hover:scale-80 sm:group-hover:scale-105"
+              />
             </div>
           </div>
 

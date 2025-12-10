@@ -153,9 +153,9 @@ export default function Header({ onBookClick, variant = 'default' }: HeaderProps
 
             {/* Center: logo */}
             <Link to="/" className="flex items-center justify-center gap-3 hover:opacity-90 transition group -translate-x-6 sm:translate-x-0">
-              <div className={`relative w-[64px] h-[64px] shrink-0 transition-transform duration-500 ease-out ${isScrolled ? 'scale-[.85]' : 'scale-100'}`}>
+              <div className={`relative w-[40px] h-[40px] sm:w-[52px] sm:h-[52px] shrink-0 transition-transform duration-500 ease-out sm:translate-y-2 ${isScrolled ? 'scale-[.85]' : 'scale-100'}`}>
                 <Logo
-                  size={64}
+                  size={40}
                   className="absolute inset-0 drop-shadow-lg scale-[1.28] group-hover:scale-[1.33] transition-transform"
                 />
               </div>
@@ -274,8 +274,8 @@ export default function Header({ onBookClick, variant = 'default' }: HeaderProps
             {/* Top bar */}
             <div className="flex items-center justify-between px-6 py-4">
               <div className="flex items-center gap-3">
-                <div className="relative w-10 h-10 shrink-0 overflow-visible">
-                  <Logo size={80} className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+                <div className="relative w-9 h-9 shrink-0 overflow-visible">
+                  <Logo size={60} className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
                 </div>
                 <div>
                   <div className="text-white font-display text-xl font-bold tracking-wide">АУРА</div>
