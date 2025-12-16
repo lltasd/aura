@@ -12,22 +12,22 @@ export default function BodyProceduresPage() {
   return (
     <div className="min-h-screen bg-white">
 
-      <Header onBookClick={() => setIsContactOpen(true)} />
+      <Header onBookClick={() => setIsContactOpen(true)} variant="dark" />
 
-      <main className="container mx-auto px-4 pt-44 pb-16 relative z-10">
-        <div className="mb-16 text-center animate-fade-in-down">
+      <main className="container mx-auto px-4 pt-32 sm:pt-40 md:pt-44 pb-14 md:pb-16 relative z-10">
+        <div className="mb-12 sm:mb-16 text-center animate-fade-in-down">
             <div className="w-1.5 h-1.5 bg-blue-600 rounded-full animate-ping" />
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black bg-gradient-to-r from-blue-600 via-blue-700 to-slate-800 bg-clip-text text-transparent leading-tight mb-4 animate-gradient inline-flex items-center gap-4 justify-center">
-            <img src="/body.svg" alt="body" className="w-8 h-8 md:w-10 md:h-10 drop-shadow" />
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black bg-gradient-to-r from-blue-600 via-blue-700 to-slate-800 bg-clip-text text-transparent leading-tight mb-4 animate-gradient inline-flex items-center gap-4 justify-center">
+            <img src="/body.svg" alt="body" className="w-7 h-7 md:w-10 md:h-10 drop-shadow" />
             <span>Процедуры для тела</span>
           </h1>
-          <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
             Современные аппаратные методики для здоровья и красоты вашего тела
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {bodyProcedures.map((p, index) => (
             <article
               key={p.slug}
@@ -65,14 +65,14 @@ export default function BodyProceduresPage() {
           ))}
         </div>
 
-        <div className="mt-24 text-center animate-fade-in-up" style={{animationDelay: '1s', animationFillMode: 'both'}}>
-          <div className="relative inline-flex flex-col items-center gap-6 p-10 bg-gradient-to-br from-blue-600/15 via-slate-200/20 to-blue-400/10 backdrop-blur-md rounded-3xl border border-blue-300/40 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105">
-            <Sparkles className="w-12 h-12 text-blue-600" />
+        <div className="mt-16 sm:mt-24 text-center animate-fade-in-up" style={{animationDelay: '1s', animationFillMode: 'both'}}>
+          <div className="relative inline-flex flex-col items-center gap-5 sm:gap-6 p-6 sm:p-8 md:p-10 bg-gradient-to-br from-blue-600/15 via-slate-200/20 to-blue-400/10 backdrop-blur-md rounded-3xl border border-blue-300/40 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105">
+            <Sparkles className="w-10 h-10 text-blue-600" />
             <div className="space-y-2">
-              <p className="text-2xl font-black text-slate-800">Не нашли подходящую процедуру?</p>
-              <p className="text-slate-600">Получите персональную консультацию от наших специалистов</p>
+              <p className="text-xl sm:text-2xl font-black text-slate-800">Не нашли подходящую процедуру?</p>
+              <p className="text-slate-600 text-sm sm:text-base">Получите персональную консультацию от наших специалистов</p>
             </div>
-            <button onClick={() => setIsContactOpen(true)} className="px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-black text-lg rounded-2xl shadow-xl hover:shadow-2xl hover:from-blue-700 hover:to-blue-800 transform hover:-translate-y-1 transition-all duration-300 flex items-center gap-3">
+            <button onClick={() => setIsContactOpen(true)} className="px-8 py-3 sm:px-10 sm:py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-black text-base sm:text-lg rounded-2xl shadow-xl hover:shadow-2xl hover:from-blue-700 hover:to-blue-800 transform hover:-translate-y-1 transition-all duration-300 flex items-center gap-3">
               <span>Получить консультацию</span>
               <Sparkles className="w-6 h-6" />
             </button>

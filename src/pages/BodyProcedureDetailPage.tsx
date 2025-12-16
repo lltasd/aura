@@ -14,7 +14,7 @@ export default function BodyProcedureDetailPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header onBookClick={() => setIsBookingModalOpen(true)} />
+      <Header onBookClick={() => setIsBookingModalOpen(true)} variant="dark" />
 
       {/* HERO */}
       <section className="relative pt-36 md:pt-44">

@@ -35,9 +35,9 @@ export default function SpecialistsPage() {
     <div className="min-h-screen bg-slate-50">
       <Header onBookClick={() => {}} variant="dark" />
 
-      <main className="pt-32 pb-20">
+      <main className="pt-28 sm:pt-32 pb-16 md:pb-20">
         {/* Hero Section - Full Screen */}
-        <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 min-h-screen flex items-center opacity-0 animate-fadeIn overflow-hidden -mt-32" style={{ animationDelay: '100ms', animationFillMode: 'forwards' }}>
+        <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 min-h-[80vh] sm:min-h-screen flex items-center opacity-0 animate-fadeIn overflow-hidden -mt-32" style={{ animationDelay: '100ms', animationFillMode: 'forwards' }}>
           {/* Decorative elements */}
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-slate-500/10 rounded-full blur-3xl"></div>
@@ -70,16 +70,16 @@ export default function SpecialistsPage() {
               {/* Left Content */}
               <div className="opacity-0 animate-fadeInUp" style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}>
 
-                <div className="inline-block mb-6 px-5 py-2 bg-blue-500/20 border border-blue-400/30 rounded-full backdrop-blur-sm">
-                  <span className="text-blue-300 text-sm font-bold uppercase tracking-wider">Профессионалы своего дела</span>
+                <div className="inline-block mb-4 sm:mb-6 px-4 py-2 bg-blue-500/20 border border-blue-400/30 rounded-full backdrop-blur-sm">
+                  <span className="text-blue-300 text-xs sm:text-sm font-bold uppercase tracking-wider">Профессионалы своего дела</span>
                 </div>
-                <h1 className="text-6xl md:text-8xl font-black tracking-tight text-white uppercase mb-8 leading-none">
+                <h1 className="text-3xl sm:text-5xl md:text-7xl font-black tracking-tight text-white uppercase mb-6 md:mb-8 leading-none">
                   Команда<br />Аура
                 </h1>
-                <p className="text-slate-300 text-2xl leading-relaxed mb-8 font-light">
+                <p className="text-slate-300 text-lg sm:text-xl leading-relaxed mb-6 md:mb-8 font-light">
                   Квалифицированные профессионалы с медицинским образованием и многолетним опытом
                 </p>
-                <p className="text-slate-400 text-lg leading-relaxed mb-10">
+                <p className="text-slate-400 text-sm sm:text-base leading-relaxed mb-8 md:mb-10">
                   Каждый специалист искренне увлечён косметологией и стремится, чтобы каждая процедура приносила не только видимый результат, но и удовольствие от заботы о себе.
                 </p>
                 
@@ -93,7 +93,7 @@ export default function SpecialistsPage() {
               {/* Right Content - Features */}
               <div className="opacity-0 animate-fadeInUp" style={{ animationDelay: '600ms', animationFillMode: 'forwards' }}>
                 <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10 shadow-2xl">
-                  <h2 className="text-3xl font-black text-white uppercase mb-8 flex items-center">
+                  <h2 className="text-2xl sm:text-3xl font-black text-white uppercase mb-6 sm:mb-8 flex items-center">
                     <span className="w-2 h-10 bg-blue-400 mr-4 rounded-full"></span>
                     Почему выбирают нас
                   </h2>
@@ -146,7 +146,7 @@ export default function SpecialistsPage() {
                   </div>
 
                   <div className="mt-8 pt-8 border-t border-white/10">
-                    <p className="text-slate-400 leading-relaxed text-sm mb-4">
+                    <p className="text-slate-400 leading-relaxed text-xs sm:text-sm mb-4">
                       Мы знаем, как важно доверять специалисту, особенно когда речь идёт о лице и теле. В студии «Аура» вы можете быть уверены: вас обслужат бережно, профессионально и с вниманием к деталям.
                     </p>
                     <p className="text-slate-400 leading-relaxed text-sm mb-4">
@@ -154,7 +154,7 @@ export default function SpecialistsPage() {
                     </p>
                     <div className="bg-blue-500/10 rounded-lg p-4 border border-blue-400/20">
                       <p className="text-blue-200 font-medium text-sm">
-                        📞 Записаться на процедуры можно по телефонам на сайте
+                        Записаться на процедуры можно по телефонам на сайте
                       </p>
                     </div>
                   </div>
@@ -270,29 +270,29 @@ export default function SpecialistsPage() {
                 
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
                   <div className="text-center group">
-                    <div className=" flex items-center justify-center transition-all duration-300">
-                      <div className="text-5xl font-black text-white">50<span className="text-blue-300">+</span></div>
+                    <div className="flex items-center justify-center transition-all duration-300">
+                      <div className="text-4xl sm:text-5xl font-black text-white">50<span className="text-blue-300">+</span></div>
                     </div>
                     <div className="text-slate-300 text-sm uppercase tracking-wider font-semibold">Специалистов</div>
                   </div>
                   
                   <div className="text-center group">
-                    <div className=" backdrop-blur flex items-center justify-center  transition-all duration-300">
-                      <div className="text-5xl font-black text-white">15<span className="text-blue-300">+</span></div>
+                    <div className="backdrop-blur flex items-center justify-center transition-all duration-300">
+                      <div className="text-4xl sm:text-5xl font-black text-white">15<span className="text-blue-300">+</span></div>
                     </div>
                     <div className="text-slate-300 text-sm uppercase tracking-wider font-semibold">Лет опыта</div>
                   </div>
                   
                   <div className="text-center group">
-                    <div className=" flex items-center justify-center  transition-all duration-300">
-                      <div className="text-5xl font-black text-white">100<span className="text-blue-300">%</span></div>
+                    <div className="flex items-center justify-center transition-all duration-300">
+                      <div className="text-4xl sm:text-5xl font-black text-white">100<span className="text-blue-300">%</span></div>
                     </div>
                     <div className="text-slate-300 text-sm uppercase tracking-wider font-semibold">Сертифицированы</div>
                   </div>
                   
                   <div className="text-center group">
-                    <div className=" flex items-center justify-center  transition-all duration-300">
-                      <div className="text-5xl font-black text-white">10k<span className="text-blue-300">+</span></div>
+                    <div className="flex items-center justify-center transition-all duration-300">
+                      <div className="text-4xl sm:text-5xl font-black text-white">10k<span className="text-blue-300">+</span></div>
                     </div>
                     <div className="text-slate-300 text-sm uppercase tracking-wider font-semibold">Довольных клиентов</div>
                   </div>

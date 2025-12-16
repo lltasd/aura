@@ -121,7 +121,6 @@ function WhyUsSection() {
 }
 
 export default function HomePage() {
-
   const images = ['/slider5.png', '/slider1.png', '/slider2.png']
   const [active, setActive] = useState(0)
   const [isContactOpen, setIsContactOpen] = useState(false)
@@ -158,7 +157,6 @@ export default function HomePage() {
   }, [])
 
   useEffect(() => {
-
     const id = setInterval(() => setActive((p) => (p + 1) % images.length), 3000)
     return () => clearInterval(id)
   }, [])
@@ -179,7 +177,7 @@ export default function HomePage() {
         setShowPromo(true)
         localStorage.setItem(key, String(now))
       }
-    } catch {}
+    } catch (e) {}
   }, [])
 
   return (
@@ -188,17 +186,15 @@ export default function HomePage() {
 
       <NewYearPromoModal isOpen={showPromo} onClose={() => setShowPromo(false)} />
 
-      <main className="container mx-auto px-4 pt-36 sm:pt-44 pb-16">
+      <main className="container mx-auto px-4 pt-32 sm:pt-40 md:pt-44 pb-14 md:pb-16">
         <section className="grid lg:grid-cols-3 gap-6 sm:gap-8 items-start">
-
           {/* ЛЕВАЯ КОЛОНКА */}
           <div className="lg:col-span-2 space-y-8">
             {/* Слайдер с описанием студии */}
             <div className="group relative">
               <div className="absolute -inset-2 bg-gradient-to-r from-blue-400 via-blue-300 to-blue-500 rounded-[2rem] opacity-20 sm:opacity-30 group-hover:opacity-40 sm:group-hover:opacity-50 blur-md sm:blur-2xl transition-all duration-1000" />
               <div className="relative rounded-[2rem] overflow-hidden shadow-lg sm:shadow-2xl border border-slate-200 bg-white">
-
-                <div className="relative h-72 sm:h-96 md:h-[480px] bg-gradient-to-br from-blue-100/50 via-white to-slate-100/50 overflow-hidden">
+                <div className="relative h-64 sm:h-88 md:h-[480px] bg-gradient-to-br from-blue-100/50 via-white to-slate-100/50 overflow-hidden">
                   {images.map((src, i) => (
                     <img
                       key={i}
@@ -209,7 +205,9 @@ export default function HomePage() {
                       fetchPriority={i === 0 ? 'high' : 'low'}
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 100vw"
                       aria-hidden={i !== active}
-                      className={`absolute inset-0 w-full h-full object-cover transition-all sm:duration-[1500ms] duration-500 ease-in-out ${i === active ? 'opacity-100 scale-100' : 'opacity-0 sm:scale-110 scale-105'}`}
+                      className={`absolute inset-0 w-full h-full object-cover transition-all sm:duration-[1500ms] duration-500 ease-in-out ${
+                        i === active ? 'opacity-100 scale-100' : 'opacity-0 sm:scale-110 scale-105'
+                      }`}
                     />
                   ))}
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
@@ -241,10 +239,10 @@ export default function HomePage() {
                 <div className="p-6 sm:p-12 space-y-6 bg-gradient-to-br from-white via-blue-50/20 to-white">
                   {/* Мобильный вариант: текст + ДОНЕЦК ДНР, без линии */}
                   <div className="flex flex-col items-start sm:hidden">
-                    <h2 className="text-3xl font-black font-display text-blue-900 leading-tight tracking-tight">
+                    <h2 className="text-2xl font-black font-display text-blue-900 leading-tight tracking-tight">
                       СТУДИЯ КРАСОТЫ АУРА
                     </h2>
-                    <div className="mt-3 text-2xl font-display font-black bg-gradient-to-r from-slate-600 to-slate-800 bg-clip-text text-transparent">
+                    <div className="mt-2 text-xl font-display font-black bg-gradient-to-r from-slate-600 to-slate-800 bg-clip-text text-transparent">
                       ДОНЕЦК ДНР
                     </div>
                   </div>
@@ -264,7 +262,7 @@ export default function HomePage() {
 
                   {/* Ключевые преимущества */}
                   <div className="grid sm:grid-cols-3 gap-3 sm:gap-4 py-2">
-                    {[/* Изменение фона внутриних карточек ключевых преимуществ на градиент в фирменных цветах, похожий на левую часть блока «ПОДАРОЧНЫЙ СЕРТИФИКАТ», с белым текстом. */
+                    {[
                       { icon: Award, text: 'Основана в 2018', delay: '0ms' },
                       { icon: Shield, text: 'FDA, ЕС, РФ', delay: '100ms' },
                       { icon: Users, text: 'Два филиала', delay: '200ms' }
@@ -282,43 +280,50 @@ export default function HomePage() {
                     ))}
                   </div>
 
-                  <div className="space-y-5 text-slate-700 leading-relaxed">
-                    <p className="text-lg font-medium">Студия красоты «Аура» в Донецке предлагает вам уникальный опыт профессионального ухода за кожей и телом. Вас порадует широкий спектр косметологических процедур, направленных на подчеркивание вашей индивидуальной красоты и сохранение молодости.</p>
-                    <p>Мы предоставляем косметологические услуги по уходу за лицом и телом, аппаратной коррекции фигуры и лазерной эпиляции на аппаратах премиум класса. Благодаря персонализированному подходу и современным методам, наши услуги обеспечивают максимальную эффективность и безопасность.</p>
-                    <p>Все помещения в нашей студии соответствуют СанПиН. Мы применяем новейшие аппаратные методики. Наше оборудование сертифицировано в РФ, США (FDA), ЕС.</p>
-                    <p>Все сотрудники имеют медицинское образование. Наши специалисты сертифицированы и регулярно проходят переподготовку. Мы гарантируем строгое соблюдение норм стерильности, асептики и антисептики.</p>
+                  <div className="space-y-4 text-slate-700 leading-relaxed">
+                    <p className="text-base sm:text-lg font-medium">
+                      Студия красоты «Аура» в Донецке предлагает вам уникальный опыт профессионального ухода за кожей и телом. Вас порадует широкий спектр косметологических процедур, направленных на подчеркивание вашей индивидуальной красоты и сохранение молодости.
+                    </p>
+                    <p className="text-sm sm:text-base">
+                      Мы предоставляем косметологические услуги по уходу за лицом и телом, аппаратной коррекции фигуры и лазерной эпиляции на аппаратах премиум класса. Благодаря персонализированному подходу и современным методам, наши услуги обеспечивают максимальную эффективность и безопасность.
+                    </p>
+                    <p className="text-sm sm:text-base">
+                      Все помещения в нашей студии соответствуют СанПиН. Мы применяем новейшие аппаратные методики. Наше оборудование сертифицировано в РФ, США (FDA), ЕС.
+                    </p>
+                    <p className="text-sm sm:text-base">
+                      Все сотрудники имеют медицинское образование. Наши специалисты сертифицированы и регулярно проходят переподготовку. Мы гарантируем строгое соблюдение норм стерильности, асептики и антисептики.
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* БЛОК О РУКОВОДИТЕЛЕ - ОБНОВЛЕННЫЙ */}
+            {/* БЛОК О РУКОВОДИТЕЛЕ */}
             <div className="group relative">
               <div className="absolute -inset-2 bg-gradient-to-r from-blue-400 via-blue-300 to-blue-500 rounded-[2rem] opacity-30 group-hover:opacity-50 blur-2xl transition-all duration-1000" />
               <div className="relative bg-white rounded-3xl shadow-xl sm:shadow-2xl overflow-hidden border border-slate-200">
-
                 <div className="grid md:grid-cols-5 gap-0">
                   {/* Левая колонка с фото */}
                   <div className="md:col-span-2 relative">
-                    <div className="h-full min-h-[500px] md:min-h-[600px] relative overflow-hidden">
+                    <div className="h-full min-h-[420px] md:min-h-[600px] relative overflow-hidden">
                       <img
                         src="/svet.webp"
                         alt="Светлана Михайловна Химина"
                         className="absolute inset-0 w-full h-full object-cover"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
 
                       {/* Информация поверх фото */}
                       <div
                         ref={directorBlockRef}
-                        className="absolute bottom-0 left-0 right-0 p-8 text-white"
+                        className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white"
                       >
-                        <h3 className="text-3xl font-black mb-2 font-display">
+                        <h3 className="text-2xl md:text-3xl font-black mb-1 md:mb-2 font-display">
                           <span className="block">Светлана Михайловна</span>
                           <span className="block">Химина</span>
                         </h3>
 
-                        <p className="text-blue-200 font-semibold text-lg mb-4">
+                        <p className="text-blue-200 font-semibold text-base sm:text-lg mb-3 md:mb-4">
                           Руководитель студии красоты «Аура»
                         </p>
                         <a
@@ -335,41 +340,41 @@ export default function HomePage() {
                   </div>
 
                   {/* Правая колонка с текстом */}
-                  <div className="md:col-span-3 p-8 md:p-12 flex flex-col justify-center">
+                  <div className="md:col-span-3 p-6 md:p-12 flex flex-col justify-center">
                     {/* Иконка статуса */}
                     <div className="mb-6">
-                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-lg mb-6">
-                        <Award className="w-7 h-7 text-white" />
+                      <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-lg mb-5 md:mb-6">
+                        <Award className="w-6 h-6 md:w-7 md:h-7 text-white" />
                       </div>
-                      
+
                       {/* Основная цитата */}
                       <div className="relative mb-8">
                         <div className="absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-400 to-blue-600 rounded-full" />
-                        <p className="text-xl md:text-2xl font-medium text-slate-800 leading-relaxed pl-6 italic relative">
+                        <p className="text-base sm:text-lg md:text-2xl font-medium text-slate-800 leading-relaxed pl-6 italic relative">
                           Я горжусь тем, что на рынке современной косметологии есть такое качество услуг и высокий сервис, как в студии красоты «Аура».
                         </p>
                       </div>
-                      
-                      <p className="text-slate-600 leading-relaxed mb-4">
+
+                      <p className="text-sm sm:text-base text-slate-600 leading-relaxed mb-3 sm:mb-4">
                         Каждое наше достижение — это результат кропотливого труда и глубоких знаний, которые мы с гордостью применяем в своей практике. Мы уверены, что высокое качество услуг невозможно без передовых аппаратов и лучших препаратов, которые мы используем.
                       </p>
-                      <p className="text-slate-600 leading-relaxed">
+                      <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
                         Мы нацелены на то, чтобы удовлетворить потребности наших клиентов и превзойти их ожидания, создавая прочные отношения, основанные на доверии и взаимопонимании.
                       </p>
                     </div>
 
                     {/* Выделенное сообщение */}
-                    <div className="mt-8 p-6 rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100/50 border-l-4 border-blue-500">
-                      <p className="text-slate-800 font-semibold leading-relaxed">
+                    <div className="mt-6 md:mt-8 p-5 md:p-6 rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100/50 border-l-4 border-blue-500">
+                      <p className="text-sm sm:text-base text-slate-800 font-semibold leading-relaxed">
                         Благодарим вас за выбор нашей студии «Аура». Мы уверены, что вместе мы достигнем новых высот! Мы слышим ваши голоса, каждое мнение ценно для нас. Буду рада обратной связи в социальных сетях.
                       </p>
                     </div>
 
                     {/* Подпись */}
-                    <div className="mt-8 flex items-center gap-4">
-                      <div className="flex-1 h-px bg-gradient-to-r from-slate-300 to-transparent"></div>
+                    <div className="mt-6 md:mt-8 flex items-center gap-4">
+                      <div className="flex-1 h-px bg-gradient-to-r from-slate-300 to-transparent" />
                       <span className="text-slate-500 font-semibold italic">С. М. Химина</span>
-                      <div className="flex-1 h-px bg-gradient-to-l from-slate-300 to-transparent"></div>
+                      <div className="flex-1 h-px bg-gradient-to-l from-slate-300 to-transparent" />
                     </div>
                   </div>
                 </div>
@@ -461,11 +466,12 @@ export default function HomePage() {
         </section>
 
         {/* РАЗДЕЛЫ ДО ПОЧЕМУ МЫ */}
-        <AboutUsSection />
+        <SpecialsRow items={specialsItems} />
+        
         <ReviewsSection />
         <SpecialistsSection items={specialists} />
         <GiftCertificateSection onSubmit={() => setIsContactOpen(true)} />
-        <SpecialsRow items={specialsItems} />
+        <AboutUsSection />
 
         {/* ПОЧЕМУ МЫ */}
         <section className="mt-8 sm:mt-17">

@@ -10,7 +10,7 @@ export default function AboutPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header onBookClick={() => setIsBookingModalOpen(true)} />
+      <Header onBookClick={() => setIsBookingModalOpen(true)} variant="dark" />
 
       <About onBookClick={() => setIsBookingModalOpen(true)} />
 

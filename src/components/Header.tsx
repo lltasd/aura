@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Menu, X, Phone, Clock, Search, MessageCircle } from 'lucide-react'
+import { Menu, X, Phone, Clock, Search, MessageCircle, ChevronDown } from 'lucide-react'
 import { contactInfo } from '../data/services'
 import Logo from './Logo'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -18,6 +18,7 @@ export default function Header({ onBookClick, variant = 'default' }: HeaderProps
   const [showMobilePhones, setShowMobilePhones] = useState(false)
   const [showPromo, setShowPromo] = useState(false)
   const [showSearch, setShowSearch] = useState(false)
+  const [isProceduresSubmenuOpen, setIsProceduresSubmenuOpen] = useState(false)
   const navigate = useNavigate()
 
   // Helpers: sanitize phone for tel: links and build telegram URL if handle is available
@@ -51,7 +52,6 @@ export default function Header({ onBookClick, variant = 'default' }: HeaderProps
   const navItems: { label: string; href: string; isRoute: boolean; mobileOnly?: boolean }[] = [
     { label: 'ГЛАВНАЯ', href: '/', isRoute: true },
     { label: 'ВИДЫ ПРОЦЕДУР', href: '/procedures', isRoute: true },
-    { label: 'АППАРАТНАЯ КОСМЕТОЛОГИЯ', href: '/hardware-cosmetology', isRoute: true },
     { label: 'НАШИ СПЕЦИАЛИСТЫ', href: '/specialists', isRoute: true },
     { label: 'СПЕЦИАЛЬНЫЕ ПРЕДЛОЖЕНИЯ', href: '/specials', isRoute: true, mobileOnly: true },
     { label: 'О СТУДИИ', href: '/about', isRoute: true },
@@ -295,7 +295,60 @@ export default function Header({ onBookClick, variant = 'default' }: HeaderProps
               <ul className="flex flex-col gap-2 mb-8">
                 {navItems.map((item) => (
                   <li key={item.label} className="opacity-100">
-                    {item.isRoute ? (
+                    {item.label === 'ВИДЫ ПРОЦЕДУР' ? (
+                      <div className="relative">
+                        <button
+                          type="button"
+                          onClick={() => setIsProceduresSubmenuOpen((v) => !v)}
+                          className="w-full flex items-center justify-between text-left text-white hover:text-accent hover:bg-white/10 active:bg-white/20 transition-all duration-300 py-4 px-6 text-lg font-semibold rounded-xl border border-transparent hover:border-accent/30"
+                        >
+                          <span>{item.label}</span>
+                          <ChevronDown
+                            className={`w-5 h-5 transition-transform duration-300 ${isProceduresSubmenuOpen ? 'rotate-180' : ''}`}
+                          />
+                        </button>
+                        <AnimatePresence>
+                          {isProceduresSubmenuOpen && (
+                            <motion.div 
+                              className="mt-3 overflow-hidden"
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: 'auto', opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.3, ease: 'easeInOut' }}
+                            >
+                              <div className="ml-2 space-y-2">
+                                {['Косметология', 'Лазер', 'Аппаратная косметология'].map((subLabel, idx) => {
+                                  const to = subLabel === 'Аппаратная косметология' ? '/hardware-cosmetology' : '/procedures'
+                                  return (
+                                    <motion.div
+                                      key={subLabel}
+                                      initial={{ x: -20, opacity: 0 }}
+                                      animate={{ x: 0, opacity: 1 }}
+                                      transition={{ delay: idx * 0.1, duration: 0.3 }}
+                                    >
+                                      <Link
+                                        to={to}
+                                        onClick={(e) => {
+                                          handleNavClick(to, true, e)
+                                          setIsMobileMenuOpen(false)
+                                        }}
+                                        className="group relative block overflow-hidden text-sm text-white/90 hover:text-white bg-gradient-to-r from-white/5 to-transparent hover:from-accent/20 hover:to-accent/5 active:from-accent/30 active:to-accent/10 transition-all duration-300 py-3.5 px-5 rounded-lg border border-white/10 hover:border-accent/50 shadow-sm hover:shadow-md"
+                                      >
+                                        <div className="relative z-10 flex items-center justify-between">
+                                          <span className="font-medium">{subLabel}</span>
+                                          <ChevronDown className="w-4 h-4 -rotate-90 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                        </div>
+                                        <div className="absolute inset-0 bg-gradient-to-r from-accent/0 via-accent/10 to-accent/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                                      </Link>
+                                    </motion.div>
+                                  )
+                                })}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    ) : item.isRoute ? (
                       <Link
                         to={item.href}
                         onClick={(e) => {

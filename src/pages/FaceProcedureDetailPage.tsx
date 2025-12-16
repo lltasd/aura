@@ -14,7 +14,7 @@ export default function FaceProcedureDetailPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-slate-50/30 to-white">
-      <Header onBookClick={() => setIsBookingModalOpen(true)} />
+      <Header onBookClick={() => setIsBookingModalOpen(true)} variant="dark" />
 
       {/* HERO */}
       <section className="relative pt-36 md:pt-44 pb-12">

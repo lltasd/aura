@@ -98,7 +98,8 @@ export default function AboutUsSection() {
             {/* Правая часть - Текст */}
             <div className="p-8 sm:p-12 lg:p-16 flex items-center bg-white relative">
               
-              <div className="relative z-10 w-full">
+              <div className="relative z-10 w-full flex flex-col items-center">
+                
                 {/* Заголовок с декоративной линией */}
                 <div className="mb-10">
                   <div className="relative">
@@ -110,30 +111,33 @@ export default function AboutUsSection() {
                 </div>
 
                 {/* Текстовые блоки */}
-                <div className="space-y-6">
+                <div className="space-y-6 w-full max-w-xl mx-auto">
                   <div 
-                    className={`relative pl-6 border-l-4 border-blue-500/30 hover:border-blue-600/60 transition-all duration-300 hover:pl-8 transform ${isInView ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`}
+                    className={`relative transition-all duration-300 transform ${isInView ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`}
                     style={{ transitionDelay: '200ms' }}
                   >
                     <p className="text-slate-700 leading-relaxed text-base">
+
                       В студии красоты «Аура» мы объединяем современную косметологию и заботу о клиенте. Работаем с 2018 года, используем сертифицированное оборудование и методики, соответствующие РФ, ЕС и FDA.
                     </p>
                   </div>
 
                   <div 
-                    className={`relative pl-6 border-l-4 border-blue-500/30 hover:border-blue-600/60 transition-all duration-300 hover:pl-8 transform ${isInView ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`}
+                    className={`relative transition-all duration-300 transform ${isInView ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`}
                     style={{ transitionDelay: '400ms' }}
                   >
                     <p className="text-slate-700 leading-relaxed text-base">
+
                       Наша команда — специалисты с медицинским образованием, регулярно повышающие квалификацию. Мы придерживаемся строгих стандартов стерильности, асептики и антисептики.
                     </p>
                   </div>
 
                   <div 
-                    className={`relative pl-6 border-l-4 border-blue-500/30 hover:border-blue-600/60 transition-all duration-300 hover:pl-8 transform ${isInView ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`}
+                    className={`relative transition-all duration-300 transform ${isInView ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`}
                     style={{ transitionDelay: '600ms' }}
                   >
                     <p className="text-slate-700 leading-relaxed text-base">
+
                       Мы верим в индивидуальный подход: подбираем процедуры под ваши задачи и ожидаемые результаты, чтобы вы каждый день чувствовали уверенность и гармонию.
                     </p>
                   </div>
@@ -141,20 +145,21 @@ export default function AboutUsSection() {
 
                 {/* Декоративные элементы внизу текста */}
                 <div 
-                  className={`mt-12 flex items-center gap-8 transition-all duration-700 ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
+                  className={`mt-12 flex items-center justify-center gap-8 transition-all duration-700 ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
                   style={{ transitionDelay: '800ms' }}
                 >
-                  <div className="flex flex-col">
+                  <div className="flex flex-col items-center text-center">
                     <span className="text-4xl font-black bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
                       {yearValue.toLocaleString('ru-RU')}
                     </span>
                     <span className="text-sm text-slate-600 font-semibold mt-1">Год основания</span>
                   </div>
                   <div className="h-14 w-px bg-gradient-to-b from-transparent via-blue-300 to-transparent" />
-                  <div className="flex flex-col">
+                  <div className="flex flex-col items-center text-center">
                     <span className="text-4xl font-black bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
                       {clientsValue.toLocaleString('ru-RU')}+
                     </span>
+
                     <span className="text-sm text-slate-600 font-semibold mt-1">Довольных клиентов</span>
                   </div>
                 </div>

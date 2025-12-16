@@ -238,12 +238,13 @@ export default function ProceduresOverviewPage() {
         </div>
 
         {/* Filters */}
-        <div className="container mx-auto px-4 mb-8 md:mb-16">
+        <div className="container mx-auto px-4 mb-8 md:mb-16 relative z-40">
+
           <div
             className="mt-8 md:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto
                        bg-white/90 backdrop-blur-sm rounded-2xl p-4 shadow-md border border-slate-200
                        md:bg-transparent md:backdrop-blur-0 md:rounded-none md:p-0 md:shadow-none md:border-0
-                       sticky top-24 z-30 md:static"
+                       sticky top-24 z-40 md:static"
           >
 
             <div>

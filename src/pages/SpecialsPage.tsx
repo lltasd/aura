@@ -48,7 +48,7 @@ export default function SpecialsPage() {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-50">
       <Header onBookClick={() => {}} variant="dark" />
 
-      <main className="pt-28 sm:pt-32 pb-16">
+      <main className="pt-24 sm:pt-32 pb-14 md:pb-16">
         <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 min-h-screen flex items-center animate-fadeIn overflow-hidden -mt-32" style={{ animationDelay: '100ms', animationFillMode: 'forwards' }}>
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-slate-500/10 rounded-full blur-3xl"></div>
@@ -71,16 +71,16 @@ export default function SpecialsPage() {
 
             <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
               <div className="animate-fadeInUp" style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}>
-                <div className="inline-block mb-6 px-5 py-2 bg-blue-500/20 border border-blue-400/30 rounded-full backdrop-blur-sm">
-                  <span className="text-blue-300 text-sm font-bold uppercase tracking-wider">Лучшие акции месяца</span>
+                <div className="inline-block mb-4 sm:mb-6 px-4 py-2 bg-blue-500/20 border border-blue-400/30 rounded-full backdrop-blur-sm">
+                  <span className="text-blue-300 text-xs sm:text-sm font-bold uppercase tracking-wider">Лучшие акции месяца</span>
                 </div>
-                <h1 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tight text-white uppercase mb-6 sm:mb-8 leading-none md:text-balance md:hyphens-none md:break-keep">
+                <h1 className="text-3xl sm:text-5xl md:text-7xl font-black tracking-tight text-white uppercase mb-5 sm:mb-7 leading-none md:text-balance md:hyphens-none md:break-keep">
                   Специальные<br />предложения
                 </h1>
-                <p className="text-slate-300 text-base sm:text-2xl leading-relaxed mb-6 sm:mb-8 font-light md:text-pretty md:hyphens-none md:break-keep">
+                <p className="text-slate-300 text-base sm:text-xl leading-relaxed mb-5 sm:mb-7 font-light md:text-pretty md:hyphens-none md:break-keep">
                   Актуальные акции и выгодные комплексы для вашей красоты
                 </p>
-                <p className="text-slate-400 text-sm sm:text-lg leading-relaxed mb-8 sm:mb-10 md:text-pretty md:hyphens-none md:break-keep">
+                <p className="text-slate-400 text-sm sm:text-base leading-relaxed mb-7 sm:mb-9 md:text-pretty md:hyphens-none md:break-keep">
                   Выбирайте предложение и записывайтесь — количество мест ограничено.
                 </p>
                 <button onClick={() => window.scrollTo({ top: window.innerHeight + 80, behavior: 'smooth' })} className="group px-6 py-3 sm:px-8 sm:py-4 bg-white text-slate-900 font-bold uppercase tracking-wide rounded-lg hover:bg-blue-50 transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105">
