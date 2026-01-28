@@ -103,7 +103,7 @@ function WhyUsSection() {
               }`}
               style={{ transition: 'opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s' }}
             >
-              ПОЧЕМУ НАШИ КЛИЕНТЫ ВЫБИРАЮТ СТУДИЮ КРАСОТЫ «АУРА»?
+              ПОЧЕМУ ВЫБИРАЮТ СТУДИЮ КРАСОТЫ «АУРА»?
             </h2>
             
             {/* Декоративная линия с анимацией удлинения */}
@@ -329,7 +329,7 @@ export default function HomePage() {
                   <div className="space-y-3 sm:space-y-4">
                     {/* Мобильная версия */}
                     <div className="sm:hidden">
-                      <h2 className="text-2xl font-black font-display text-[#1E40AF] leading-tight tracking-tight">
+                      <h2 className="text-2xl font-black font-display text-blue-900 leading-tight tracking-tight">
                         СТУДИЯ КРАСОТЫ АУРА
                       </h2>
                       <div className="mt-2 inline-flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-slate-100 to-slate-50 rounded-lg border border-slate-200">
@@ -340,7 +340,7 @@ export default function HomePage() {
 
                     {/* Десктопная версия */}
                     <div className="hidden sm:block text-center">
-                      <h2 className="text-3xl md:text-4xl lg:text-5xl font-black font-display text-[#1E40AF] leading-tight tracking-tight">
+                      <h2 className="text-3xl md:text-4xl lg:text-5xl font-black font-display text-blue-900 leading-tight tracking-tight">
                         СТУДИЯ КРАСОТЫ АУРА
                       </h2>
 
