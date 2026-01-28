@@ -19,7 +19,6 @@ export default function PricingPage() {
       <Hero onBookClick={() => setIsBookingModalOpen(true)} />
               <DiscountPackages />
       <Services />
-
       <BodyContouring />
       <Pricing />
       <Booking onBookClick={() => setIsBookingModalOpen(true)} />

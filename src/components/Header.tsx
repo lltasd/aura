@@ -317,8 +317,18 @@ export default function Header({ onBookClick, variant = 'default' }: HeaderProps
                               transition={{ duration: 0.3, ease: 'easeInOut' }}
                             >
                               <div className="ml-2 space-y-2">
-                                {['Косметология', 'Лазер', 'Аппаратная косметология'].map((subLabel, idx) => {
-                                  const to = subLabel === 'Аппаратная косметология' ? '/hardware-cosmetology' : '/procedures'
+                                {['Косметология', 'Лазерная эпиляция', 'Аппаратная коррекция фигуры', 'Аппаратная косметология', 'Инъекционные процедуры', 'Нитевой лифтинг'].map((subLabel, idx) => {
+                                  const to = subLabel === 'Аппаратная косметология'
+                                    ? '/hardware-cosmetology'
+                                    : subLabel === 'Лазерная эпиляция'
+                                      ? '/laser'
+                                      : subLabel === 'Аппаратная коррекция фигуры'
+                                        ? '/body-correction'
+                                        : subLabel === 'Инъекционные процедуры'
+                                          ? '/injection'
+                                          : subLabel === 'Нитевой лифтинг'
+                                            ? '/thread-lifting'
+                                        : '/cosmetology'
                                   return (
                                     <motion.div
                                       key={subLabel}

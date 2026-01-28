@@ -46,73 +46,154 @@ function WhyUsSection() {
   }, [])
 
   return (
-    <div ref={sectionRef} className="px-4 sm:px-0">
+    <div ref={sectionRef} className="px-4 py-6 sm:px-6 md:px-8 lg:px-0 lg:py-8">
       <div 
-        className={`group relative rounded-2xl sm:rounded-[2rem] overflow-hidden shadow-xl sm:shadow-2xl hover:shadow-blue-500/10 hover:shadow-3xl transition-all duration-700 border border-blue-100/50 bg-gradient-to-br from-white via-blue-50/20 to-slate-50/30 backdrop-blur-xl p-6 sm:p-8 md:p-12 transform ${
-          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
-        }`}
+        className={`group relative overflow-hidden 
+          rounded-xl sm:rounded-2xl lg:rounded-[2rem]
+          shadow-lg sm:shadow-xl lg:shadow-2xl
+          border border-[#BFDBFE]/60 sm:border-[#DBEAFE]/60
+          bg-white sm:bg-gradient-to-br sm:from-white sm:via-[#EFF6FF]/40 sm:to-slate-50/50
+          p-6 sm:p-8 md:p-10 lg:p-12
+          transition-all duration-700
+          hover:shadow-xl sm:hover:shadow-2xl lg:hover:shadow-[#1E40AF]/10
+          transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'}`}
         style={{ transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)' }}
       >
-        {/* Animated background orbs - скрыты на мобильных */}
-        <div className="hidden md:block absolute -top-20 -right-20 w-[30rem] h-[30rem] bg-gradient-to-br from-blue-400/15 to-blue-600/10 rounded-full blur-3xl animate-pulse" />
-        <div className="hidden md:block absolute -bottom-20 -left-20 w-[28rem] h-[28rem] bg-gradient-to-tr from-slate-400/10 to-blue-400/10 rounded-full blur-3xl group-hover:from-blue-400/15 group-hover:to-blue-500/15 transition-all duration-1000" />
+        {/* Фоновые элементы - ТОЛЬКО на планшетах и выше */}
+        <div className="hidden sm:block absolute -top-24 -right-24 w-80 h-80 lg:w-[30rem] lg:h-[30rem] 
+          bg-gradient-to-br from-[#2563EB]/12 via-[#1E40AF]/8 to-transparent 
+          rounded-full blur-3xl opacity-70" 
+        />
+        <div className="hidden sm:block absolute -bottom-16 -left-16 w-72 h-72 lg:w-[28rem] lg:h-[28rem] 
+          bg-gradient-to-tr from-slate-300/15 via-[#BFDBFE]/15 to-transparent 
+          rounded-full blur-3xl opacity-60
+          group-hover:from-[#2563EB]/20 group-hover:via-[#1E40AF]/15 
+          transition-all duration-1000" 
+        />
         
-        {/* Упрощенный фон для мобильных */}
-        <div className="md:hidden absolute top-0 right-0 w-48 h-48 bg-blue-400/10 rounded-full blur-2xl" />
-        <div className="md:hidden absolute bottom-0 left-0 w-40 h-40 bg-slate-400/10 rounded-full blur-2xl" />
+        {/* Золотой акцент - только десктоп */}
+        <div className="hidden lg:block absolute top-0 right-0 w-32 h-32 
+          bg-gradient-to-bl from-amber-400/5 to-transparent rounded-bl-full" 
+        />
         
-        {/* Sparkle effect on hover */}
-        <div className="absolute inset-0 bg-gradient-to-t from-blue-100/30 via-transparent to-blue-50/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+        {/* Hover эффект - только на больших экранах */}
+        <div className="hidden sm:block absolute inset-0 
+          bg-gradient-to-t from-[#DBEAFE]/20 via-transparent to-[#EFF6FF]/10 
+          opacity-0 group-hover:opacity-100 transition-opacity duration-700" 
+        />
         
-        {/* Subtle grid pattern - только на десктопе */}
-        <div className="hidden sm:block absolute inset-0 opacity-[0.02]" style={{backgroundImage: 'radial-gradient(circle, #1e40af 1px, transparent 1px)', backgroundSize: '24px 24px'}} />
+        {/* Сетка - только десктоп */}
+        <div className="hidden lg:block absolute inset-0 opacity-[0.015]" 
+          style={{
+            backgroundImage: 'radial-gradient(circle, #1E40AF 1px, transparent 1px)', 
+            backgroundSize: '28px 28px'
+          }} 
+        />
         
-        <div className="relative">
-          <div 
-            className={`inline-block mb-6 sm:mb-8 transform ${
-              isVisible ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'
-            }`}
-            style={{ transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s' }}
-          >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black font-display text-blue-900 leading-tight tracking-tight drop-shadow-sm">
+        <div className="relative z-10">
+          {/* Заголовок */}
+          <div className="mb-6 sm:mb-7 lg:mb-8">
+            <h2
+              className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 
+              font-extrabold sm:font-black font-display 
+              text-[#1E40AF] 
+              leading-snug sm:leading-tight sm:tracking-tight 
+              mb-4 transition-all duration-700 ${
+                isVisible ? 'opacity-100' : 'opacity-0'
+              }`}
+              style={{ transition: 'opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s' }}
+            >
               ПОЧЕМУ НАШИ КЛИЕНТЫ ВЫБИРАЮТ СТУДИЮ КРАСОТЫ «АУРА»?
             </h2>
-            <div className="h-1 sm:h-1.5 w-20 sm:w-32 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full mt-3 sm:mt-4 group-hover:w-32 sm:group-hover:w-48 transition-all duration-500" />
+            
+            {/* Декоративная линия с анимацией удлинения */}
+            <div className="flex items-center gap-2 overflow-hidden">
+              <div
+                className={`h-1 sm:h-1.5 
+                  bg-gradient-to-r from-[#2563EB] via-[#1E40AF] to-[#1D4ED8] 
+                  rounded-full shadow-md shadow-[#2563EB]/20
+                  transition-all duration-1000 ease-out
+                  ${isVisible ? 'w-32 sm:w-40 lg:w-48' : 'w-0'}
+                  group-hover:w-40 sm:group-hover:w-52 lg:group-hover:w-64`}
+                style={{
+                  transition: 'width 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.4s'
+                }}
+              />
+              <div
+                className={`hidden sm:block h-1 bg-gradient-to-r from-amber-400/50 to-transparent rounded-full
+                  transition-all duration-1000 ease-out
+                  ${isVisible ? 'w-8 lg:w-12 opacity-100' : 'w-0 opacity-0'}`}
+                style={{
+                  transition: 'width 1s cubic-bezier(0.4, 0, 0.2, 1) 0.8s, opacity 0.6s ease-out 0.8s'
+                }}
+              />
+            </div>
           </div>
           
-          <div className="space-y-4 sm:space-y-6 text-slate-700 leading-relaxed text-base sm:text-lg">
-            <p 
-              className={`hover:text-slate-900 transition-all duration-300 pl-3 sm:pl-5 border-l-2 sm:border-l-4 border-blue-400/30 hover:border-blue-600/80 sm:hover:pl-6 hover:scale-[1.01] transform origin-left ${
-                isVisible ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'
-              }`}
-              style={{ transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s' }}
-            >
-              Каждый клиент для нас ценен, поэтому мы разрабатываем индивидуальные программы ухода в зависимости от ваших пожеланий и потребностей. Наши квалифицированные специалисты проведут консультацию и подбор оптимальных процедур для достижения желаемых результатов.
-            </p>
-            <p 
-              className={`hover:text-slate-900 transition-all duration-300 pl-3 sm:pl-5 border-l-2 sm:border-l-4 border-blue-400/30 hover:border-blue-600/80 sm:hover:pl-6 hover:scale-[1.01] transform origin-left ${
-                isVisible ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'
-              }`}
-              style={{ transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s' }}
-            >
-              Студия красоты «Аура» в Донецке сочетает профессионализм, комфорт и современные технологии. Все наши специалисты - врачи с высшим медицинским образованием, которые регулярно проходят дополнительное обучение на курсах повышения квалификации и изучают самые передовые технологии.
-            </p>
-            <p 
-              className={`hover:text-slate-900 transition-all duration-300 pl-3 sm:pl-5 border-l-2 sm:border-l-4 border-blue-400/30 hover:border-blue-600/80 sm:hover:pl-6 hover:scale-[1.01] transform origin-left ${
-                isVisible ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'
-              }`}
-              style={{ transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.5s' }}
-            >
-              Мы используем самое современное оборудование для косметологии, которое на сегодня в Донецке есть только у нас. Используем только проверенные материалы, чтобы каждая процедура была безопасной и максимально эффективной.
-            </p>
-            <p 
-              className={`hover:text-slate-900 transition-all duration-300 pl-3 sm:pl-5 border-l-2 sm:border-l-4 border-blue-400/30 hover:border-blue-600/80 sm:hover:pl-6 hover:scale-[1.01] transform origin-left ${
-                isVisible ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'
-              }`}
-              style={{ transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.6s' }}
-            >
-              Здесь вы сможете не только ухаживать за своей внешностью, но и расслабиться в уютной атмосфере. Доверьте свою красоту специалистам студии «Аура». Мы поможем вам выглядеть великолепно каждый день!
-            </p>
+          {/* Текстовые блоки */}
+          <div className="space-y-5 sm:space-y-5 lg:space-y-6">
+            {[
+              {
+                text: 'Каждый клиент для нас ценен, поэтому мы разрабатываем индивидуальные программы ухода в зависимости от ваших пожеланий и потребностей. Наши квалифицированные специалисты проведут консультацию и подбор оптимальных процедур для достижения желаемых результатов.',
+                delay: '0.5s'
+              },
+              {
+                text: 'Студия красоты «Аура» в Донецке сочетает профессионализм, комфорт и современные технологии. Все наши специалисты - врачи с высшим медицинским образованием, которые регулярно проходят дополнительное обучение на курсах повышения квалификации и изучают самые передовые технологии.',
+                delay: '0.7s'
+              },
+              {
+                text: 'Мы используем самое современное оборудование для косметологии, которое на сегодня в Донецке есть только у нас. Используем только проверенные материалы, чтобы каждая процедура была безопасной и максимально эффективной.',
+                delay: '0.9s'
+              },
+              {
+                text: 'Здесь вы сможете не только ухаживать за своей внешностью, но и расслабиться в уютной атмосфере. Доверьте свою красоту специалистам студии «Аура». Мы поможем вам выглядеть великолепно каждый день!',
+                delay: '1.1s'
+              }
+            ].map((item, index) => (
+              <div
+                key={index}
+                className={`relative
+                  pl-4 sm:pl-5 lg:pl-6
+                  border-l-[3px] sm:border-l-[3px] lg:border-l-4
+                  transition-all duration-700
+                  ${
+                    isVisible
+                      ? 'border-[#2563EB]/60 opacity-100 translate-x-0'
+                      : 'border-[#2563EB]/0 opacity-0 translate-x-4'
+                  }
+                  sm:hover:border-[#2563EB]/90
+                  sm:hover:pl-6 lg:hover:pl-8
+                  sm:transform sm:hover:scale-[1.01] sm:origin-left`}
+                style={{
+                  transition: `all 0.7s cubic-bezier(0.4, 0, 0.2, 1) ${item.delay}`
+                }}
+              >
+                {/* Золотой акцент при ховере - только десктоп */}
+                <div className="hidden lg:block absolute left-0 top-0 bottom-0 w-0.5 
+                  bg-gradient-to-b from-amber-400/0 via-amber-400/40 to-amber-400/0 
+                  opacity-0 group-hover:opacity-100 transition-opacity duration-500" 
+                />
+                
+                <p className="text-[15px] sm:text-base lg:text-lg 
+                  text-slate-700 
+                  sm:hover:text-[#1E40AF]
+                  leading-relaxed
+                  transition-colors duration-300">
+                  {item.text}
+                </p>
+              </div>
+            ))}
+          </div>
+          
+          {/* Декоративный элемент - только десктоп */}
+          <div className="hidden lg:flex items-center gap-3 mt-8 pt-6 border-t border-[#DBEAFE]/30">
+            <div className="h-2 w-2 rounded-full bg-[#2563EB]/60 animate-pulse" />
+            <div
+              className={`h-1 bg-gradient-to-r from-[#BFDBFE]/30 via-[#2563EB]/10 to-transparent rounded-full
+              transition-all duration-1000 ${isVisible ? 'flex-1' : 'w-0'}`}
+              style={{ transition: 'width 1s cubic-bezier(0.4, 0, 0.2, 1) 1.3s' }}
+            />
+            <div className="h-1.5 w-1.5 rounded-full bg-amber-400/40" />
           </div>
         </div>
       </div>
@@ -124,7 +205,7 @@ export default function HomePage() {
   const images = ['/slider5.png', '/slider1.png', '/slider2.png']
   const [active, setActive] = useState(0)
   const [isContactOpen, setIsContactOpen] = useState(false)
-  const [showPromo, setShowPromo] = useState(false)
+  const [showPromo, setShowPromo] = useState(false) 
 
   const specialsItems = Array.from(
     new Map(

@@ -1,6 +1,12 @@
 import { useState, useEffect, useRef } from 'react'
-import { Sparkles, Clock, Zap, X, Mail, User, MessageSquare, Send, Activity, Droplets, Wind, Radio, Waves } from 'lucide-react'
-import { bodyContouringServices } from '../data/services'
+import { Sparkles, Clock, Zap, X, Mail, User, MessageSquare, Send, Activity, Droplets, Wind, Radio, Waves, ChevronRight, ChevronLeft, Syringe } from 'lucide-react'
+import {
+  bodyContouringServices,
+  cosmetologyServices,
+  injectionServices,
+  hardwareCosmetologyServices,
+  threadLiftingServices,
+} from '../data/services'
 import type { ServiceItem } from '../data/services'
 
 interface ContactModalProps {
@@ -211,13 +217,37 @@ const categoryIcons: Record<string, JSX.Element> = {
 }
 
 export default function BodyContouring() {
+  type Mode = 'body' | 'cosmetology' | 'injections' | 'thread' | 'hardware'
+
+  const [activeMode, setActiveMode] = useState<Mode>('body')
   const [activeCategory, setActiveCategory] = useState<keyof typeof bodyContouringServices>(
     'subdermalMassage'
   )
+  const [activeCosmoCategory, setActiveCosmoCategory] = useState(0)
+  const [activeInjectionCategory, setActiveInjectionCategory] = useState(0)
+  const hardwareKeys = Object.keys(hardwareCosmetologyServices) as Array<
+    keyof typeof hardwareCosmetologyServices
+  >
+  const [activeHardwareKey, setActiveHardwareKey] = useState<
+    keyof typeof hardwareCosmetologyServices
+  >(hardwareKeys[0])
   const [isVisible, setIsVisible] = useState(false)
   const [showAll, setShowAll] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const sectionRef = useRef<HTMLDivElement>(null)
+
+  const threadItems = threadLiftingServices.items as ServiceItem[]
+
+  const hardwareTitles: Record<keyof typeof hardwareCosmetologyServices, string> = {
+    rfMicroneedling: 'Микроигольчатый RF-лифтинг',
+    smasLifting: 'SMAS-лифтинг',
+    ledTherapy: 'LED-терапия',
+    vascularFace: 'Лазерное удаление сосудов на лице',
+    vascularBody: 'Лазерное удаление сосудов на теле',
+    pigmentation: 'Удаление пигментации',
+    permanentRemoval: 'Лазерное удаление перманента',
+    tattooRemoval: 'Лазерное удаление татуировок',
+  }
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -281,15 +311,56 @@ export default function BodyContouring() {
   const displayedServices = showAll ? currentServices : currentServices.slice(0, 4)
   const hasMoreServices = currentServices.length > 4
 
+  const modeConfigs: Record<Mode, { title: string; subtitle: string }> = {
+    body: {
+      title: 'Аппаратная коррекция фигуры',
+      subtitle: 'Современные технологии для коррекции фигуры и улучшения состояния кожи',
+    },
+    cosmetology: {
+      title: 'Косметология',
+      subtitle: 'Уходовые программы, пилинги и липолитики для лица и тела',
+    },
+    injections: {
+      title: 'Инъекционные процедуры',
+      subtitle: 'Современные методы омоложения и коррекции внешности',
+    },
+    thread: {
+      title: 'Нитевой лифтинг',
+      subtitle: 'Лифтинг-эффект и укрепление тканей с помощью современных нитевых техник',
+    },
+    hardware: {
+      title: 'Аппаратная косметология',
+      subtitle: 'Инновационные аппаратные методики для омоложения и коррекции',
+    },
+  }
+
+  const cycleMode = () => {
+    setShowAll(false)
+    if (activeMode === 'body') setActiveMode('cosmetology')
+    else if (activeMode === 'cosmetology') setActiveMode('injections')
+    else if (activeMode === 'injections') setActiveMode('thread')
+    else if (activeMode === 'thread') setActiveMode('hardware')
+    else setActiveMode('body')
+  }
+
+  const cycleModeBack = () => {
+    setShowAll(false)
+    if (activeMode === 'body') setActiveMode('hardware')
+    else if (activeMode === 'hardware') setActiveMode('thread')
+    else if (activeMode === 'thread') setActiveMode('injections')
+    else if (activeMode === 'injections') setActiveMode('cosmetology')
+    else setActiveMode('body')
+  }
+
   return (
-    <section 
-      id="body-contouring" 
+    <section
+      id="body-contouring"
       className="py-20 bg-gradient-to-b from-white via-gray-50 to-white scroll-mt-28"
       ref={sectionRef}
     >
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div 
+        <div
           className={`text-center mb-16 transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
           }`}
@@ -300,163 +371,474 @@ export default function BodyContouring() {
               Премиум процедуры
             </span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
-            Аппаратная коррекция фигуры
-          </h2>
-          <p className="text-xl text-gray-700 max-w-3xl mx-auto font-medium">
-            Современные технологии для коррекции фигуры и улучшения состояния кожи
+          <div className="relative mb-6 max-w-4xl mx-auto">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary text-center px-16 md:px-24">
+              {modeConfigs[activeMode].title}
+            </h2>
+            <div className="absolute inset-y-0 left-0 flex items-center justify-start pl-0">
+              <button
+                type="button"
+                onClick={cycleModeBack}
+                className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-primary/30 text-primary hover:bg-primary hover:text-white transition-colors"
+                aria-label="Переключить раздел назад"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="absolute inset-y-0 right-0 flex items-center justify-end pr-0">
+              <button
+                type="button"
+                onClick={cycleMode}
+                className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-primary/30 text-primary hover:bg-primary hover:text-white transition-colors"
+                aria-label="Переключить раздел"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+          <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto font-medium">
+            {modeConfigs[activeMode].subtitle}
           </p>
         </div>
 
-        {/* Category tabs with improved design */}
-        <div 
-          className={`flex flex-wrap justify-center gap-3 mb-12 transition-all duration-700 delay-100 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-          }`}
-        >
-          {Object.entries(categories).map(([key, label]) => (
-            <button
-              key={key}
-              onClick={() => {
-                setActiveCategory(key as keyof typeof bodyContouringServices)
-                setShowAll(false)
-              }}
-              className={`group inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 border ${
-                activeCategory === key
-                  ? 'bg-primary text-white border-primary shadow-lg shadow-primary/30 scale-105'
-                  : 'bg-white text-gray-700 border-gray-200 hover:border-primary/40 hover:bg-primary/5 hover:text-primary'
+        {/* Content */}
+        {activeMode === 'body' ? (
+          <>
+            {/* Category tabs with improved design */}
+            <div
+              className={`flex flex-wrap justify-center gap-3 mb-12 transition-all duration-700 delay-100 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
               }`}
             >
-              <span className={`inline-flex items-center justify-center w-7 h-7 rounded-lg ${
-                activeCategory === key ? 'bg-white/20 text-white' : 'bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white'
-              }`}>
-                {categoryIcons[key as keyof typeof categoryIcons]}
-              </span>
-              <span>{label}</span>
-            </button>
-          ))}
-        </div>
-
-        {/* Services cards with modern design */}
-        <div 
-          className={`max-w-5xl mx-auto transition-all duration-700 delay-200 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-          }`}
-        >
-          <div className="grid gap-4">
-            {displayedServices.map((service: ServiceItem, index: number) => (
-              <div
-                key={index}
-                className="bg-white/90 backdrop-blur rounded-2xl shadow-md hover:shadow-xl border border-gray-100 hover:border-primary/30 transition-all duration-300 overflow-hidden group animate-fade-in"
-                style={{ animationDelay: `${index * 50}ms` }}
-              >
-                <div className="p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                  {/* Left side - Service info */}
-                  <div className="flex-1">
-                    <div className="flex items-start gap-3 mb-3">
-                      <div className="bg-primary/10 p-2 rounded-xl group-hover:bg-primary group-hover:scale-110 transition-all">
-                        <div className="text-primary group-hover:text-white transition-colors">
-                          {categoryIcons[activeCategory]}
-                        </div>
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-bold text-gray-900 group-hover:text-primary transition-colors">
-                          {service.zone}
-                        </h3>
-                        <div className="flex items-center gap-2 mt-1 text-gray-600">
-                          <Clock className="w-4 h-4" />
-                          <span className="text-sm font-medium">{service.duration}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Right side - Price */}
-                  <div className="flex items-center gap-4">
-                    <div className="text-right">
-                      <div className="flex items-baseline gap-1 justify-end">
-                        <span className="text-3xl font-extrabold text-primary group-hover:scale-110 transition-transform inline-block">
-                          {service.price}
-                        </span>
-                        <span className="text-gray-500 font-medium">₽</span>
-                      </div>
-                      <div className="flex items-center gap-1 text-xs text-gray-500 mt-1 justify-end">
-                        <Zap className="w-3 h-3" />
-                        <span>за процедуру</span>
-                      </div>
-                    </div>
-                    <button className="hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all">
-                      <svg
-                        className="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Show All Button */}
-          {hasMoreServices && (
-            <div className="mt-8 text-center">
-              <button
-                onClick={() => setShowAll(!showAll)}
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white/90 backdrop-blur text-primary font-bold rounded-2xl border border-primary/30 hover:bg-primary hover:text-white transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 group"
-              >
-                <span>{showAll ? 'Скрыть' : `Показать все (${currentServices.length})`}</span>
-                <svg
-                  className={`w-5 h-5 transition-transform duration-300 ${showAll ? 'rotate-180' : ''}`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+              {Object.entries(categories).map(([key, label]) => (
+                <button
+                  key={key}
+                  onClick={() => {
+                    setActiveCategory(key as keyof typeof bodyContouringServices)
+                    setShowAll(false)
+                  }}
+                  className={`group inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 border ${
+                    activeCategory === key
+                      ? 'bg-primary text-white border-primary shadow-lg shadow-primary/30 scale-105'
+                      : 'bg-white text-gray-700 border-gray-200 hover:border-primary/40 hover:bg-primary/5 hover:text-primary'
+                  }`}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </button>
+                  <span
+                    className={`inline-flex items-center justify-center w-7 h-7 rounded-lg ${
+                      activeCategory === key
+                        ? 'bg-white/20 text-white'
+                        : 'bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white'
+                    }`}
+                  >
+                    {categoryIcons[key as keyof typeof categoryIcons]}
+                  </span>
+                  <span>{label}</span>
+                </button>
+              ))}
             </div>
-          )}
 
-          {/* Bottom info card */}
-          <div className="mt-10 bg-gradient-to-r from-primary/5 to-primary/10 rounded-2xl p-6 border border-primary/20 shadow-md">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-              <div className="flex items-start gap-3">
-                <div className="bg-primary p-2.5 rounded-xl shadow-sm">
-                  <Sparkles className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-gray-900 mb-1">Не нашли нужную процедуру?</h4>
-                  <p className="text-sm text-gray-600">
-                    Запишитесь на бесплатную консультацию — подберём программу под ваши цели
-                  </p>
-                </div>
+            {/* Services cards with modern design */}
+            <div
+              className={`max-w-5xl mx-auto transition-all duration-700 delay-200 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
+            >
+              <div className="grid gap-4">
+                {displayedServices.map((service: ServiceItem, index: number) => (
+                  <div
+                    key={index}
+                    className="bg-white/90 backdrop-blur rounded-2xl shadow-md hover:shadow-xl border border-gray-100 hover:border-primary/30 transition-all duration-300 overflow-hidden group animate-fade-in"
+                    style={{ animationDelay: `${index * 50}ms` }}
+                  >
+                    <div className="p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                      {/* Left side - Service info */}
+                      <div className="flex-1">
+                        <div className="flex items-start gap-3 mb-3">
+                          <div className="bg-primary/10 p-2 rounded-xl group-hover:bg-primary group-hover:scale-110 transition-all">
+                            <div className="text-primary group-hover:text-white transition-colors">
+                              {categoryIcons[activeCategory]}
+                            </div>
+                          </div>
+                          <div>
+                            <h3 className="text-lg font-bold text-gray-900 group-hover:text-primary transition-colors">
+                              {service.zone}
+                            </h3>
+                            <div className="flex items-center gap-2 mt-1 text-gray-600">
+                              <Clock className="w-4 h-4" />
+                              <span className="text-sm font-medium">{service.duration}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Right side - Price */}
+                      <div className="flex items-center gap-4">
+                        <div className="text-right">
+                          <div className="flex items-baseline gap-1 justify-end">
+                            <span className="text-3xl font-extrabold text-primary group-hover:scale-110 transition-transform inline-block">
+                              {service.price}
+                            </span>
+                            <span className="text-gray-500 font-medium">₽</span>
+                          </div>
+                          <div className="flex items-center gap-1 text-xs text-gray-500 mt-1 justify-end">
+                            <Zap className="w-3 h-3" />
+                            <span>за процедуру</span>
+                          </div>
+                        </div>
+                        <button className="hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all">
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <button 
-                onClick={() => setIsModalOpen(true)}
-                className="px-6 py-3 bg-primary text-white font-semibold rounded-xl hover:bg-primary-dark transition-colors shadow-lg shadow-primary/30 whitespace-nowrap"
-              >
-                Получить консультацию
-              </button>
+
+              {/* Show All Button */}
+              {hasMoreServices && (
+                <div className="mt-8 text-center">
+                  <button
+                    onClick={() => setShowAll(!showAll)}
+                    className="inline-flex items-center gap-2 px-8 py-4 bg-white/90 backdrop-blur text-primary font-bold rounded-2xl border border-primary/30 hover:bg-primary hover:text-white transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 group"
+                  >
+                    <span>{showAll ? 'Скрыть' : `Показать все (${currentServices.length})`}</span>
+                    <svg
+                      className={`w-5 h-5 transition-transform duration-300 ${showAll ? 'rotate-180' : ''}`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                </div>
+              )}
+            </div>
+          </>
+        ) : activeMode === 'cosmetology' ? (
+          <>
+            {/* Табы разделов косметологии */}
+            <div
+              className={`flex flex-wrap justify-center gap-3 mb-12 transition-all duration-700 delay-100 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
+            >
+              {cosmetologyServices.map((category, idx) => (
+                <button
+                  key={category.title}
+                  onClick={() => {
+                    setActiveCosmoCategory(idx)
+                    setShowAll(false)
+                  }}
+                  className={`group inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 border ${
+                    activeCosmoCategory === idx
+                      ? 'bg-primary text-white border-primary shadow-lg shadow-primary/30 scale-105'
+                      : 'bg-white text-gray-700 border-gray-200 hover:border-primary/40 hover:bg-primary/5 hover:text-primary'
+                  }`}
+                >
+                  <span className="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white">
+                    <Sparkles className="w-4 h-4" />
+                  </span>
+                  <span>{category.title}</span>
+                </button>
+              ))}
+            </div>
+
+            {/* Карточки услуг косметологии */}
+            <div
+              className={`max-w-5xl mx-auto transition-all duration-700 delay-200 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
+            >
+              <div className="grid gap-4">
+                {cosmetologyServices[activeCosmoCategory].items.map((item, index) => (
+                  <div
+                    key={`${item.name}-${index}`}
+                    className="bg-white/90 backdrop-blur rounded-2xl shadow-md hover:shadow-xl border border-gray-100 hover:border-primary/30 transition-all duration-300 overflow-hidden group animate-fade-in"
+                    style={{ animationDelay: `${index * 50}ms` }}
+                  >
+                    <div className="p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                      <div className="flex-1">
+                        <div className="flex items-start gap-3 mb-1">
+                          <div className="bg-primary/10 p-2 rounded-xl group-hover:bg-primary group-hover:scale-110 transition-all">
+                            <div className="text-primary group-hover:text-white transition-colors">
+                              <Sparkles className="w-4 h-4" />
+                            </div>
+                          </div>
+                          <h3 className="text-lg font-bold text-gray-900 group-hover:text-primary transition-colors">
+                            {item.name}
+                          </h3>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <div className="text-right">
+                          <div className="flex items-baseline gap-1 justify-end">
+                            <span className="text-3xl font-extrabold text-primary group-hover:scale-110 transition-transform inline-block">
+                              {item.from && (
+                                <span className="text-xs text-gray-500 mr-1 align-middle">от</span>
+                              )}
+                              {item.price}
+                            </span>
+                            <span className="text-gray-500 font-medium">₽</span>
+                          </div>
+                        </div>
+                        <button className="hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all">
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </>
+        ) : activeMode === 'injections' ? (
+          <>
+            {/* Табы разделов инъекций */}
+            <div
+              className={`flex flex-wrap justify-center gap-3 mb-12 transition-all duration-700 delay-100 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
+            >
+              {injectionServices.map((category, idx) => (
+                <button
+                  key={category.title}
+                  onClick={() => {
+                    setActiveInjectionCategory(idx)
+                    setShowAll(false)
+                  }}
+                  className={`group inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 border ${
+                    activeInjectionCategory === idx
+                      ? 'bg-primary text-white border-primary shadow-lg shadow-primary/30 scale-105'
+                      : 'bg-white text-gray-700 border-gray-200 hover:border-primary/40 hover:bg-primary/5 hover:text-primary'
+                  }`}
+                >
+                  <span className="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white">
+                    <Sparkles className="w-4 h-4" />
+                  </span>
+                  <span>{category.title}</span>
+                </button>
+              ))}
+            </div>
+
+            {/* Карточки услуг инъекций */}
+            <div
+              className={`max-w-5xl mx-auto transition-all duration-700 delay-200 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
+            >
+              <div className="grid gap-4">
+                {injectionServices[activeInjectionCategory].items.map((item, index) => (
+                  <div
+                    key={`${item.name}-${index}`}
+                    className="bg-white/90 backdrop-blur rounded-2xl shadow-md hover:shadow-xl border border-gray-100 hover:border-primary/30 transition-all duration-300 overflow-hidden group animate-fade-in"
+                    style={{ animationDelay: `${index * 50}ms` }}
+                  >
+                    <div className="p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                      <div className="flex-1">
+                        <div className="flex items-start gap-3 mb-1">
+                          <div className="bg-primary/10 p-2 rounded-xl group-hover:bg-primary group-hover:scale-110 transition-all">
+                            <div className="text-primary group-hover:text-white transition-colors">
+                              <Sparkles className="w-4 h-4" />
+                            </div>
+                          </div>
+                          <h3 className="text-lg font-bold text-gray-900 group-hover:text-primary transition-colors">
+                            {item.name}
+                          </h3>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <div className="text-right">
+                          <div className="flex items-baseline gap-1 justify-end">
+                            <span className="text-3xl font-extrabold text-primary group-hover:scale-110 transition-transform inline-block">
+                              {item.from && (
+                                <span className="text-xs text-gray-500 mr-1 align-middle">от</span>
+                              )}
+                              {item.price}
+                            </span>
+                            <span className="text-gray-500 font-medium">₽</span>
+                          </div>
+                        </div>
+                        <button className="hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all">
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </>
+        ) : activeMode === 'thread' ? (
+          <div
+            className={`max-w-5xl mx-auto transition-all duration-700 delay-200 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`}
+          >
+            <div className="grid gap-4">
+              {threadItems.map((item, index) => (
+                <div
+                  key={`${item.zone}-${index}`}
+                  className="bg-white/90 backdrop-blur rounded-2xl shadow-md hover:shadow-xl border border-gray-100 hover:border-primary/30 transition-all duration-300 overflow-hidden group animate-fade-in"
+                  style={{ animationDelay: `${index * 50}ms` }}
+                >
+                  <div className="p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <div className="flex-1">
+                      <div className="flex items-start gap-3 mb-2">
+                        <div className="bg-primary/10 p-2 rounded-xl group-hover:bg-primary group-hover:scale-110 transition-all">
+                          <div className="text-primary group-hover:text-white transition-colors">
+                            <Syringe className="w-4 h-4" />
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-bold text-gray-900 group-hover:text-primary transition-colors">
+                            {item.zone}
+                          </h3>
+                          <div className="flex items-center gap-2 mt-1 text-gray-600">
+                            <Clock className="w-4 h-4" />
+                            <span className="text-sm font-medium">{item.duration}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <div className="text-right">
+                        <div className="flex items-baseline gap-1 justify-end">
+                          <span className="text-3xl font-extrabold text-primary group-hover:scale-110 transition-transform inline-block">
+                            {item.from && (
+                              <span className="text-xs text-gray-500 mr-1 align-middle">от</span>
+                            )}
+                            {item.price}
+                          </span>
+                          <span className="text-gray-500 font-medium">₽</span>
+                        </div>
+                      </div>
+                      <button className="hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
+        ) : (
+          <>
+            <div
+              className={`flex flex-wrap justify-center gap-3 mb-12 transition-all duration-700 delay-100 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
+            >
+              {hardwareKeys.map((key) => (
+                <button
+                  key={key}
+                  onClick={() => {
+                    setActiveHardwareKey(key)
+                    setShowAll(false)
+                  }}
+                  className={`group inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 border ${
+                    activeHardwareKey === key
+                      ? 'bg-primary text-white border-primary shadow-lg shadow-primary/30 scale-105'
+                      : 'bg-white text-gray-700 border-gray-200 hover:border-primary/40 hover:bg-primary/5 hover:text-primary'
+                  }`}
+                >
+                  <span className="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white">
+                    <Activity className="w-4 h-4" />
+                  </span>
+                  <span>{hardwareTitles[key]}</span>
+                </button>
+              ))}
+            </div>
 
+            <div
+              className={`max-w-5xl mx-auto transition-all duration-700 delay-200 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
+            >
+              <div className="grid gap-4">
+                {hardwareCosmetologyServices[activeHardwareKey].map((item: ServiceItem, index: number) => (
+                  <div
+                    key={`${item.zone}-${index}`}
+                    className="bg-white/90 backdrop-blur rounded-2xl shadow-md hover:shadow-xl border border-gray-100 hover:border-primary/30 transition-all duration-300 overflow-hidden group animate-fade-in"
+                    style={{ animationDelay: `${index * 50}ms` }}
+                  >
+                    <div className="p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                      <div className="flex-1">
+                        <div className="flex items-start gap-3 mb-2">
+                          <div className="bg-primary/10 p-2 rounded-xl group-hover:bg-primary group-hover:scale-110 transition-all">
+                            <div className="text-primary group-hover:text-white transition-colors">
+                              <Activity className="w-4 h-4" />
+                            </div>
+                          </div>
+                          <div>
+                            <h3 className="text-lg font-bold text-gray-900 group-hover:text-primary transition-colors">
+                              {item.zone}
+                            </h3>
+                            <div className="flex items-center gap-2 mt-1 text-gray-600">
+                              <Clock className="w-4 h-4" />
+                              <span className="text-sm font-medium">{item.duration}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <div className="text-right">
+                          <div className="flex items-baseline gap-1 justify-end">
+                            <span className="text-3xl font-extrabold text-primary group-hover:scale-110 transition-transform inline-block">
+                              {item.from && (
+                                <span className="text-xs text-gray-500 mr-1 align-middle">от</span>
+                              )}
+                              {item.price}
+                            </span>
+                            <span className="text-gray-500 font-medium">₽</span>
+                          </div>
+                        </div>
+                        <button className="hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all">
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </>
+        )}
+
+        {/* Bottom info card */}
+        <div className="mt-10 bg-gradient-to-r from-primary/5 to-primary/10 rounded-2xl p-6 border border-primary/20 shadow-md">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex items-start gap-3">
+              <div className="bg-primary p-2.5 rounded-xl shadow-sm">
+                <Sparkles className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h4 className="font-bold text-gray-900 mb-1">Не нашли нужную процедуру?</h4>
+                <p className="text-sm text-gray-600">
+                  Запишитесь на бесплатную консультацию — подберём программу под ваши цели
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="px-6 py-3 bg-primary text-white font-semibold rounded-xl hover:bg-primary-dark transition-colors shadow-lg shadow-primary/30 whitespace-nowrap"
+            >
+              Получить консультацию
+            </button>
+          </div>
         </div>
       </div>
-  
+
       <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   )

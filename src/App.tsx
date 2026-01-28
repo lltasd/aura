@@ -10,6 +10,11 @@ import BodyProcedureDetailPage from './pages/BodyProcedureDetailPage'
 import FaceProceduresPage from './pages/FaceProceduresPage'
 import FaceProcedureDetailPage from './pages/FaceProcedureDetailPage'
 import ProceduresOverviewPage from './pages/ProceduresOverviewPage'
+import LaserPage from './pages/LaserPage'
+import CosmetologyPage from './pages/CosmetologyPage'
+import BodyCorrectionPage from './pages/BodyCorrectionPage'
+import InjectionPage from './pages/InjectionPage'
+import ThreadLiftingPage from './pages/ThreadLiftingPage'
 import PricingPage from './pages/PricingPage'
 import SpecialistsPage from './pages/SpecialistsPage'
 import HardwareCosmetologyPage from './pages/HardwareCosmetologyPage'
@@ -69,6 +74,11 @@ function AnimatedRoutes() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contacts" element={<ContactsPage />} />
         <Route path="/procedures" element={<ProceduresOverviewPage />} />
+        <Route path="/laser" element={<LaserPage />} />
+        <Route path="/cosmetology" element={<CosmetologyPage />} />
+        <Route path="/body-correction" element={<BodyCorrectionPage />} />
+        <Route path="/injection" element={<InjectionPage />} />
+        <Route path="/thread-lifting" element={<ThreadLiftingPage />} />
         <Route path="/hardware-cosmetology" element={<HardwareCosmetologyPage />} />
         <Route path="/hardware-cosmetology/:slug" element={<PageTransition><DeviceDetailPage /></PageTransition>} />
         <Route path="/body-procedures" element={<BodyProceduresPage />} />

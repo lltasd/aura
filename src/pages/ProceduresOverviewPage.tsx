@@ -10,22 +10,58 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import { ContactModal } from '../components/BodyContouring'
 import WhatsAppButton from '../components/WhatsAppButton'
+import PricingCta from '../components/PricingCta'
 
-export default function ProceduresOverviewPage() {
+type ProceduresOverviewPageProps = {
+  initialType?: string
+  variant?: 'default' | 'laser' | 'body-correction' | 'cosmetology'
+}
+
+export default function ProceduresOverviewPage({ initialType, variant = 'default' }: ProceduresOverviewPageProps = {}) {
+  const isLaserVariant = variant === 'laser'
+  const isBodyCorrectionVariant = variant === 'body-correction'
+  const isCosmetologyVariant = variant === 'cosmetology'
+
   const [isContactOpen, setIsContactOpen] = useState(false)
   const [selectedSalon, setSelectedSalon] = useState<string>('')
   const [selectedDevice, setSelectedDevice] = useState<string>('')
-  const [selectedType, setSelectedType] = useState<string>('')
+  const [selectedType, setSelectedType] = useState<string>(initialType || '')
+
+  const [selectedLaserType, setSelectedLaserType] = useState<string>('')
+
   const [isSalonOpen, setIsSalonOpen] = useState<boolean>(false)
   const [isDeviceOpen, setIsDeviceOpen] = useState<boolean>(false)
   const [isTypeOpen, setIsTypeOpen] = useState<boolean>(false)
   const [deviceQuery, setDeviceQuery] = useState<string>('')
+
   const [salonIndex, setSalonIndex] = useState<number>(0)
   const [deviceIndex, setDeviceIndex] = useState<number>(0)
 
   const salonRef = useRef<HTMLDivElement>(null)
   const deviceRef = useRef<HTMLDivElement>(null)
   const typeRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!isLaserVariant && !isBodyCorrectionVariant && !isCosmetologyVariant && initialType !== undefined) setSelectedType(initialType)
+  }, [initialType, isLaserVariant, isBodyCorrectionVariant, isCosmetologyVariant])
+
+  useEffect(() => {
+    if (!isLaserVariant) return
+    if (selectedType) setSelectedType('')
+    if (selectedDevice) setSelectedDevice('')
+    if (deviceQuery) setDeviceQuery('')
+    if (isDeviceOpen) setIsDeviceOpen(false)
+  }, [isLaserVariant, selectedType, selectedDevice, deviceQuery, isDeviceOpen])
+
+  useEffect(() => {
+    if (!isBodyCorrectionVariant) return
+    if (selectedType) setSelectedType('')
+  }, [isBodyCorrectionVariant, selectedType])
+
+  useEffect(() => {
+    if (!isCosmetologyVariant) return
+    if (selectedType) setSelectedType('')
+  }, [isCosmetologyVariant, selectedType])
 
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
@@ -59,10 +95,17 @@ export default function ProceduresOverviewPage() {
       }
       // Keyboard navigation for Type
       if (isTypeOpen) {
-        const typeOpts: string[] = ['', 'Лазерная эпиляция', 'Косметология', 'Аппаратная коррекция фигуры']
+        const typeOpts: string[] = isLaserVariant
+          ? ['', 'Александритовый лазер', 'Диодный лазер']
+          : ['', 'Лазерная эпиляция', 'Косметология', 'Аппаратная коррекция фигуры']
         if (e.key === 'ArrowDown') { e.preventDefault(); setSalonIndex(i => Math.min(i + 1, typeOpts.length - 1)) }
         if (e.key === 'ArrowUp')   { e.preventDefault(); setSalonIndex(i => Math.max(i - 1, 0)) }
-        if (e.key === 'Enter')     { e.preventDefault(); setSelectedType(typeOpts[salonIndex] || ''); setIsTypeOpen(false) }
+        if (e.key === 'Enter')     {
+          e.preventDefault()
+          if (isLaserVariant) setSelectedLaserType(typeOpts[salonIndex] || '')
+          else setSelectedType(typeOpts[salonIndex] || '')
+          setIsTypeOpen(false)
+        }
       }
     }
 
@@ -154,7 +197,9 @@ export default function ProceduresOverviewPage() {
 
   const filteredSectionsData = useMemo(() => {
     if (!selectedDevice) return sectionsData
-    const allowed = new Set(deviceProcedureMap[selectedDevice] || [])
+    const mapped = deviceProcedureMap[selectedDevice]
+    if (!mapped) return sectionsData
+    const allowed = new Set(mapped)
     const filterList = (arr: typeof sectionsData.combined) => arr.filter(p => allowed.has(p.slug))
     return {
       laser: filterList(sectionsData.laser),
@@ -163,6 +208,62 @@ export default function ProceduresOverviewPage() {
       combined: filterList(sectionsData.combined)
     }
   }, [sectionsData, selectedDevice, deviceProcedureMap])
+
+  const laserVariantItems = useMemo(() => {
+    const base = filteredSectionsData.laser
+    if (!selectedLaserType) return base
+    if (selectedLaserType === 'Александритовый лазер') return base.filter(p => p.slug === 'alexandrite-laser-epilation')
+    if (selectedLaserType === 'Диодный лазер') return base.filter(p => p.slug === 'diode-laser-epilation')
+    return base
+  }, [filteredSectionsData.laser, selectedLaserType])
+
+  const pageLabel = isLaserVariant
+    ? 'Лазерная эпиляция'
+    : isCosmetologyVariant
+      ? 'Косметология'
+      : isBodyCorrectionVariant
+        ? 'Аппаратная коррекция фигуры'
+        : 'Виды процедур'
+
+  const heroTitle = isLaserVariant
+    ? 'Лазерная эпиляция'
+    : isCosmetologyVariant
+      ? 'Косметология'
+      : isBodyCorrectionVariant
+        ? 'Аппаратная коррекция фигуры'
+        : 'Подберите\nидеальную процедуру'
+
+  const heroSubtitle = isLaserVariant
+    ? 'Александритовый и диодный лазер'
+    : isCosmetologyVariant
+      ? 'Уход, очищение и омоложение кожи'
+      : isBodyCorrectionVariant
+        ? 'Комплексные методики для моделирования силуэта'
+        : 'От быстрого бьюти-ухода до комплексного курса'
+
+  const heroDescription = isLaserVariant
+    ? 'Выберите тип лазера и подходящую процедуру. Подберём курс под ваш фототип и цель.'
+    : isCosmetologyVariant
+      ? 'Процедуры для лица и тела: уход, очищение, восстановление и улучшение качество кожи. Подберём план под вашу задачу.'
+      : isBodyCorrectionVariant
+        ? 'Процедуры для коррекции фигуры: лимфодренаж, уменьшение объёмов, улучшение качество кожи. Подберём программу и аппарат.'
+        : 'Мы собрали проверенные методики по трём направлениям: косметология, лазерная эпиляция и аппаратная коррекция фигуры. Фильтры помогут сузить выбор по салону и доступному оборудованию. Нужна подсказка? Наш специалист бесплатно проконсультирует и составит персональный план.'
+
+  const heroButtonLabel = isLaserVariant
+    ? 'Смотреть процедуры'
+    : isCosmetologyVariant
+      ? 'Смотреть процедуры'
+      : isBodyCorrectionVariant
+        ? 'Смотреть процедуры'
+        : 'Смотреть направления'
+
+  const heroRightItems = isLaserVariant
+    ? ['Александритовый лазер', 'Диодный лазер']
+    : isCosmetologyVariant
+      ? ['Уходовые процедуры', 'Очищение', 'Омоложение']
+      : isBodyCorrectionVariant
+        ? ['Лимфодренаж', 'Снижение объёмов', 'Тонус и качество кожи']
+        : ['Косметология лица', 'Лазерная эпиляция', 'Аппаратная коррекция фигуры']
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-100">
@@ -194,7 +295,7 @@ export default function ProceduresOverviewPage() {
             <nav className="text-sm text-slate-400 mb-12 opacity-0 animate-fadeIn" style={{ animationDelay: '300ms', animationFillMode: 'forwards' }}>
               <Link to="/" className="hover:text-blue-300 transition-colors duration-300">Главная</Link>
               <span className="mx-2 text-slate-600">›</span>
-              <span className="text-slate-300">Виды процедур</span>
+              <span className="text-slate-300">{pageLabel}</span>
             </nav>
 
             <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
@@ -203,19 +304,24 @@ export default function ProceduresOverviewPage() {
                   <span className="text-blue-200 text-sm font-bold uppercase tracking-wide">Наши услуги</span>
                 </div>
                 <h1 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tight text-white uppercase mb-6 leading-tight md:leading-none break-words drop-shadow-2xl">
-                  Подберите<br />идеальную процедуру
+                  {heroTitle.split('\n').map((line, idx) => (
+                    <span key={idx}>
+                      {line}
+                      {idx === 0 && heroTitle.includes('\n') ? <br /> : null}
+                    </span>
+                  ))}
                 </h1>
                 <p className="text-slate-200 text-lg sm:text-xl md:text-2xl leading-relaxed mb-6 font-light">
-                  От быстрого бьюти-ухода до комплексного курса
+                  {heroSubtitle}
                 </p>
                 <p className="text-slate-300 text-base sm:text-lg md:text-xl leading-relaxed mb-8">
-                  Мы собрали проверенные методики по трём направлениям: косметология, лазерная эпиляция и аппаратная коррекция фигуры. Фильтры помогут сузить выбор по салону и доступному оборудованию. Нужна подсказка? Наш специалист бесплатно проконсультирует и составит персональный план.
+                  {heroDescription}
                 </p>
                 <button 
                   onClick={() => window.scrollTo({ top: window.innerHeight + 80, behavior: 'smooth' })}
                   className="group px-6 py-4 md:px-10 md:py-5 bg-gradient-to-r from-white to-blue-50 text-slate-900 font-bold uppercase tracking-wide rounded-xl hover:from-blue-50 hover:to-white transition-all duration-300 shadow-2xl hover:shadow-blue-500/30 hover:scale-105 border border-white/20 text-base md:text-lg"
                 >
-                  Смотреть направления
+                  {heroButtonLabel}
                   <span className="inline-block ml-2 group-hover:translate-x-2 transition-transform duration-300">→</span>
                 </button>
               </div>
@@ -227,9 +333,9 @@ export default function ProceduresOverviewPage() {
                     Направления
                   </h2>
                   <div className="space-y-4 text-slate-200">
-                    <div className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-blue-400"></span> Косметология лица</div>
-                    <div className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-blue-400"></span> Лазерная эпиляция</div>
-                    <div className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-blue-400"></span> Аппаратная коррекция фигуры</div>
+                    {heroRightItems.map((t) => (
+                      <div key={t} className="flex items-center gap-3"><span className="w-2 h-2 rounded-full bg-blue-400"></span> {t}</div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -241,10 +347,10 @@ export default function ProceduresOverviewPage() {
         <div className="container mx-auto px-4 mb-8 md:mb-16 relative z-40">
 
           <div
-            className="mt-8 md:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto
+            className={`mt-8 md:mt-12 grid grid-cols-1 ${(isLaserVariant || isBodyCorrectionVariant || isCosmetologyVariant) ? 'sm:grid-cols-2' : 'sm:grid-cols-3'} gap-4 sm:gap-6 max-w-5xl mx-auto
                        bg-white/90 backdrop-blur-sm rounded-2xl p-4 shadow-md border border-slate-200
                        md:bg-transparent md:backdrop-blur-0 md:rounded-none md:p-0 md:shadow-none md:border-0
-                       sticky top-24 z-40 md:static"
+                       sticky top-24 z-40 md:static`}
           >
 
             <div>
@@ -287,115 +393,129 @@ export default function ProceduresOverviewPage() {
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-bold text-slate-700 mb-3 uppercase tracking-wide">Аппарат</label>
-              <div className="relative" ref={deviceRef}>
-                <button
-                  type="button"
-                  onClick={() => { setIsDeviceOpen(v => !v); setDeviceIndex(0) }}
-                  className={`w-full text-left px-5 pr-12 py-4 rounded-2xl border-2 bg-white transition-all duration-300 shadow-sm hover:shadow-md font-medium focus:outline-none ${isDeviceOpen ? 'border-blue-500 ring-4 ring-blue-100' : 'border-slate-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-100'}`}
-                  aria-haspopup="listbox"
-                  aria-expanded={isDeviceOpen}
-                >
-                  {selectedDeviceObj?.title || 'Все аппараты'}
-                  <ChevronDown className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5" />
-                </button>
+            {(isLaserVariant) ? null : (
+              <div>
+                <label className="block text-sm font-bold text-slate-700 mb-3 uppercase tracking-wide">Аппарат</label>
+                <div className="relative" ref={deviceRef}>
+                  <button
+                    type="button"
+                    onClick={() => { setIsDeviceOpen(v => !v); setDeviceIndex(0) }}
+                    className={`w-full text-left px-5 pr-12 py-4 rounded-2xl border-2 bg-white transition-all duration-300 shadow-sm hover:shadow-md font-medium focus:outline-none ${isDeviceOpen ? 'border-blue-500 ring-4 ring-blue-100' : 'border-slate-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-100'}`}
+                    aria-haspopup="listbox"
+                    aria-expanded={isDeviceOpen}
+                  >
+                    {selectedDeviceObj?.title || 'Все аппараты'}
+                    <ChevronDown className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5" />
+                  </button>
 
-                {isDeviceOpen && (
-                  <div className="absolute left-0 right-0 mt-2 z-50">
-                    <div className="rounded-2xl border border-slate-200 bg-white shadow-2xl overflow-hidden">
-                      <div className="p-2 border-b border-slate-100 bg-slate-50/50">
-                        <input
-                          value={deviceQuery}
-                          onChange={(e) => { setDeviceQuery(e.target.value); setDeviceIndex(0) }}
-                          placeholder="Поиск аппарата..."
-                          className="w-full px-3 py-2 rounded-xl border border-slate-300 focus:outline-none focus:border-blue-500"
-                        />
+                  {isDeviceOpen && (
+                    <div className="absolute left-0 right-0 mt-2 z-50">
+                      <div className="rounded-2xl border border-slate-200 bg-white shadow-2xl overflow-hidden">
+                        <div className="p-2 border-b border-slate-100 bg-slate-50/50">
+                          <input
+                            value={deviceQuery}
+                            onChange={(e) => { setDeviceQuery(e.target.value); setDeviceIndex(0) }}
+                            placeholder="Поиск аппарата..."
+                            className="w-full px-3 py-2 rounded-xl border border-slate-300 focus:outline-none focus:border-blue-500"
+                          />
+                        </div>
+                        <ul role="listbox" className="py-1 max-h-72 overflow-auto">
+                          {[{ slug: '', title: 'Все аппараты', image: '' } as any, ...devices]
+                            .filter(d => !deviceQuery || d.title.toLowerCase().includes(deviceQuery.toLowerCase()))
+                            .map((d, idx) => {
+                              const active = selectedDevice === d.slug
+                              return (
+                                <li
+                                  key={d.slug || 'all'}
+                                  role="option"
+                                  aria-selected={active}
+                                  onClick={() => { setSelectedDevice(d.slug); setIsDeviceOpen(false) }}
+                                  className={`flex items-center justify-between px-4 py-2.5 cursor-pointer transition-colors ${active ? 'bg-blue-50 text-blue-700' : deviceIndex === idx ? 'bg-slate-100' : 'text-slate-700 hover:bg-slate-50'}`}
+                                >
+                                  <div className="flex items-center gap-3 min-w-0">
+                                    {d.slug ? (
+                                      <img src={d.image} alt={d.title} className="w-8 h-8 rounded-lg object-cover border border-slate-200" />
+                                    ) : (
+                                      <span className="w-8 h-8 rounded-lg bg-slate-100 border border-slate-200" />
+                                    )}
+                                    <span className="truncate">{d.title}</span>
+                                  </div>
+                                  {active ? <Check className="w-4 h-4 text-blue-600" /> : <span className="w-4 h-4" />}
+                                </li>
+                              )
+                            })}
+                        </ul>
                       </div>
-                      <ul role="listbox" className="py-1 max-h-72 overflow-auto">
-                        {[{ slug: '', title: 'Все аппараты', image: '' } as any, ...devices]
-                          .filter(d => !deviceQuery || d.title.toLowerCase().includes(deviceQuery.toLowerCase()))
-                          .map((d, idx) => {
-                            const active = selectedDevice === d.slug
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {(isBodyCorrectionVariant || isCosmetologyVariant) ? null : (
+              <div>
+                <label className="block text-sm font-bold text-slate-700 mb-3 uppercase tracking-wide">{isLaserVariant ? 'Тип лазера' : 'Тип'}</label>
+                <div className="relative" ref={typeRef}>
+                  <button
+                    type="button"
+                    onClick={() => setIsTypeOpen(v => !v)}
+                    className={`w-full text-left px-5 pr-12 py-4 rounded-2xl border-2 bg-white transition-all duration-300 shadow-sm hover:shadow-md font-medium focus:outline-none ${isTypeOpen ? 'border-blue-500 ring-4 ring-blue-100' : 'border-slate-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-100'}`}
+                    aria-haspopup="listbox"
+                    aria-expanded={isTypeOpen}
+                  >
+                    {(isLaserVariant ? selectedLaserType : selectedType) || 'Все типы'}
+                    <ChevronDown className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5" />
+                  </button>
+                  {isTypeOpen && (
+                    <div className="absolute left-0 right-0 mt-2 z-50">
+                      <div className="rounded-2xl border border-slate-200 bg-white shadow-2xl overflow-hidden">
+                        <ul role="listbox" className="py-1 max-h-60 overflow-auto">
+                          {(isLaserVariant ? ['', 'Александритовый лазер', 'Диодный лазер'] : ['', 'Лазерная эпиляция', 'Косметология', 'Аппаратная коррекция фигуры']).map((opt) => {
+                            const label = opt || 'Все типы'
+                            const active = (isLaserVariant ? selectedLaserType : selectedType) === opt
                             return (
                               <li
-                                key={d.slug || 'all'}
+                                key={label}
                                 role="option"
                                 aria-selected={active}
-                                onClick={() => { setSelectedDevice(d.slug); setIsDeviceOpen(false) }}
-                                className={`flex items-center justify-between px-4 py-2.5 cursor-pointer transition-colors ${active ? 'bg-blue-50 text-blue-700' : deviceIndex === idx ? 'bg-slate-100' : 'text-slate-700 hover:bg-slate-50'}`}
+                                onClick={() => {
+                                  if (isLaserVariant) setSelectedLaserType(opt)
+                                  else setSelectedType(opt)
+                                  setIsTypeOpen(false)
+                                }}
+                                className={`flex items-center justify-between px-4 py-2.5 cursor-pointer transition-colors ${active ? 'bg-blue-50 text-blue-700' : 'text-slate-700 hover:bg-slate-50'}`}
                               >
-                                <div className="flex items-center gap-3 min-w-0">
-                                  {d.slug ? (
-                                    <img src={d.image} alt={d.title} className="w-8 h-8 rounded-lg object-cover border border-slate-200" />
-                                  ) : (
-                                    <span className="w-8 h-8 rounded-lg bg-slate-100 border border-slate-200" />
-                                  )}
-                                  <span className="truncate">{d.title}</span>
-                                </div>
+                                <span className="truncate">{label}</span>
                                 {active ? <Check className="w-4 h-4 text-blue-600" /> : <span className="w-4 h-4" />}
                               </li>
                             )
                           })}
-                      </ul>
+                        </ul>
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-bold text-slate-700 mb-3 uppercase tracking-wide">Тип</label>
-              <div className="relative" ref={typeRef}>
-                <button
-                  type="button"
-                  onClick={() => setIsTypeOpen(v => !v)}
-                  className={`w-full text-left px-5 pr-12 py-4 rounded-2xl border-2 bg-white transition-all duration-300 shadow-sm hover:shadow-md font-medium focus:outline-none ${isTypeOpen ? 'border-blue-500 ring-4 ring-blue-100' : 'border-slate-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-100'}`}
-                  aria-haspopup="listbox"
-                  aria-expanded={isTypeOpen}
-                >
-                  {selectedType || 'Все типы'}
-                  <ChevronDown className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5" />
-                </button>
-                {isTypeOpen && (
-                  <div className="absolute left-0 right-0 mt-2 z-50">
-                    <div className="rounded-2xl border border-slate-200 bg-white shadow-2xl overflow-hidden">
-                      <ul role="listbox" className="py-1 max-h-60 overflow-auto">
-                        {['', 'Лазерная эпиляция', 'Косметология', 'Аппаратная коррекция фигуры'].map((opt) => {
-                          const label = opt || 'Все типы'
-                          const active = selectedType === opt
-                          return (
-                            <li
-                              key={label}
-                              role="option"
-                              aria-selected={active}
-                              onClick={() => { setSelectedType(opt); setIsTypeOpen(false) }}
-                              className={`flex items-center justify-between px-4 py-2.5 cursor-pointer transition-colors ${active ? 'bg-blue-50 text-blue-700' : 'text-slate-700 hover:bg-slate-50'}`}
-                            >
-                              <span className="truncate">{label}</span>
-                              {active ? <Check className="w-4 h-4 text-blue-600" /> : <span className="w-4 h-4" />}
-                            </li>
-                          )
-                        })}
-                      </ul>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-
+            )}
           </div>
 
-          {(selectedSalon || selectedDevice || selectedType || deviceQuery) ? (
+          {((selectedSalon || selectedDevice || selectedType || deviceQuery) && !isLaserVariant && !isBodyCorrectionVariant && !isCosmetologyVariant) || ((selectedSalon || selectedLaserType) && isLaserVariant) || ((selectedSalon || selectedDevice || deviceQuery) && isBodyCorrectionVariant) || ((selectedSalon || selectedDevice || deviceQuery) && isCosmetologyVariant) ? (
             <div className="max-w-5xl mx-auto mt-3 md:mt-4 flex justify-end">
               <button
                 onClick={() => {
                   setSelectedSalon('')
-                  setSelectedDevice('')
-                  setSelectedType('')
-                  setDeviceQuery('')
+                  if (isBodyCorrectionVariant || isCosmetologyVariant) {
+                    setSelectedDevice('')
+                    setDeviceQuery('')
+                  } else if (!isLaserVariant) {
+                    setSelectedDevice('')
+                    setSelectedType('')
+                    setDeviceQuery('')
+                  } else {
+                    setSelectedLaserType('')
+                  }
                   setIsSalonOpen(false)
-                  setIsDeviceOpen(false)
+                  if (!isLaserVariant) setIsDeviceOpen(false)
                   setIsTypeOpen(false)
                   setSalonIndex(0)
                   setDeviceIndex(0)
@@ -413,7 +533,7 @@ export default function ProceduresOverviewPage() {
           {(!selectedType) ? (
             <section>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                {filteredSectionsData.combined.map((p, index) => (
+                {(isLaserVariant ? laserVariantItems : isBodyCorrectionVariant ? filteredSectionsData.bodyCorr : isCosmetologyVariant ? filteredSectionsData.cosmetology : filteredSectionsData.combined).map((p, index) => (
                   <article
                     key={`${p.section}-${p.slug}`}
                     className="group relative animate-slide-up-fade"
@@ -533,6 +653,8 @@ export default function ProceduresOverviewPage() {
             </div>
           </div>
         </div>
+
+        {variant === 'default' ? null : <PricingCta />}
       </main>
 
       <Footer />

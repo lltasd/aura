@@ -4,6 +4,7 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import WhatsAppButton from '../components/WhatsAppButton'
 import { ContactModal } from '../components/BodyContouring'
+import PricingCta from '../components/PricingCta'
 import { devices } from '../data/devices'
 
 export default function HardwareCosmetologyPage() {
@@ -219,6 +220,8 @@ export default function HardwareCosmetologyPage() {
               </div>
             )
           })()}
+
+          <PricingCta />
         </div>
       </main>
 
