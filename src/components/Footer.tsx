@@ -8,16 +8,29 @@ export default function Footer() {
   return (
     <footer id="site-footer" className="text-white bg-gradient-to-b from-blue-950 via-blue-900 to-blue-950 border-t border-white/10">
       {/* Disclaimer */}
-      <div className="bg-gradient-to-r from-slate-100 to-white text-slate-700 py-3 text-center text-sm border-b border-slate-200">
-        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="flex items-center justify-center gap-3">
-            <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-600 text-white">
-              <AlertCircle size={14} />
-            </span>
-            <span className="opacity-90">Информация на сайте не является публичной офертой и требует уточнения у менеджера</span>
-          </p>
-        </div>
-      </div>
+<div className="relative bg-gradient-to-r from-[#EFF6FF] via-white to-[#EFF6FF] border-b border-[#BFDBFE]/40 overflow-hidden">
+  {/* Декоративные элементы */}
+  <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#2563EB]/50 via-[#1E40AF]/30 to-transparent" />
+  <div className="absolute right-0 top-0 bottom-0 w-1 bg-gradient-to-b from-transparent via-[#1E40AF]/30 to-[#2563EB]/50" />
+  
+  {/* Тонкий золотой акцент */}
+  <div className="hidden sm:block absolute top-0 left-1/4 right-1/4 h-px bg-gradient-to-r from-transparent via-amber-400/20 to-transparent" />
+  
+  <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 sm:py-3.5">
+    <div className="flex items-center justify-center gap-2 sm:gap-3">
+      {/* Иконка */}
+      <span className="flex-shrink-0 inline-flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gradient-to-br from-[#2563EB] to-[#1E40AF] text-white shadow-sm shadow-[#2563EB]/30">
+        <AlertCircle size={12} className="sm:w-3.5 sm:h-3.5" />
+      </span>
+      
+      {/* Текст */}
+      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed text-center max-w-4xl">
+        <span className="hidden sm:inline">Информация на сайте не является публичной офертой и требует уточнения у менеджера</span>
+        <span className="sm:hidden">Информация на сайте не является публичной офертой</span>
+      </p>
+    </div>
+  </div>
+</div>
 
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">

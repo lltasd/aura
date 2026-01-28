@@ -12,7 +12,7 @@ import SpecialistsSection from '../components/SpecialistsSection'
 import GiftCertificateSection from '../components/GiftCertificateSection'
 import SpecialsRow from '../components/SpecialsRow'
 import { ContactModal } from '../components/BodyContouring'
-import { Sparkles, Award, Shield, Users, Phone } from 'lucide-react'
+import { Sparkles, Award, Shield, Users, Phone, MapPin } from 'lucide-react'
 import { specialists } from '../data/specialists'
 import { specials } from '../data/specials'
 
@@ -273,9 +273,12 @@ export default function HomePage() {
           <div className="lg:col-span-2 space-y-8">
             {/* Слайдер с описанием студии */}
             <div className="group relative">
-              <div className="absolute -inset-2 bg-gradient-to-r from-blue-400 via-blue-300 to-blue-500 rounded-[2rem] opacity-20 sm:opacity-30 group-hover:opacity-40 sm:group-hover:opacity-50 blur-md sm:blur-2xl transition-all duration-1000" />
-              <div className="relative rounded-[2rem] overflow-hidden shadow-lg sm:shadow-2xl border border-slate-200 bg-white">
-                <div className="relative h-64 sm:h-88 md:h-[480px] bg-gradient-to-br from-blue-100/50 via-white to-slate-100/50 overflow-hidden">
+              {/* Светящийся фон - адаптивный */}
+              <div className="absolute -inset-1 sm:-inset-2 bg-gradient-to-r from-[#2563EB]/20 via-[#1E40AF]/15 to-[#2563EB]/20 rounded-2xl sm:rounded-[2rem] opacity-30 sm:opacity-40 group-hover:opacity-50 sm:group-hover:opacity-60 blur-xl sm:blur-2xl transition-all duration-1000" />
+
+              <div className="relative rounded-2xl sm:rounded-[2rem] overflow-hidden shadow-xl sm:shadow-2xl border border-[#BFDBFE]/60 bg-white">
+                {/* СЛАЙДЕР */}
+                <div className="relative h-64 sm:h-80 md:h-[480px] bg-gradient-to-br from-[#EFF6FF]/50 via-white to-slate-50 overflow-hidden">
                   {images.map((src, i) => (
                     <img
                       key={i}
@@ -286,63 +289,81 @@ export default function HomePage() {
                       fetchPriority={i === 0 ? 'high' : 'low'}
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 100vw"
                       aria-hidden={i !== active}
-                      className={`absolute inset-0 w-full h-full object-cover transition-all sm:duration-[1500ms] duration-500 ease-in-out ${
-                        i === active ? 'opacity-100 scale-100' : 'opacity-0 sm:scale-110 scale-105'
+                      className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 sm:duration-[1200ms] ease-in-out ${
+                        i === active ? 'opacity-100 scale-100' : 'opacity-0 scale-105 sm:scale-110'
                       }`}
                     />
                   ))}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
 
-                  {/* Индикаторы слайдера */}
-                  <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3">
+                  {/* Градиент снизу */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#1E40AF]/70 via-transparent to-transparent" />
+
+                  {/* Индикаторы слайдера - улучшенные */}
+                  <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex gap-2 sm:gap-3 bg-white/10 backdrop-blur-md rounded-full px-3 sm:px-4 py-2 sm:py-2.5 border border-white/20">
                     {images.map((_, i) => (
                       <button
                         key={i}
                         onClick={() => setActive(i)}
-                        className={`h-2.5 rounded-full transition-all duration-500 backdrop-blur-sm ${
+                        aria-label={`Перейти к слайду ${i + 1}`}
+                        className={`h-2 sm:h-2.5 rounded-full transition-all duration-500 ${
                           i === active
-                            ? 'bg-white w-12 shadow-lg shadow-white/50'
-                            : 'bg-white/60 w-2.5 hover:bg-white/90 hover:w-8'
+                            ? 'bg-white w-8 sm:w-12 shadow-lg shadow-white/40'
+                            : 'bg-white/50 w-2 sm:w-2.5 hover:bg-white/80 hover:w-5 sm:hover:w-8'
                         }`}
                       />
                     ))}
                   </div>
 
-                  {/* Декоративный элемент */}
-                  <div className="absolute top-8 right-8 bg-white/10 sm:bg-white/15 backdrop-blur-0 sm:backdrop-blur-2xl rounded-2xl px-6 py-3 border border-white/40 shadow-lg sm:shadow-2xl">
-                    <div className="flex items-center gap-2.5 text-white">
-                      <Sparkles className="w-5 h-5" />
-                      <span className="font-bold text-sm tracking-wide">Премиум качество</span>
+                  {/* Бейдж "Премиум качество" */}
+                  <div className="absolute top-4 sm:top-8 right-4 sm:right-8 bg-white/20 backdrop-blur-xl rounded-xl sm:rounded-2xl px-3 sm:px-6 py-2 sm:py-3 border border-white/30 shadow-lg sm:shadow-2xl hover:bg-white/25 transition-all duration-300">
+                    <div className="flex items-center gap-2 sm:gap-2.5 text-white">
+                      <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
+                      <span className="font-bold text-xs sm:text-sm tracking-wide">Премиум качество</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="p-6 sm:p-12 space-y-6 bg-gradient-to-br from-white via-blue-50/20 to-white">
-                  {/* Мобильный вариант: текст + ДОНЕЦК ДНР, без линии */}
-                  <div className="flex flex-col items-start sm:hidden">
-                    <h2 className="text-2xl font-black font-display text-blue-900 leading-tight tracking-tight">
-                      СТУДИЯ КРАСОТЫ АУРА
-                    </h2>
-                    <div className="mt-2 text-xl font-display font-black bg-gradient-to-r from-slate-600 to-slate-800 bg-clip-text text-transparent">
-                      ДОНЕЦК ДНР
+                {/* КОНТЕНТНАЯ ЧАСТЬ */}
+                <div className="p-5 sm:p-8 md:p-10 lg:p-12 space-y-6 sm:space-y-8 bg-gradient-to-br from-white via-[#EFF6FF]/30 to-white">
+                  {/* ЗАГОЛОВОК - Адаптивный */}
+                  <div className="space-y-3 sm:space-y-4">
+                    {/* Мобильная версия */}
+                    <div className="sm:hidden">
+                      <h2 className="text-2xl font-black font-display text-[#1E40AF] leading-tight tracking-tight">
+                        СТУДИЯ КРАСОТЫ АУРА
+                      </h2>
+                      <div className="mt-2 inline-flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-slate-100 to-slate-50 rounded-lg border border-slate-200">
+                        <MapPin className="w-3.5 h-3.5 text-[#2563EB]" />
+                        <span className="text-base font-display font-bold text-slate-700">ДОНЕЦК ДНР</span>
+                      </div>
+                    </div>
+
+                    {/* Десктопная версия */}
+                    <div className="hidden sm:block text-center">
+                      <h2 className="text-3xl md:text-4xl lg:text-5xl font-black font-display text-[#1E40AF] leading-tight tracking-tight">
+                        СТУДИЯ КРАСОТЫ АУРА
+                      </h2>
+
+                      {/* Анимированная линия */}
+                      <motion.div
+                        initial={{ scaleX: 0 }}
+                        animate={showPromo ? { scaleX: 0 } : { scaleX: 1 }}
+                        transition={{ duration: 0.9, ease: [0.4, 0, 0.2, 1], delay: 0.3 }}
+                        className="mx-auto mt-4 h-1 sm:h-1.5 w-3/4 max-w-md bg-gradient-to-r from-[#2563EB] via-[#1E40AF] to-[#1D4ED8] rounded-full origin-center shadow-md shadow-[#2563EB]/20"
+                      />
+
+                      {/* Золотой акцент */}
+                      <motion.div
+                        initial={{ scaleX: 0, opacity: 0 }}
+                        animate={showPromo ? { scaleX: 0, opacity: 0 } : { scaleX: 1, opacity: 1 }}
+                        transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1], delay: 0.8 }}
+                        className="mx-auto mt-2 h-0.5 w-24 bg-gradient-to-r from-transparent via-amber-400/40 to-transparent rounded-full origin-center"
+                      />
                     </div>
                   </div>
 
-                  {/* Десктопный вариант: анимированная линия по центру */}
-                  <div className="hidden sm:inline-flex flex-col items-center">
-                    <h2 className="text-3xl md:text-5xl font-black font-display text-blue-900 leading-tight tracking-tight text-center">
-                      СТУДИЯ КРАСОТЫ АУРА
-                    </h2>
-                    <motion.div
-                      initial={{ scaleX: 0 }}
-                      animate={showPromo ? { scaleX: 0 } : { scaleX: 1 }}
-                      transition={{ duration: 0.8, ease: 'easeOut', delay: 0.3 }}
-                      className="mt-4 h-1 w-full bg-gradient-to-r from-blue-600 to-blue-500 rounded-full origin-center"
-                    />
-                  </div>
-
-                  {/* Ключевые преимущества */}
-                  <div className="grid sm:grid-cols-3 gap-3 sm:gap-4 py-2">
+                  {/* КЛЮЧЕВЫЕ ПРЕИМУЩЕСТВА - Улучшенные */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                     {[
                       { icon: Award, text: 'Основана в 2018', delay: '0ms' },
                       { icon: Shield, text: 'FDA, ЕС, РФ', delay: '100ms' },
@@ -350,30 +371,49 @@ export default function HomePage() {
                     ].map((item, idx) => (
                       <div
                         key={idx}
-                        className="flex items-center gap-3 p-5 rounded-2xl bg-gradient-to-br from-primary via-primary-light to-primary-dark border border-white/20 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-500 group/card backdrop-blur-sm"
+                        className="flex items-center gap-3 sm:gap-3.5 p-4 sm:p-5 rounded-xl sm:rounded-2xl 
+                    bg-gradient-to-br from-primary via-primary-light to-primary-dark
+                    border border-white/20 
+                    shadow-lg hover:shadow-xl 
+                    hover:scale-[1.03] sm:hover:scale-105 
+                    transition-all duration-500 
+                    group/card"
                         style={{ transitionDelay: item.delay }}
                       >
-                        <div className="w-11 h-11 rounded-xl bg-white/20 flex items-center justify-center shadow-lg group-hover/card:scale-110 transition-transform duration-500">
+                        <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-md group-hover/card:scale-110 group-hover/card:bg-white/30 transition-all duration-500">
                           <item.icon className="w-5 h-5 text-white" />
                         </div>
-                        <div className="text-sm font-bold text-white">{item.text}</div>
+                        <div className="text-sm sm:text-base font-bold text-white leading-tight">{item.text}</div>
                       </div>
                     ))}
                   </div>
 
-                  <div className="space-y-4 text-slate-700 leading-relaxed">
-                    <p className="text-base sm:text-lg font-medium">
+                  {/* ТЕКСТОВЫЙ КОНТЕНТ - Улучшенная типографика */}
+                  <div className="space-y-4 sm:space-y-5 text-slate-700 leading-relaxed">
+                    <p className="text-base sm:text-lg font-semibold text-slate-800 border-l-4 border-[#2563EB] pl-4 bg-gradient-to-r from-[#EFF6FF]/50 to-transparent py-2 rounded-r-lg">
                       Студия красоты «Аура» в Донецке предлагает вам уникальный опыт профессионального ухода за кожей и телом. Вас порадует широкий спектр косметологических процедур, направленных на подчеркивание вашей индивидуальной красоты и сохранение молодости.
                     </p>
-                    <p className="text-sm sm:text-base">
-                      Мы предоставляем косметологические услуги по уходу за лицом и телом, аппаратной коррекции фигуры и лазерной эпиляции на аппаратах премиум класса. Благодаря персонализированному подходу и современным методам, наши услуги обеспечивают максимальную эффективность и безопасность.
-                    </p>
-                    <p className="text-sm sm:text-base">
-                      Все помещения в нашей студии соответствуют СанПиН. Мы применяем новейшие аппаратные методики. Наше оборудование сертифицировано в РФ, США (FDA), ЕС.
-                    </p>
-                    <p className="text-sm sm:text-base">
-                      Все сотрудники имеют медицинское образование. Наши специалисты сертифицированы и регулярно проходят переподготовку. Мы гарантируем строгое соблюдение норм стерильности, асептики и антисептики.
-                    </p>
+
+                    <div className="space-y-3 sm:space-y-4 text-sm sm:text-base">
+                      <p className="hover:text-slate-900 transition-colors duration-300">
+                        Мы предоставляем косметологические услуги по уходу за лицом и телом, аппаратной коррекции фигуры и лазерной эпиляции на аппаратах премиум класса. Благодаря персонализированному подходу и современным методам, наши услуги обеспечивают максимальную эффективность и безопасность.
+                      </p>
+
+                      <p className="hover:text-slate-900 transition-colors duration-300">
+                        Все помещения в нашей студии соответствуют СанПиН. Мы применяем новейшие аппаратные методики. Наше оборудование сертифицировано в РФ, США (FDA), ЕС.
+                      </p>
+
+                      <p className="hover:text-slate-900 transition-colors duration-300">
+                        Все сотрудники имеют медицинское образование. Наши специалисты сертифицированы и регулярно проходят переподготовку. Мы гарантируем строгое соблюдение норм стерильности, асептики и антисептики.
+                      </p>
+                    </div>
+
+                    {/* Декоративный разделитель */}
+                    <div className="hidden sm:flex items-center gap-3 pt-2">
+                      <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#BFDBFE]/50 to-transparent" />
+                      <div className="h-1.5 w-1.5 rounded-full bg-[#2563EB]/40" />
+                      <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#BFDBFE]/50 to-transparent" />
+                    </div>
                   </div>
                 </div>
               </div>
