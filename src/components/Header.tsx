@@ -386,7 +386,6 @@ export default function Header({ onBookClick, variant = 'default' }: HeaderProps
               </ul>
 
               {/* Contact Section */}
-              {/* Contact Section - улучшенный */}
               <motion.div 
                 className="relative overflow-hidden bg-gradient-to-br from-slate-800/35 via-slate-900/25 to-slate-900/15 backdrop-blur-md rounded-2xl p-5 sm:p-6 border border-white/10 shadow-lg"
                 initial={{ y: 20, opacity: 0 }}

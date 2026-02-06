@@ -94,9 +94,9 @@ export default function ContactsSection() {
                   <h4 className="font-bold text-gray-900 mb-3 text-lg">Наши адреса</h4>
                   <ul className="space-y-3">
                     {contactInfo.addresses.map((addr, i) => (
-                      <li key={i} className="flex items-start gap-3 hover:text-[#2563EB] transition-colors group/item">
-                        <div className="mt-2 w-2 h-2 rounded-full bg-[#2563EB] group-hover/item:scale-125 transition-transform"></div>
-                        <span className="text-sm sm:text-base text-slate-700 font-medium leading-relaxed">{addr}</span>
+                      <li key={i} className="flex items-start gap-3 hover:text-primary transition-colors group">
+                        <div className="mt-2 w-2 h-2 rounded-full bg-accent group-hover:scale-125 transition-transform"></div>
+                        <span className="text-gray-700 font-medium leading-relaxed">{addr}</span>
                       </li>
                     ))}
                   </ul>
@@ -104,9 +104,9 @@ export default function ContactsSection() {
                     href="https://yandex.ru/maps/?um=constructor%3A11511965ab6f5e33cb6b916a4a041e11a24585c60428311b58282acdd7128338&source=constructorLink"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 mt-4 px-5 sm:px-6 py-3 bg-gradient-to-r from-[#2563EB] to-[#1E40AF] text-white font-bold rounded-xl hover:shadow-lg transition-all hover:scale-105 text-sm sm:text-base"
+                    className="inline-flex items-center gap-2 mt-4 px-6 py-3 bg-gradient-to-r from-primary to-primary-dark text-white font-bold rounded-xl hover:shadow-lg transition-all hover:scale-105"
                   >
-                    Открыть на Яндекс.Картах <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                    Открыть на Яндекс.Картах <ArrowRight className="w-5 h-5" />
                   </a>
                 </div>
               </div>
@@ -121,13 +121,13 @@ export default function ContactsSection() {
                   <PhoneIcon className="text-primary w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-slate-900 mb-3 text-base sm:text-lg">Телефоны</h4>
+                  <h4 className="font-bold text-gray-900 mb-3 text-lg">Телефоны</h4>
                   <div className="flex flex-col gap-2">
                     {contactInfo.phones.map((phone, index) => (
                       <a
                         key={index}
                         href={`tel:${phone.replace(/\s/g, '').replace(/[()]/g, '')}`}
-                        className="text-slate-700 hover:text-[#2563EB] transition-all font-bold text-base sm:text-lg hover:translate-x-1 inline-block"
+                        className="text-gray-700 hover:text-primary transition-colors font-bold text-lg hover:translate-x-1 inline-block"
                       >
                         {phone}
                       </a>
@@ -157,32 +157,29 @@ export default function ContactsSection() {
                   isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
                 }`}
               >
-                <h4 className="font-bold text-slate-900 mb-4 text-base sm:text-lg">Мы на связи</h4>
-                <div className="flex flex-wrap gap-3 sm:gap-4">
-
+                <h4 className="font-bold text-gray-900 mb-4 text-lg">Мы на связи</h4>
+                <div className="flex flex-wrap gap-4">
                   <a
                     href={contactInfo.socialMedia.telegram}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-5 sm:px-6 py-3 rounded-xl bg-[#0088cc] hover:bg-[#0077b5] text-white font-bold transition-all hover:scale-105 shadow-md hover:shadow-lg text-sm sm:text-base"
+                    className="px-6 py-3 rounded-2xl bg-blue-500 hover:bg-blue-600 text-white font-bold transition-all hover:scale-110 shadow-lg hover:shadow-xl"
                   >
                     Telegram
                   </a>
-
                   <a
                     href={contactInfo.socialMedia.vk}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-5 sm:px-6 py-3 rounded-xl bg-white text-[#2563EB] border-2 border-[#BFDBFE] hover:border-[#2563EB] hover:text-[#1E40AF] font-bold transition-all hover:scale-105 shadow-md hover:shadow-lg text-sm sm:text-base"
+                    className="px-6 py-3 rounded-2xl bg-white text-primary border-2 border-primary/20 hover:border-accent hover:text-accent font-bold transition-all hover:scale-110 shadow-lg hover:shadow-xl"
                   >
                     ВКонтакте
                   </a>
-
                   <a
                     href={contactInfo.socialMedia.whatsapp}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-5 sm:px-6 py-3 rounded-xl bg-[#25D366] hover:bg-[#1fb855] text-white font-bold transition-all hover:scale-105 shadow-md hover:shadow-lg text-sm sm:text-base"
+                    className="px-6 py-3 rounded-2xl bg-green-500 hover:bg-green-600 text-white font-bold transition-all hover:scale-110 shadow-lg hover:shadow-xl"
                   >
                     WhatsApp
                   </a>
@@ -276,19 +273,18 @@ export default function ContactsSection() {
                   Оставьте заявку — администратор свяжется с вами и подберёт удобное время для записи.
                 </p>
               </div>
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full md:w-auto">
-
+              <div className="flex flex-col sm:flex-row gap-4">
                 <a
                   href={contactInfo.socialMedia.telegram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 sm:px-8 py-3 sm:py-4 rounded-xl bg-white text-[#1E40AF] hover:bg-[#BFDBFE] font-bold transition-all hover:scale-105 shadow-lg hover:shadow-xl text-center text-sm sm:text-base"
+                  className="px-8 py-4 rounded-xl bg-white text-primary hover:bg-slate-100 font-bold transition-all hover:scale-105 shadow-lg hover:shadow-xl"
                 >
                   Написать в Telegram
                 </a>
                 <button
                   type="button"
-                  className="px-6 sm:px-8 py-3 sm:py-4 rounded-xl bg-white/10 hover:bg-white/20 border-2 border-white/30 hover:border-white/50 font-bold transition-all hover:scale-105 text-sm sm:text-base"
+                  className="px-8 py-4 rounded-xl bg-white/10 hover:bg-white/20 border-2 border-white/20 font-bold transition-all hover:scale-105"
                   onClick={() => setPhoneModalOpen(true)}
                 >
                   Позвонить
